@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<!--taken from-->
+<!--https://www.dummies.com/web-design-development/site-development/how-to-define-the-basic-page-layout-in-css3/-->
+
+
+<h:head>
+    <script
+            src="http://code.jquery.com/jquery-latest.js" type="text/javascript">
+    </script>
+    <script
+            src="http://code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript">
+    </script>
+    <script
+            src="http://layout.jquery-dev.net/lib/js/jquery.layout-latest.js" type="text/javascript">
+    </script>
+    <link
+            rel="stylesheet"
+            href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+
+    <title>Creating a Simple Page Layout</title>
+
+    <script type="text/javascript">
+        $(document).ready(
+            function ()
+            {
+                $('body').layout({ applyDemoStyles: true });
+            });
+    </script>
+
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+</h:head>
+
+<h:body>
+
+    <div class="ui-layout-center">
+        <ui:insert name="center">Top Section</ui:insert>
+    </div>
+    <div class="ui-layout-north">
+    <ui:insert name="north">Top Section</ui:insert>
+    </div>
+    <div class="ui-layout-south">
+         <ui:insert name="south">Top Section</ui:insert>
+    </div>
+    <div class="ui-layout-east">
+    <ui:insert name="east">Top Section</ui:insert>
+    </div>
+    <div class="ui-layout-west">
+         <ui:insert name="west">Top Section</ui:insert>
+    </div>
+
+</h:body>
+</html>
