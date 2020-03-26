@@ -1,0 +1,26 @@
+@startuml
+
+class ProductCategory {
+  Long dbId
+  String id
+  String categoryName
+}
+
+class ConfigurableField {
+  Long dbId
+  String id
+  String fieldName
+  String fieldType
+  int fieldLength
+}
+
+enum fieldType {
+    String
+    Integer
+    Float
+}
+
+ProductCategory "1" - "n" ConfigurableField
+ConfigurableField "1" - "1" fieldType
+
+@enduml

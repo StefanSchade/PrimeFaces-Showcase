@@ -12,4 +12,6 @@ public interface CarRepository extends CrudRepository<CarEntity,Long> {
     @Override
     Optional<CarEntity> findById(Long aLong);
 
+
+
 }
