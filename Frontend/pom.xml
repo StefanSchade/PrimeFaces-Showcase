@@ -54,6 +54,39 @@
 
     <build>
         <finalName>app</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>fish.payara.maven.plugins</groupId>
+                <artifactId>payara-micro-maven-plugin</artifactId>
+                <version>${payaramicro.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <autoDeployContextRoot>${project.build.finalName}</autoDeployContextRoot>
+                    <deployArtifacts>
+                        <artifactItem>
+                            <groupId>de.stefanschade</groupId>
+                            <artifactId>Frontend</artifactId>
+                            <version>${project.version}</version>
+                            <type>war</type>
+                        </artifactItem>
+                    </deployArtifacts>
+                    <customJars>
+                        <artifactItem>
+                            <groupId>org.primefaces</groupId>
+                            <artifactId>primefaces</artifactId>
+                            <version>${primefaces.version}</version>
+                        </artifactItem>
+                    </customJars>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
