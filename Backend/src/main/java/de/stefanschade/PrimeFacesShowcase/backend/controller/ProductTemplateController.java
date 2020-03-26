@@ -5,6 +5,7 @@ import de.stefanschade.PrimeFacesShowcase.backend.model.response.ProductTemplate
 import de.stefanschade.PrimeFacesShowcase.backend.service.ConfigurationFieldService;
 import de.stefanschade.PrimeFacesShowcase.backend.service.ProductTemplateService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,13 +26,16 @@ public class ProductTemplateController {
     @Autowired
     ConfigurationFieldService configurationFieldService;
 
+
+    //http://localhost:8081/product-template
     @GetMapping
     public List<ProductTemplateResponseModel> getAllProductTemplates() {
         List<ProductTemplateDto>  productTemplateDtoList = productTemplateService.getAll();
         List<ProductTemplateResponseModel> returnValue = new ArrayList<>(productTemplateDtoList.size());
         Iterator<ProductTemplateDto> productTemplateDtoIterator = productTemplateDtoList.iterator();
         while (productTemplateDtoIterator.hasNext()) {
-            //todo finish implementation
+            ProductTemplateResponseModel productTemplateResponseModel = new ProductTemplateResponseModel();
+            BeanUtils.copyProperties(productTemplateDtoIterator.next(), productTemplateResponseModel);
         }
         return returnValue;
     }

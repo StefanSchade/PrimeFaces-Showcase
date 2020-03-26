@@ -14,5 +14,4 @@ public interface ProductTemplateService {
 
     List<ProductTemplateDto> getAll();
 
-
 }

@@ -1,7 +1,11 @@
 package de.stefanschade.PrimeFacesShowcase.backend.bootstrap;
 
 import de.stefanschade.PrimeFacesShowcase.backend.domain.CarEntity;
+import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurationFieldDto;
+import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.CarRepository;
+import de.stefanschade.PrimeFacesShowcase.backend.service.ConfigurationFieldService;
+import de.stefanschade.PrimeFacesShowcase.backend.service.ProductTemplateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -15,6 +19,12 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
     @Autowired
     private CarRepository userRepository;
 
+    @Autowired
+    ProductTemplateService productTemplateService;
+
+    @Autowired
+    ConfigurationFieldService configurationFieldService;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         log.info("load test data into db");
@@ -26,6 +36,15 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
         userRepository.save(car1);
         userRepository.save(car2);
         userRepository.save(car3);
+
+        log.info("load test data into db product templates");
+
+        ConfigurationFieldDto notional = new ConfigurationFieldDto("Notional", "Notional", 8, FieldType.INTEGER);
+        ConfigurationFieldDto interest = new ConfigurationFieldDto("Interest Rate", "Interest Rate", 8, FieldType.DOUBLE);
+        ConfigurationFieldDto isin = new ConfigurationFieldDto("ISIN", "Interest Rate", 8, FieldType.STRING);
+
+//        ProductTemplateDto loan = new ProductTemplateDto()
+
     }
 
 }

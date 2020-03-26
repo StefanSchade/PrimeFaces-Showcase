@@ -4,11 +4,16 @@ import de.stefanschade.PrimeFacesShowcase.backend.domain.ProductTemplateEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.ProductTemplateDto;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.ProductTemplateRepository;
 import de.stefanschade.PrimeFacesShowcase.backend.service.ProductTemplateService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+
+@Slf4j
+@Service
 public class ProductTemplateServiceImpl implements ProductTemplateService {
 
     @Autowired
