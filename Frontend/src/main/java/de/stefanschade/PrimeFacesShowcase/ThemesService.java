@@ -1,4 +1,4 @@
-package de.stefanschade.PrimeFacesShowcase;
+package main.java.de.stefanschade.PrimeFacesShowcase;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

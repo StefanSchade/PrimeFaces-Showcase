@@ -1,7 +1,6 @@
 package de.stefanschade.PrimeFacesShowcase;
 
 import lombok.extern.java.Log;
-
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;

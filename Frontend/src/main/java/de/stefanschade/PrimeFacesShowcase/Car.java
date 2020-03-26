@@ -5,12 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 @Named
-@ApplicationScoped
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -23,5 +20,4 @@ public class Car {
     private String color;
     private int price;
     private boolean soldState;
-
 }
