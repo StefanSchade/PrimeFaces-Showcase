@@ -1,9 +1,10 @@
 @startuml
 
-class ProductCategory {
+class ProductTemplate {
   Long dbId
   String id
   String categoryName
+  List<ConfigurableField>
 }
 
 class ConfigurableField {
@@ -12,6 +13,7 @@ class ConfigurableField {
   String fieldName
   String fieldType
   int fieldLength
+  ProductCategory productCategory
 }
 
 enum fieldType {
@@ -20,7 +22,7 @@ enum fieldType {
     Float
 }
 
-ProductCategory "1" - "n" ConfigurableField
+ProductTemplate "1" - "n" ConfigurableField
 ConfigurableField "1" - "1" fieldType
 
 @enduml
