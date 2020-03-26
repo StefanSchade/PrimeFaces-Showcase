@@ -3,11 +3,13 @@ package de.stefanschade.PrimeFacesShowcase.backend.service.impl;
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ProductTemplateEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.ProductTemplateDto;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.ProductTemplateRepository;
-import de.stefanschade.PrimeFacesShowcase.backend.service.ProductCategoryService;
+import de.stefanschade.PrimeFacesShowcase.backend.service.ProductTemplateService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ProductCategoryServiceImpl  implements ProductCategoryService  {
+import java.util.*;
+
+public class ProductTemplateServiceImpl implements ProductTemplateService {
 
     @Autowired
     ProductTemplateRepository productTemplateRepository;
@@ -29,4 +31,18 @@ public class ProductCategoryServiceImpl  implements ProductCategoryService  {
     public ProductTemplateDto getProductCategoryById(String id) {
         return null;
     }
+
+    @Override
+    public List<ProductTemplateDto> getAll() {
+        List<ProductTemplateDto> returnValue = new ArrayList<>();
+        Iterable<ProductTemplateEntity> productTemplateDtoIterable = productTemplateRepository.findAll();
+        Iterator<ProductTemplateEntity> productTemplateEntityIterator = productTemplateDtoIterable.iterator();
+        ProductTemplateDto nextProductTemplate = null;
+        while (productTemplateEntityIterator.hasNext()) {
+            BeanUtils.copyProperties(productTemplateEntityIterator.next(), nextProductTemplate);
+            returnValue.add(nextProductTemplate);
+        }
+        return returnValue;
+    }
+
 }
