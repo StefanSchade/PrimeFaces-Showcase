@@ -17,18 +17,14 @@ import javax.persistence.*;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"template_name","field_name"})})
+@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"templatename","field_name"})})
 public class ConfigurableFieldEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long dbId;
+    private Long Id;
 
-    @Column(nullable = false)
-    @NonNull
-    private String id;
-
-    @Column(nullable = false, name="template_name")
+    @Column(nullable = false, name="templatename")
     @NonNull
     @JsonManagedReference
     String productTemplateName;

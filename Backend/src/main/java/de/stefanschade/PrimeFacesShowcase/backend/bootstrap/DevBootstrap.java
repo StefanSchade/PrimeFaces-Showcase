@@ -1,8 +1,6 @@
 package de.stefanschade.PrimeFacesShowcase.backend.bootstrap;
 
 import de.stefanschade.PrimeFacesShowcase.backend.domain.CarEntity;
-import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurableFieldDto;
-import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.CarRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +35,9 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
 
         log.info("load test data into db product templates");
 
-        ConfigurableFieldDto notional = new ConfigurableFieldDto("Notional", "Notional", 8, FieldType.INTEGER);
-        ConfigurableFieldDto interest = new ConfigurableFieldDto("Interest Rate", "Interest Rate", 8, FieldType.DOUBLE);
-        ConfigurableFieldDto isin = new ConfigurableFieldDto("ISIN", "Interest Rate", 8, FieldType.STRING);
+//        ConfigurableFieldDto notional = new ConfigurableFieldDto("Notional", "Notional", 8, FieldType.INTEGER);
+//        ConfigurableFieldDto interest = new ConfigurableFieldDto("Interest Rate", "Interest Rate", 8, FieldType.DOUBLE);
+//        ConfigurableFieldDto isin = new ConfigurableFieldDto("ISIN", "Interest Rate", 8, FieldType.STRING);
 
 //        ProductTemplateDto loan = new ProductTemplateDto()
 

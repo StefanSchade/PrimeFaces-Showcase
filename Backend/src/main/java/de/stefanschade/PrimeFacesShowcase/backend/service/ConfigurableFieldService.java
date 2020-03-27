@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 @Service
     public interface ConfigurableFieldService {
 
-    ConfigurableFieldDto createConfigurationField(ConfigurableFieldDto configurationField);
-    ConfigurableFieldDto getConfigurationFieldById(String id);
+    ConfigurableFieldDto createConfigurableFiled(ConfigurableFieldDto configurationField);
+    ConfigurableFieldDto getConfigurableFieldById(Long id);
+//    List<ConfigurableFieldDto> getConfigurableFieldsByTemplateName(String templateName);
+
 }

@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ConfigurableFieldDto {
 
     private String id;
+    private String templateName;
     private String fieldName;
     private Integer fieldLength;
     private FieldType fieldType;
