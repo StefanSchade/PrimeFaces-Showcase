@@ -1,6 +1,7 @@
 package de.stefanschade.PrimeFacesShowcase.backend.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 
+
 @Slf4j
 @Data
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class ConfigurationFieldEntity {
+@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"template_name","field_name"})})
+public class ConfigurableFieldEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +28,12 @@ public class ConfigurationFieldEntity {
     @NonNull
     private String id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name="template_name")
+    @NonNull
+    @JsonManagedReference
+    String productTemplateName;
+
+    @Column(nullable = false, name="field_name")
     @NonNull
     private String fieldName;
 

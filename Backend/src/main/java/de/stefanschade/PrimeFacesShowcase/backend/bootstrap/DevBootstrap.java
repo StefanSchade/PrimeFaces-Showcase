@@ -1,11 +1,9 @@
 package de.stefanschade.PrimeFacesShowcase.backend.bootstrap;
 
 import de.stefanschade.PrimeFacesShowcase.backend.domain.CarEntity;
-import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurationFieldDto;
+import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurableFieldDto;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.CarRepository;
-import de.stefanschade.PrimeFacesShowcase.backend.service.ConfigurationFieldService;
-import de.stefanschade.PrimeFacesShowcase.backend.service.ProductTemplateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -19,11 +17,11 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
     @Autowired
     private CarRepository userRepository;
 
-    @Autowired
-    ProductTemplateService productTemplateService;
+//    @Autowired
+//    ProductTemplateService productTemplateService;
 
-    @Autowired
-    ConfigurationFieldService configurationFieldService;
+//    @Autowired
+//    ConfigurableFieldService configurableFieldService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -39,11 +37,15 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
 
         log.info("load test data into db product templates");
 
-        ConfigurationFieldDto notional = new ConfigurationFieldDto("Notional", "Notional", 8, FieldType.INTEGER);
-        ConfigurationFieldDto interest = new ConfigurationFieldDto("Interest Rate", "Interest Rate", 8, FieldType.DOUBLE);
-        ConfigurationFieldDto isin = new ConfigurationFieldDto("ISIN", "Interest Rate", 8, FieldType.STRING);
+        ConfigurableFieldDto notional = new ConfigurableFieldDto("Notional", "Notional", 8, FieldType.INTEGER);
+        ConfigurableFieldDto interest = new ConfigurableFieldDto("Interest Rate", "Interest Rate", 8, FieldType.DOUBLE);
+        ConfigurableFieldDto isin = new ConfigurableFieldDto("ISIN", "Interest Rate", 8, FieldType.STRING);
 
 //        ProductTemplateDto loan = new ProductTemplateDto()
+
+
+
+
 
     }
 
