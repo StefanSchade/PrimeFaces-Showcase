@@ -1,13 +1,11 @@
 package de.stefanschade.PrimeFacesShowcase.backend.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+
 import javax.persistence.*;
 
 
@@ -16,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"fk_template","name"})})
+@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"templatename","name"})})
 public class ConfigurableFieldEntity {
 
     @Id
@@ -24,9 +22,9 @@ public class ConfigurableFieldEntity {
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_template")
+    @JoinColumn(name = "templatename", nullable = false)
     @NonNull
-    @JsonManagedReference
+    @JsonBackReference
     ProductTemplateEntity template;
 
     @Column(nullable = false)

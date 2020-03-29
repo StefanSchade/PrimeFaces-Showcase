@@ -15,4 +15,5 @@ public interface ConfigurableFieldRepository extends CrudRepository<Configurable
 
 //    List<ConfigurableFieldEntity> findBytemplatename(@Param("templatename") String templateName);
 
+
 }

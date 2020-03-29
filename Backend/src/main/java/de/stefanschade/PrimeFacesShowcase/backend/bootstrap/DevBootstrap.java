@@ -3,7 +3,9 @@ package de.stefanschade.PrimeFacesShowcase.backend.bootstrap;
 import de.stefanschade.PrimeFacesShowcase.backend.domain.CarEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ConfigurableFieldEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ProductTemplateEntity;
+import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.CarRepository;
+import de.stefanschade.PrimeFacesShowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.ProductTemplateRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +27,9 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
     @Autowired
     ProductTemplateRepository productTemplateRepository;
 
+    @Autowired
+    ConfigurableFieldRepository configurableFieldRepository;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         log.info("load test data into db");
@@ -36,21 +42,27 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
         userRepository.save(car2);
         userRepository.save(car3);
 
-        log.info("load test data into db product templates");
+        log.info("load test data into db: loans");
 
-//        ProductTemplateEntity loan = new ProductTemplateEntity("loan");
-//
-//        ConfigurableFieldEntity loan_businesspartner = new ConfigurableFieldEntity(loan,"businesspartner", FieldType.STRING);
-//        ConfigurableFieldEntity loan_notional = new ConfigurableFieldEntity(loan,"notional", FieldType.INTEGER);
-//        ConfigurableFieldEntity loan_interstrate = new ConfigurableFieldEntity(loan,"notional", FieldType.INTEGER);
-//
-//        loan.setFields(new HashSet<>());
-//
-//        loan.getFields().add(loan_businesspartner);
-//        loan.getFields().add(loan_notional);
-//        loan.getFields().add(loan_interstrate);
+        ProductTemplateEntity loan = new ProductTemplateEntity("loan");
 
-//        productTemplateRepository.save(loan);
+        ConfigurableFieldEntity loan_businesspartner = new ConfigurableFieldEntity(loan,"businesspartner", FieldType.STRING);
+        ConfigurableFieldEntity loan_notional = new ConfigurableFieldEntity(loan,"notional", FieldType.INTEGER);
+        ConfigurableFieldEntity loan_interstrate = new ConfigurableFieldEntity(loan,"notional", FieldType.INTEGER);
+
+        loan.setFields(new ArrayList<>());
+
+        loan.getFields().add(loan_businesspartner);
+        loan.getFields().add(loan_notional);
+        loan.getFields().add(loan_interstrate);
+
+        productTemplateRepository.save(loan);
+
+//        todo saving the fields results in a jpa problem
+//       configurableFieldRepository.save(loan_businesspartner);
+//        configurableFieldRepository.save(loan_notional);
+//        configurableFieldRepository.save(loan_interstrate);
+
 
 
 
