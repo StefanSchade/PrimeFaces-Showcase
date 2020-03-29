@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 public class ProductTemplateDto {
 
-    private String id;
     private String categoryName;
+    private String id;
 
 }

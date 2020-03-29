@@ -1,5 +1,6 @@
-package de.stefanschade.PrimeFacesShowcase.backend.dto;
+package de.stefanschade.PrimeFacesShowcase.backend.deprecated;
 
+import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

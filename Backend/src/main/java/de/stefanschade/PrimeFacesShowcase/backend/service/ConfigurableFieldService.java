@@ -1,6 +1,6 @@
 package de.stefanschade.PrimeFacesShowcase.backend.service;
 
-import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurableFieldDto;
+import de.stefanschade.PrimeFacesShowcase.backend.deprecated.ConfigurableFieldDto;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import javax.persistence.*;
 
 
@@ -17,28 +16,26 @@ import javax.persistence.*;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"templatename","field_name"})})
+@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"fk_template","name"})})
 public class ConfigurableFieldEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    @Column(nullable = false, name="templatename")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_template")
     @NonNull
     @JsonManagedReference
-    String productTemplateName;
-
-    @Column(nullable = false, name="field_name")
-    @NonNull
-    private String fieldName;
+    ProductTemplateEntity template;
 
     @Column(nullable = false)
     @NonNull
-    private Integer fieldLength;
+    private String name;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @NonNull
     private FieldType fieldType;
+
 }

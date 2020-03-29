@@ -1,12 +1,18 @@
 package de.stefanschade.PrimeFacesShowcase.backend.bootstrap;
 
 import de.stefanschade.PrimeFacesShowcase.backend.domain.CarEntity;
+import de.stefanschade.PrimeFacesShowcase.backend.domain.ConfigurableFieldEntity;
+import de.stefanschade.PrimeFacesShowcase.backend.domain.ProductTemplateEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.CarRepository;
+import de.stefanschade.PrimeFacesShowcase.backend.repositories.ProductTemplateRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Slf4j
 @Component
@@ -15,11 +21,8 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
     @Autowired
     private CarRepository userRepository;
 
-//    @Autowired
-//    ProductTemplateService productTemplateService;
-
-//    @Autowired
-//    ConfigurableFieldService configurableFieldService;
+    @Autowired
+    ProductTemplateRepository productTemplateRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -35,9 +38,42 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
 
         log.info("load test data into db product templates");
 
+//        ProductTemplateEntity loan = new ProductTemplateEntity("loan");
+//
+//        ConfigurableFieldEntity loan_businesspartner = new ConfigurableFieldEntity(loan,"businesspartner", FieldType.STRING);
+//        ConfigurableFieldEntity loan_notional = new ConfigurableFieldEntity(loan,"notional", FieldType.INTEGER);
+//        ConfigurableFieldEntity loan_interstrate = new ConfigurableFieldEntity(loan,"notional", FieldType.INTEGER);
+//
+//        loan.setFields(new HashSet<>());
+//
+//        loan.getFields().add(loan_businesspartner);
+//        loan.getFields().add(loan_notional);
+//        loan.getFields().add(loan_interstrate);
+
+//        productTemplateRepository.save(loan);
+
+
+
+
+        ProductTemplateEntity deposit = new ProductTemplateEntity("deposit");
+        ProductTemplateEntity equity = new ProductTemplateEntity("equity");
+
+
+        Set<ConfigurableFieldEntity> configurableFieldEntitySet = new HashSet<>();
+
+        productTemplateRepository.save(deposit);
+        productTemplateRepository.save(equity);
+
+
+
+//        ConfigurableFieldEntity notional = new ConfigurableFieldEntity("Notional", "Notional", 8, FieldType.INTEGER);
 //        ConfigurableFieldDto notional = new ConfigurableFieldDto("Notional", "Notional", 8, FieldType.INTEGER);
 //        ConfigurableFieldDto interest = new ConfigurableFieldDto("Interest Rate", "Interest Rate", 8, FieldType.DOUBLE);
 //        ConfigurableFieldDto isin = new ConfigurableFieldDto("ISIN", "Interest Rate", 8, FieldType.STRING);
+
+
+
+
 
 //        ProductTemplateDto loan = new ProductTemplateDto()
 

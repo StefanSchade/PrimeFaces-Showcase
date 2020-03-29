@@ -1,7 +1,7 @@
 package de.stefanschade.PrimeFacesShowcase.backend.service.impl;
 
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ConfigurableFieldEntity;
-import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurableFieldDto;
+import de.stefanschade.PrimeFacesShowcase.backend.deprecated.ConfigurableFieldDto;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.PrimeFacesShowcase.backend.service.ConfigurableFieldService;
 import lombok.extern.slf4j.Slf4j;
@@ -9,9 +9,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
 

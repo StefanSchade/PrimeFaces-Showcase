@@ -22,8 +22,6 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
     @Override
     public ProductTemplateDto createProductCategory(ProductTemplateDto productTemplateDto) {
         ProductTemplateEntity entityToBeStored = new ProductTemplateEntity();
-        if (productTemplateRepository.findById(productTemplateDto.getId()) != null)
-            throw new RuntimeException("Record already exists");
         BeanUtils.copyProperties(productTemplateDto, entityToBeStored); // will throw an error, if non-null annotation is violated
         ProductTemplateEntity enitityThatWasStored = productTemplateRepository.save(entityToBeStored);
         ProductTemplateDto returnValue = new ProductTemplateDto();
