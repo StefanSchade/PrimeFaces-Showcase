@@ -1,8 +1,9 @@
 package de.stefanschade.PrimeFacesShowcase.backend.controller;
 
+import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurableFieldDto;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.ProductTemplateDto;
+import de.stefanschade.PrimeFacesShowcase.backend.model.response.ConfigurableFieldResponseModel;
 import de.stefanschade.PrimeFacesShowcase.backend.model.response.ProductTemplateResponseModel;
-import de.stefanschade.PrimeFacesShowcase.backend.deprecated.ConfigurableFieldService;
 import de.stefanschade.PrimeFacesShowcase.backend.service.ProductTemplateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -17,17 +18,12 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("product-template")
+@RequestMapping("producttemplate")
 public class ProductTemplateController {
 
     @Autowired
     ProductTemplateService productTemplateService;
 
-    @Autowired
-    ConfigurableFieldService configurableFieldService;
-
-
-    //http://localhost:8081/product-template
     @GetMapping
     public List<ProductTemplateResponseModel> getAllProductTemplates() {
         List<ProductTemplateDto>  productTemplateDtoList = productTemplateService.getAll();
@@ -35,11 +31,20 @@ public class ProductTemplateController {
         Iterator<ProductTemplateDto> productTemplateDtoIterator = productTemplateDtoList.iterator();
         while (productTemplateDtoIterator.hasNext()) {
             ProductTemplateResponseModel productTemplateResponseModel = new ProductTemplateResponseModel();
-            BeanUtils.copyProperties(productTemplateDtoIterator.next(), productTemplateResponseModel);
+            ProductTemplateDto productTemplateDto = productTemplateDtoIterator.next();
+            BeanUtils.copyProperties(productTemplateDto, productTemplateResponseModel);
+            Iterator<ConfigurableFieldDto> configurableFieldDtoIterator = productTemplateDto.getFieldsdto().iterator();
+            List<ConfigurableFieldResponseModel> configurableFieldResponseModelList = new ArrayList<>();
+            while (configurableFieldDtoIterator.hasNext()) {
+                ConfigurableFieldDto currentFieldDto = configurableFieldDtoIterator.next();
+                ConfigurableFieldResponseModel currentFieldResponseModel = new ConfigurableFieldResponseModel();
+                BeanUtils.copyProperties(currentFieldDto,currentFieldResponseModel);
+                configurableFieldResponseModelList.add(currentFieldResponseModel);
+            }
+            productTemplateResponseModel.setFieldsmodel(configurableFieldResponseModelList);
+            returnValue.add(productTemplateResponseModel);
         }
         return returnValue;
     }
-
-    // todo implement endpoint for one specific Template
 
 }

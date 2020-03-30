@@ -2,6 +2,7 @@ package de.stefanschade.PrimeFacesShowcase.backend.deprecated;
 
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ConfigurableFieldEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurableFieldDto;
+import de.stefanschade.PrimeFacesShowcase.backend.repositories.ConfigurableFieldRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,8 @@
 package de.stefanschade.PrimeFacesShowcase.backend.service.impl;
 
+import de.stefanschade.PrimeFacesShowcase.backend.domain.ConfigurableFieldEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ProductTemplateEntity;
+import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurableFieldDto;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.ProductTemplateDto;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.ProductTemplateRepository;
 import de.stefanschade.PrimeFacesShowcase.backend.service.ProductTemplateService;
@@ -36,15 +38,23 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
 
     @Override
     public List<ProductTemplateDto> getAll() {
-        List<ProductTemplateDto> returnValue = new ArrayList<>();
-        Iterable<ProductTemplateEntity> productTemplateDtoIterable = productTemplateRepository.findAll();
-        Iterator<ProductTemplateEntity> productTemplateEntityIterator = productTemplateDtoIterable.iterator();
-        ProductTemplateDto nextProductTemplate = null;
-        while (productTemplateEntityIterator.hasNext()) {
-            BeanUtils.copyProperties(productTemplateEntityIterator.next(), nextProductTemplate);
-            returnValue.add(nextProductTemplate);
+        List<ProductTemplateDto> returnProductTemplateList = new ArrayList<>();
+        Iterator<ProductTemplateEntity> originalProductTemplateList = productTemplateRepository.findAll().iterator();
+        while (originalProductTemplateList.hasNext()) {
+            ProductTemplateDto currentProductTemplateDTO = new ProductTemplateDto();
+            ProductTemplateEntity currentProductTemplateEntity = originalProductTemplateList.next();
+            BeanUtils.copyProperties(currentProductTemplateEntity, currentProductTemplateDTO);
+            List<ConfigurableFieldEntity> fieldsForCurrentTemplateEntity = new ArrayList<>();
+            Iterator<ConfigurableFieldEntity> fieldEntityIterator = fieldsForCurrentTemplateEntity.iterator();
+            while (fieldEntityIterator.hasNext()) {
+                ConfigurableFieldEntity configurableFieldEntity = fieldEntityIterator.next();
+                ConfigurableFieldDto configurableFieldDto = new ConfigurableFieldDto();
+                BeanUtils.copyProperties(configurableFieldEntity, configurableFieldDto);
+                currentProductTemplateDTO.getFieldsdto().add(configurableFieldDto);
+            }
+            returnProductTemplateList.add(currentProductTemplateDTO);
         }
-        return returnValue;
+        return returnProductTemplateList;
     }
 
 }

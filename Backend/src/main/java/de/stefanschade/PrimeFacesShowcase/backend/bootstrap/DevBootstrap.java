@@ -1,10 +1,9 @@
 package de.stefanschade.PrimeFacesShowcase.backend.bootstrap;
 
+import de.stefanschade.PrimeFacesShowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ConfigurableFieldEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ProductTemplateEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
-import de.stefanschade.PrimeFacesShowcase.backend.deprecated.CarRepository;
-import de.stefanschade.PrimeFacesShowcase.backend.deprecated.ConfigurableFieldRepository;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.ProductTemplateRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,6 @@ import java.util.ArrayList;
 @Slf4j
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
-
-    @Autowired
-    private CarRepository userRepository;
 
     @Autowired
     ProductTemplateRepository productTemplateRepository;
