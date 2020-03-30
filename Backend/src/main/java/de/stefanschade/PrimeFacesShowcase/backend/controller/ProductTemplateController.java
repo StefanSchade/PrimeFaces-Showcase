@@ -2,7 +2,7 @@ package de.stefanschade.PrimeFacesShowcase.backend.controller;
 
 import de.stefanschade.PrimeFacesShowcase.backend.dto.ProductTemplateDto;
 import de.stefanschade.PrimeFacesShowcase.backend.model.response.ProductTemplateResponseModel;
-import de.stefanschade.PrimeFacesShowcase.backend.service.ConfigurableFieldService;
+import de.stefanschade.PrimeFacesShowcase.backend.deprecated.ConfigurableFieldService;
 import de.stefanschade.PrimeFacesShowcase.backend.service.ProductTemplateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

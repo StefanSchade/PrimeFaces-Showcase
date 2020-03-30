@@ -1,9 +1,9 @@
-package de.stefanschade.PrimeFacesShowcase.backend.model.response;
+package de.stefanschade.PrimeFacesShowcase.backend.deprecated;
 
 import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-
+@Deprecated
 @Slf4j
 @Data
 public class ConfigurableFieldResponseModel {

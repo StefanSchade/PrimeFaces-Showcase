@@ -1,8 +1,8 @@
-package de.stefanschade.PrimeFacesShowcase.backend.service;
+package de.stefanschade.PrimeFacesShowcase.backend.deprecated;
 
-import de.stefanschade.PrimeFacesShowcase.backend.deprecated.ConfigurableFieldDto;
+import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurableFieldDto;
 import org.springframework.stereotype.Service;
-
+@Deprecated
 @Service
     public interface ConfigurableFieldService {
 

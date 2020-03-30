@@ -1,11 +1,10 @@
-package de.stefanschade.PrimeFacesShowcase.backend.repositories;
+package de.stefanschade.PrimeFacesShowcase.backend.deprecated;
 
-import de.stefanschade.PrimeFacesShowcase.backend.domain.CarEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-
+@Deprecated
 @Repository
 public interface CarRepository extends CrudRepository<CarEntity,Long> {
 

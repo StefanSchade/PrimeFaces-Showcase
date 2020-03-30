@@ -1,9 +1,9 @@
-package de.stefanschade.PrimeFacesShowcase.backend.repositories;
+package de.stefanschade.PrimeFacesShowcase.backend.deprecated;
 
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ConfigurableFieldEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
+@Deprecated
 @Repository
 public interface ConfigurableFieldRepository extends CrudRepository<ConfigurableFieldEntity,Long>  {
 

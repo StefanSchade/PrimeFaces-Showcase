@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface ProductTemplateService {
 
-    ProductTemplateDto createProductCategory(ProductTemplateDto productTemplateDto);
+    ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto);
 
     ProductTemplateDto getProductCategoryById(String id);
 

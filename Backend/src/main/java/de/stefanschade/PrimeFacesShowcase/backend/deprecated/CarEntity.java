@@ -1,14 +1,13 @@
-package de.stefanschade.PrimeFacesShowcase.backend.domain;
+package de.stefanschade.PrimeFacesShowcase.backend.deprecated;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 
-@Slf4j
+@Deprecated
 @Data
 @Entity
 @RequiredArgsConstructor

@@ -20,14 +20,13 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
     ProductTemplateRepository productTemplateRepository;
 
     @Override
-    public ProductTemplateDto createProductCategory(ProductTemplateDto productTemplateDto) {
+    public ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto) {
         ProductTemplateEntity entityToBeStored = new ProductTemplateEntity();
         BeanUtils.copyProperties(productTemplateDto, entityToBeStored); // will throw an error, if non-null annotation is violated
         ProductTemplateEntity enitityThatWasStored = productTemplateRepository.save(entityToBeStored);
         ProductTemplateDto returnValue = new ProductTemplateDto();
         BeanUtils.copyProperties(enitityThatWasStored, returnValue);
         return returnValue;
-
     }
 
     @Override
