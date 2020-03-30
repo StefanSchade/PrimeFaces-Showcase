@@ -11,6 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 public class ConfigurableFieldDto {
 
-    private String fieldName;
+    private String fieldname;
     private FieldType fieldType;
 }

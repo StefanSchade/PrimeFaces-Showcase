@@ -22,9 +22,8 @@ public class ProductTemplateEntity {
     @NonNull
     private String templatename;
 
-    @OneToMany(mappedBy = "template", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "template", cascade = CascadeType.ALL, orphanRemoval = false)
     @Column(nullable = false)
     @JsonManagedReference
-    // todo: i needed the transient to prevent a stackoverflow when generating hash codes
-    private transient List<ConfigurableFieldEntity> fields;
+    private List<ConfigurableFieldEntity> fields;
 }

@@ -4,6 +4,7 @@ import de.stefanschade.PrimeFacesShowcase.backend.domain.ConfigurableFieldEntity
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ProductTemplateEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.ConfigurableFieldDto;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.ProductTemplateDto;
+import de.stefanschade.PrimeFacesShowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.PrimeFacesShowcase.backend.repositories.ProductTemplateRepository;
 import de.stefanschade.PrimeFacesShowcase.backend.service.ProductTemplateService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,9 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
 
     @Autowired
     ProductTemplateRepository productTemplateRepository;
+
+    @Autowired
+    ConfigurableFieldRepository configurableFieldRepository;
 
     @Override
     public ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto) {
@@ -44,10 +48,13 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
             ProductTemplateDto currentProductTemplateDTO = new ProductTemplateDto();
             ProductTemplateEntity currentProductTemplateEntity = originalProductTemplateList.next();
             BeanUtils.copyProperties(currentProductTemplateEntity, currentProductTemplateDTO);
-            List<ConfigurableFieldEntity> fieldsForCurrentTemplateEntity = new ArrayList<>();
+            List<ConfigurableFieldEntity> fieldsForCurrentTemplateEntity
+                    = configurableFieldRepository.findByTemplate(currentProductTemplateEntity);
             Iterator<ConfigurableFieldEntity> fieldEntityIterator = fieldsForCurrentTemplateEntity.iterator();
+            log.info("processing template " + currentProductTemplateDTO.getTemplatename());
             while (fieldEntityIterator.hasNext()) {
                 ConfigurableFieldEntity configurableFieldEntity = fieldEntityIterator.next();
+                log.info("processing field " + configurableFieldEntity.getFieldname());
                 ConfigurableFieldDto configurableFieldDto = new ConfigurableFieldDto();
                 BeanUtils.copyProperties(configurableFieldEntity, configurableFieldDto);
                 currentProductTemplateDTO.getFieldsdto().add(configurableFieldDto);

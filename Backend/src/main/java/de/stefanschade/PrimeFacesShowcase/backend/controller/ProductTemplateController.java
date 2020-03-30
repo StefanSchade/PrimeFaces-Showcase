@@ -41,7 +41,7 @@ public class ProductTemplateController {
                 BeanUtils.copyProperties(currentFieldDto,currentFieldResponseModel);
                 configurableFieldResponseModelList.add(currentFieldResponseModel);
             }
-            productTemplateResponseModel.setFieldsmodel(configurableFieldResponseModelList);
+            productTemplateResponseModel.setFields(configurableFieldResponseModelList);
             returnValue.add(productTemplateResponseModel);
         }
         return returnValue;
