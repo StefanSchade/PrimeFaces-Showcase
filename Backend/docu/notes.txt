@@ -3,3 +3,6 @@
 
 https://thoughts-on-java.org/best-practices-many-one-one-many-associations-mappings/
 
+sometimes this problem occurs:
+The web application [ROOT] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@11.0.4/jdk.internal.misc.Unsafe.park(Native Method)

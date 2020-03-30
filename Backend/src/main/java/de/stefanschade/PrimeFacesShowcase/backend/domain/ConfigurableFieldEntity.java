@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"templatename","name"})})
+@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"template","fieldname"})})
 public class ConfigurableFieldEntity {
 
     @Id
@@ -22,14 +22,14 @@ public class ConfigurableFieldEntity {
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "templatename", nullable = false)
+    @JoinColumn(name = "template", nullable = false)
     @NonNull
     @JsonBackReference
     ProductTemplateEntity template;
 
     @Column(nullable = false)
     @NonNull
-    private String name;
+    private String fieldname;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

@@ -1,6 +1,5 @@
 package de.stefanschade.PrimeFacesShowcase.backend.bootstrap;
 
-import de.stefanschade.PrimeFacesShowcase.backend.domain.CarEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ConfigurableFieldEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.domain.ProductTemplateEntity;
 import de.stefanschade.PrimeFacesShowcase.backend.dto.FieldType;
@@ -14,12 +13,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 @Slf4j
 @Component
-public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent> {
+public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private CarRepository userRepository;
@@ -32,67 +29,47 @@ public class DevBootstrap  implements ApplicationListener<ContextRefreshedEvent>
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        log.info("load test data into db");
 
-        CarEntity car1 = new CarEntity("Mercedes",1995, "Gold", 100000, true);
-        CarEntity car2 = new CarEntity("VW",2010, "Weiss", 200000, false);
-        CarEntity car3 = new CarEntity("Ford",2015, "Rot", 300000, false);
+        this.generateTestSample("loan",
+                "business partner", FieldType.STRING,
+                "outstanding", FieldType.DOUBLE,
+                "interest rate", FieldType.DOUBLE);
 
-        userRepository.save(car1);
-        userRepository.save(car2);
-        userRepository.save(car3);
+        this.generateTestSample("deposit",
+                "business partner", FieldType.STRING,
+                "balance", FieldType.DOUBLE,
+                "interest rate", FieldType.DOUBLE);
 
-        log.info("load test data into db: loans");
+//        this.generateTestSample("equity depot",
+//                "business partner", FieldType.STRING,
+//                "stock", FieldType.INTEGER,
+//                "interest rate", FieldType.DOUBLE);
 
-        ProductTemplateEntity loan = new ProductTemplateEntity("loan");
+    }
 
-        ConfigurableFieldEntity loan_businesspartner = new ConfigurableFieldEntity(loan,"businesspartner", FieldType.STRING);
-        ConfigurableFieldEntity loan_notional = new ConfigurableFieldEntity(loan,"notional", FieldType.INTEGER);
-        ConfigurableFieldEntity loan_interstrate = new ConfigurableFieldEntity(loan,"notional", FieldType.INTEGER);
+    private void generateTestSample(String templatename,
+                                    String fieldname1, FieldType fieldtype1,
+                                    String fieldname2, FieldType fieldtype2,
+                                    String fieldname3, FieldType fieldtype3) {
 
-        loan.setFields(new ArrayList<>());
+        log.info("load test data into db: " + templatename);
 
-        loan.getFields().add(loan_businesspartner);
-        loan.getFields().add(loan_notional);
-        loan.getFields().add(loan_interstrate);
+        ProductTemplateEntity template = new ProductTemplateEntity(templatename);
 
-        productTemplateRepository.save(loan);
+        ConfigurableFieldEntity field1 = new ConfigurableFieldEntity(template, fieldname1, fieldtype1);
+        ConfigurableFieldEntity field2 = new ConfigurableFieldEntity(template, fieldname2, fieldtype2);
+        ConfigurableFieldEntity field3 = new ConfigurableFieldEntity(template, fieldname3, fieldtype3);
 
-//        todo saving the fields results in a jpa problem
-//       configurableFieldRepository.save(loan_businesspartner);
-//        configurableFieldRepository.save(loan_notional);
-//        configurableFieldRepository.save(loan_interstrate);
+        template.setFields(new ArrayList<>());
 
+        template.getFields().add(field1);
+        template.getFields().add(field2);
+        template.getFields().add(field3);
 
-
-
-
-        ProductTemplateEntity deposit = new ProductTemplateEntity("deposit");
-        ProductTemplateEntity equity = new ProductTemplateEntity("equity");
-
-
-        Set<ConfigurableFieldEntity> configurableFieldEntitySet = new HashSet<>();
-
-        productTemplateRepository.save(deposit);
-        productTemplateRepository.save(equity);
-
-
-
-//        ConfigurableFieldEntity notional = new ConfigurableFieldEntity("Notional", "Notional", 8, FieldType.INTEGER);
-//        ConfigurableFieldDto notional = new ConfigurableFieldDto("Notional", "Notional", 8, FieldType.INTEGER);
-//        ConfigurableFieldDto interest = new ConfigurableFieldDto("Interest Rate", "Interest Rate", 8, FieldType.DOUBLE);
-//        ConfigurableFieldDto isin = new ConfigurableFieldDto("ISIN", "Interest Rate", 8, FieldType.STRING);
-
-
-
-
-
-//        ProductTemplateDto loan = new ProductTemplateDto()
-
-
-
-
-
+        productTemplateRepository.save(template);
+        configurableFieldRepository.save(field1);
+        configurableFieldRepository.save(field2);
+        configurableFieldRepository.save(field3);
     }
 
 }
