@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Log
-@Named("dtBasicView")
+@Named
 @ViewScoped
 public class BasicView implements Serializable {
 
