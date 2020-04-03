@@ -17,25 +17,14 @@
         </ui:define>
 
         <ui:define name="center">
-
+<!--            <h:graphicImage value="#{resource['images:wave.med.gif']}"/>-->
             <h:outputText value="You are in the Main Content Section"/>
 
-            <p:dataTable var="car" value="#{dtBasicView.cars}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{car.id}" />
+            <p:dataTable var="template" value="#{productTemplateView.productTemplates}">
+                <p:column headerText="name">
+                    <h:outputText value="#{template.templatename}" />
                 </p:column>
 
-                <p:column headerText="Year">
-                    <h:outputText value="#{car.year}" />
-                </p:column>
-
-                <p:column headerText="Brand">
-                    <h:outputText value="#{car.brand}" />
-                </p:column>
-
-                <p:column headerText="Color">
-                    <h:outputText value="#{car.color}" />
-                </p:column>
             </p:dataTable>
 
         </ui:define>

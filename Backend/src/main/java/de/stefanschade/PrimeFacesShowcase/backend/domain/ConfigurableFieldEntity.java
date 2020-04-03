@@ -37,6 +37,4 @@ public class ConfigurableFieldEntity {
     @Enumerated(EnumType.STRING)
     @NonNull
     private FieldType fieldType;
-    
-
 }

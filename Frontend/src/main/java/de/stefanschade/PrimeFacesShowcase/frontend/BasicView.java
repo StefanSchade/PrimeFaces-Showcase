@@ -1,5 +1,7 @@
-package de.stefanschade.PrimeFacesShowcase;
+package de.stefanschade.PrimeFacesShowcase.frontend;
 
+import de.stefanschade.PrimeFacesShowcase.Car;
+import de.stefanschade.PrimeFacesShowcase.CarService;
 import lombok.extern.java.Log;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -31,3 +33,4 @@ public class BasicView implements Serializable {
         this.service = service;
     }
 }
+
