@@ -31,6 +31,7 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
         ProductTemplateEntity enitityThatWasStored = productTemplateRepository.save(entityToBeStored);
         ProductTemplateDto returnValue = new ProductTemplateDto();
         BeanUtils.copyProperties(enitityThatWasStored, returnValue);
+        log.info("logging works here");
         return returnValue;
     }
 

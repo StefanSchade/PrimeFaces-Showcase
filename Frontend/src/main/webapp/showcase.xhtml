@@ -18,11 +18,11 @@
 
         <ui:define name="center">
 <!--            <h:graphicImage value="#{resource['images:wave.med.gif']}"/>-->
-            <h:outputText value="You are in the Main Content Section"/>
+            <h:outputText value="You are in the Main abc #{productTemplateView.productTemplates[1].templatename}"/>
 
-            <p:dataTable var="template" value="#{productTemplateView.productTemplates}">
+            <p:dataTable var="currenttemplate" value="#{productTemplateView.productTemplates}">
                 <p:column headerText="name">
-                    <h:outputText value="#{template.templatename}" />
+                    <h:outputText value="#{currenttemplate.templatename}" />
                 </p:column>
 
             </p:dataTable>

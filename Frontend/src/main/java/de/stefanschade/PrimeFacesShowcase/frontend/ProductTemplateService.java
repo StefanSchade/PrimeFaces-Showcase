@@ -15,7 +15,7 @@ public class ProductTemplateService {
     public List<ProductTemplate> retrieveTemplates() {
 
         List<ProductTemplate> returnValue = new ArrayList<>();
-        System.out.println("Testing");
+        log.info("Simple Logging facade works now");
         returnValue.add(new ProductTemplate("testtemplate", null));
 
 //        Client client = ClientBuilder.newClient();
