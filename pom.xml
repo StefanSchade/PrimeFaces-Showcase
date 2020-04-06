@@ -38,6 +38,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <payaramicro.maven.plugin.version>1.0.7</payaramicro.maven.plugin.version>
         <slf4j.version>1.7.30</slf4j.version>
+        <resteasy.version>4.5.3.Final</resteasy.version>
     </properties>
 
 
@@ -81,6 +82,22 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-core</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxb-provider</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>5.6.0</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
