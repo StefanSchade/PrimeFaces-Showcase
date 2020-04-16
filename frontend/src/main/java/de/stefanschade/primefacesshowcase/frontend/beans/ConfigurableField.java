@@ -1,4 +1,4 @@
-package de.stefanschade.primefacesshowcase.frontend;
+package de.stefanschade.primefacesshowcase.frontend.beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

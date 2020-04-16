@@ -1,6 +1,6 @@
-package de.stefanschade.primefacesshowcase;
+package de.stefanschade.primefacesshowcase.frontend.rest;
 
-import de.stefanschade.primefacesshowcase.frontend.ProductTemplate;
+import de.stefanschade.primefacesshowcase.frontend.beans.ProductTemplate;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;

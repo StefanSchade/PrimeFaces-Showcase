@@ -1,6 +1,6 @@
-package de.stefanschade.primefacesshowcase.frontend;
+package de.stefanschade.primefacesshowcase.frontend.beans;
 
-import de.stefanschade.primefacesshowcase.ProductTemplateService;
+import de.stefanschade.primefacesshowcase.frontend.service.ProductTemplateService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +27,5 @@ public class ProductTemplateView implements Serializable {
     public void init() {
         productTemplates = service.retrieveTemplates();
     }
-
-    //    public void setService(ProductTemplateService service) {
 
 }

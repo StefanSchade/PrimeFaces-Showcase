@@ -12,9 +12,7 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-
-    <context-param>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>#{currentTheme.theme}</param-value>
-    </context-param>
+    <welcome-file-list>
+        <welcome-file>showcase.xhtml</welcome-file>
+    </welcome-file-list>
 </web-app>
