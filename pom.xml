@@ -25,37 +25,54 @@
         </repository>
     </repositories>
 
-        <properties>
-            <myfaces-impl.version>2.3.6</myfaces-impl.version>
-            <el-api.version>3.0.0</el-api.version>
-            <servlet-jsp-api.version>2.3.3</servlet-jsp-api.version>
-            <mojarra.version>2.3.9</mojarra.version>
-            <primefaces-themes.version>1.0.10</primefaces-themes.version>
-            <primefaces.version>8.0</primefaces.version>
-            <javee.version>8.0.1</javee.version>
-            <lombok.version>1.18.12</lombok.version>
-            <logback.version>1.2.3</logback.version>
-            <maven.compiler.source>11</maven.compiler.source>
-            <maven.compiler.target>11</maven.compiler.target>
-            <failOnMissingWebXml>false</failOnMissingWebXml>
-            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-            <payaramicro.maven.plugin.version>1.0.7</payaramicro.maven.plugin.version>
-            <slf4j.version>1.7.30</slf4j.version>
-            <resteasy.version>4.5.3.Final</resteasy.version>
-        </properties>
+    <properties>
+        <myfaces-impl.version>2.3.6</myfaces-impl.version>
+        <el-api.version>3.0.0</el-api.version>
+        <servlet-jsp-api.version>2.3.3</servlet-jsp-api.version>
+        <mojarra.version>2.3.9</mojarra.version>
+        <primefaces-themes.version>1.0.10</primefaces-themes.version>
+        <primefaces.version>8.0</primefaces.version>
+        <javee.version>8.0.1</javee.version>
+        <lombok.version>1.18.12</lombok.version>
+        <logback.version>1.2.3</logback.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <payaramicro.maven.plugin.version>1.0.7</payaramicro.maven.plugin.version>
+        <slf4j.version>1.7.30</slf4j.version>
+<!--        <resteasy.version>3.0.14.Final</resteasy.version>-->
+        <resteasy.version>4.5.3.Final</resteasy.version>
+    </properties>
 
 
     <dependencyManagement>
         <dependencies>
-<!-- jsf specific -->
-
+<!--         compare resteasy reference page 19-->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-core</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-client</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+<!--         compare resteasy reference page 8  -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxb-provider</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+            <!-- jsf specific -->
             <dependency>
                 <groupId>org.apache.myfaces.core</groupId>
                 <artifactId>myfaces-impl</artifactId>
                 <version>${myfaces-impl.version}</version>
             </dependency>
 
-<!--            Expression Language 3.0 API-->
+            <!--            Expression Language 3.0 API-->
             <dependency>
                 <groupId>javax.el</groupId>
                 <artifactId>javax.el-api</artifactId>
@@ -119,6 +136,15 @@
                 <version>${javee.version}</version>
                 <scope>provided</scope>
             </dependency>
+
+
+            <!--            <dependency>-->
+            <!--                <groupId>com.squareup.okhttp3</groupId>-->
+            <!--                <artifactId>okhttp</artifactId>-->
+            <!--                <version>${okhttp3.version}</version>-->
+            <!--            </dependency>-->
+            <!--            -->
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -135,16 +161,6 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-core</artifactId>
-                <version>${resteasy.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-jaxb-provider</artifactId>
-                <version>${resteasy.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>

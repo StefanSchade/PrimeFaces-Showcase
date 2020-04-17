@@ -2,6 +2,7 @@ package de.stefanschade.primefacesshowcase.frontend.service;
 
 import de.stefanschade.primefacesshowcase.frontend.beans.ProductTemplate;
 import de.stefanschade.primefacesshowcase.frontend.rest.BackendRestClient;
+import de.stefanschade.primefacesshowcase.frontend.rest.impl.BackendRestClientJaxRs;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 

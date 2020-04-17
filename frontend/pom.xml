@@ -23,6 +23,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
         </dependency>
@@ -65,12 +77,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxb-provider</artifactId>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
         </dependency>
     </dependencies>
 
