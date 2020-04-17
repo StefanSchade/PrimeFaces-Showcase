@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 
 import java.util.ArrayList;
 
@@ -23,48 +24,64 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     @Autowired
     ConfigurableFieldRepository configurableFieldRepository;
 
+    @Autowired
+    RandomDataGenerator randomDataGenerator;
+
+    private final int NUMBERTEMPLATES = 40;
+    private final int MINIMUMNUMBEROFFIELDS = 10;
+    private final int MAXIMUMNUMBEROFFIELDS = 20;
+    private final int TEMPLATENAMELENGTH = 10;
+    private final int FIELDNAMELENGTH = 10;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
+        log.info("generating testdata");
+
         this.generateTestSample("loan",
-                "business partner", FieldType.STRING,
-                "outstanding", FieldType.DOUBLE,
-                "interest rate", FieldType.DOUBLE);
+                new String[]{"business partner", "outstanding", "interest rate"},
+                new FieldType[]{FieldType.STRING, FieldType.DOUBLE, FieldType.DOUBLE});
 
         this.generateTestSample("deposit",
-                "business partner", FieldType.STRING,
-                "balance", FieldType.DOUBLE,
-                "interest rate", FieldType.DOUBLE);
+                new String[]{"business partner", "outstanding", "interest rate"},
+                new FieldType[]{FieldType.STRING, FieldType.DOUBLE, FieldType.DOUBLE});
 
-//        this.generateTestSample("equity depot",
-//                "business partner", FieldType.STRING,
-//                "stock", FieldType.INTEGER,
-//                "interest rate", FieldType.DOUBLE);
+        for (int templateCounter = 0; templateCounter < NUMBERTEMPLATES; templateCounter++) {
+            String templateName;
+//          templateName = randomDataGenerator.getRandomString(TEMPLATENAMELENGTH);
+            templateName = "Test-Template #"+ (templateCounter+1);
+            int fieldsInTemplate = randomDataGenerator.getRandomIntInRange(MINIMUMNUMBEROFFIELDS, MAXIMUMNUMBEROFFIELDS);
+            log.info("Templatename = "+templateName + " Fields: " + fieldsInTemplate);
+            String[] fieldNames = new String[fieldsInTemplate];
+            FieldType[] fieldTypes = new FieldType[fieldsInTemplate];
+            fieldNames = randomDataGenerator.getRandomStringArray(fieldsInTemplate, FIELDNAMELENGTH);
+            fieldTypes = randomDataGenerator.getRandomFieldTypeArray(fieldsInTemplate);
+            generateTestSample(templateName,fieldNames,fieldTypes);
+        }
     }
 
     private void generateTestSample(String templatename,
-                                    String fieldname1, FieldType fieldtype1,
-                                    String fieldname2, FieldType fieldtype2,
-                                    String fieldname3, FieldType fieldtype3) {
-
-        log.info("load test data into db: " + templatename);
+                                    String[] fieldnames, FieldType[] fieldtypes) {
 
         ProductTemplateEntity template = new ProductTemplateEntity(templatename);
 
-        ConfigurableFieldEntity field1 = new ConfigurableFieldEntity(template, fieldname1, fieldtype1);
-        ConfigurableFieldEntity field2 = new ConfigurableFieldEntity(template, fieldname2, fieldtype2);
-        ConfigurableFieldEntity field3 = new ConfigurableFieldEntity(template, fieldname3, fieldtype3);
+        if (fieldnames.length != fieldtypes.length) {
+            throw new IllegalArgumentException("Arrays for fieldname (" + fieldnames.length
+                    + ") and fieldlength (" + fieldtypes.length + ") must have the same length!");
+        }
 
         template.setFields(new ArrayList<>());
 
-        template.getFields().add(field1);
-        template.getFields().add(field2);
-        template.getFields().add(field3);
+        log.info("templatename " + templatename + " fields " + fieldnames.length + " types " + fieldtypes.length);
+        for (int i = 0; i<fieldnames.length;i++){
+            log.info("Field #"+i+": "+fieldnames[i] + "   " + fieldtypes[i]);
+        }
 
         productTemplateRepository.save(template);
-        configurableFieldRepository.save(field1);
-        configurableFieldRepository.save(field2);
-        configurableFieldRepository.save(field3);
+        for (int i = 0; i < fieldnames.length; i++) {
+            ConfigurableFieldEntity field = new ConfigurableFieldEntity(template, fieldnames[i], fieldtypes[i]);
+            template.getFields().add(field);
+            configurableFieldRepository.save(field);
+        }
     }
-
 }

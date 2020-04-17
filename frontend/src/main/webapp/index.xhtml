@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="pagetitle">Product Templates</ui:define>
+    <ui:define name="content">
+        <f:view>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Auswahl 1"/>
+                    <h:selectOneListbox value="#{productTemplate.templatename}">
+                        <f:selectItems value="#{productTemplateView.productTemplateNames}"></f:selectItems>
+                        <f:ajax event="valueChange" listener="#{productTemplateView.changeSelectedTemplate}"
+                                render="fieldList"/>
+                    </h:selectOneListbox>j
+
+                    <h:outputText value="anzahl aenderungen"/>
+                    <h:outputText value="#{productTemplateView.changeCounter}" id="fieldList"/>
+
+                    <h:outputText value="abc" id="sm"/> <br/>
+
+                    <h:commandButton value="Abspeichern" action="#{book.save}" actionListener="#{book.saveListener}"/>
+
+                </h:panelGrid>
+
+            </h:form>
+        </f:view>
+
+    </ui:define>
+</ui:composition>
+Ein Text
+</html>
