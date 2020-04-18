@@ -47,7 +47,14 @@
 
     <dependencyManagement>
         <dependencies>
-<!-- jsf specific -->
+
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <!-- jsf specific -->
 
             <dependency>
                 <groupId>org.apache.myfaces.core</groupId>
