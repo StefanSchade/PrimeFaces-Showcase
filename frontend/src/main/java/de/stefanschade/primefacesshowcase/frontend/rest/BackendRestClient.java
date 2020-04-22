@@ -9,6 +9,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -36,19 +37,26 @@ public class BackendRestClient {
 
     public List<ProductTemplate> productTemplates() {
 
+//        Client client = javax.ws.rs.client.ClientBuilder.newClient();
+//
+//        WebTarget  webTarget = client.target(BASE_URI);
+//        WebTarget resource = webTarget.path("producttemplate");
+//        javax.ws.rs.client.Invocation.Builder builder=resource.
+//                request(javax.ws.rs.core.MediaType.APPLICATION_JSON);
+//        Invocation invocation=builder.buildGet();
+//        GenericType responseType=new GenericType<List<ProductTemplate>>() { };
+//        List<ProductTemplate> productTemplates = (List<ProductTemplate>) invocation.invoke(responseType);
+//        log.info("backend returned {} product templates", productTemplates.size());
 
-        Client client = javax.ws.rs.client.ClientBuilder.newClient();
-
-        WebTarget  webTarget = client.target(BASE_URI);
-        WebTarget resource = webTarget.path("producttemplate");
-        javax.ws.rs.client.Invocation.Builder builder=resource.
-                request(javax.ws.rs.core.MediaType.APPLICATION_JSON);
-        Invocation invocation=builder.buildGet();
-        GenericType responseType=new GenericType<List<ProductTemplate>>() { };
-        List<ProductTemplate> productTemplates = (List<ProductTemplate>) invocation.invoke(responseType);
-        log.info("backend returned {} product templates", productTemplates.size());
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(BASE_URI + "/producttemplate");
+        Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
+        List<ProductTemplate> productTemplates =
+                builder.get(new GenericType<List<ProductTemplate>>() {
+                });
+        System.out.println(productTemplates);
+        client.close();
 
         return productTemplates;
-
     }
 }
