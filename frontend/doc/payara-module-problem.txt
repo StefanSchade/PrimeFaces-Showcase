@@ -1,3 +1,11 @@
+Problem with deployment on Payara seems to be related to a known issue
+
+https://youtrack.jetbrains.com/issue/IDEA-216528
+
+https://github.com/payara/Payara/issues/4619
+
+---------------------- Stacktrace as follows:
+
 [2020-04-22T20:26:28.177+0200] [Payara 5.201] [WARNING] [] [com.hazelcast.instance.HazelcastInstanceFactory] [tid: _ThreadID=29 _ThreadName=RunLevelControllerThread-1587579986628] [timeMillis: 1587579988177] [levelValue: 900] [[
   Hazelcast is starting in a Java modular environment (Java 9 and newer) but without proper access to required Java packages. Use additional Java arguments to provide Hazelcast access to Java internal API. The internal API access is used to get the best performance results. Arguments to be used:
  --add-modules java.se --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.management/sun.management=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED]]

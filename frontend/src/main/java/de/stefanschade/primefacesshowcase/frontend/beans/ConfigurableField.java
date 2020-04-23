@@ -12,5 +12,5 @@ import lombok.extern.slf4j.Slf4j;
 public class ConfigurableField {
 
     private String fieldname;
-    private String fieldType;
+    private FieldType fieldType;
 }
