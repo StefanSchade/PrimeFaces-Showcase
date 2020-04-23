@@ -47,7 +47,25 @@
 
     <dependencyManagement>
         <dependencies>
-<!-- jsf specific -->
+
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-moxy</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency> <!-- Necessary for standalone console project -->
+                <groupId>org.glassfish.jersey.inject</groupId>
+                <artifactId>jersey-hk2</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+
+            <!-- jsf specific -->
 
             <dependency>
                 <groupId>org.apache.myfaces.core</groupId>
@@ -158,6 +176,7 @@
     <modules>
         <module>frontend</module>
         <module>backend</module>
+        <module>simple-client</module>
     </modules>
 
 </project>
