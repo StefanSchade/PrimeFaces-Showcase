@@ -176,7 +176,7 @@
     <modules>
         <module>frontend</module>
         <module>backend</module>
-        <module>simple-client</module>
+        <module>debugclient</module>
     </modules>
 
 </project>
