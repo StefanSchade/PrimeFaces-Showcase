@@ -11,5 +11,5 @@ import java.util.List;
 @Getter
 public class ProductTemplate {
     private String templatename;
-    private List<ConfigurableField> fields;
+//    private List<ConfigurableField> fields;
 }

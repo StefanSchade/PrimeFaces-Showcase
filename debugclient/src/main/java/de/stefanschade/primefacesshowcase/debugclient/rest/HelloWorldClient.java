@@ -49,7 +49,7 @@ public class HelloWorldClient {
         ProductTemplate template = productTemplates.get(11);
 
         System.out.println("name: " + template.getTemplatename());
-        System.out.println("fields: " + template.getFields());
+//        System.out.println("fields: " + template.getFields());
 
         client.close();
     }
