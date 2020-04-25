@@ -2,7 +2,7 @@ package de.stefanschade.primefacesshowcase.frontend.beans;
 
 import de.stefanschade.primefacesshowcase.frontend.service.ProductTemplateService;
 import lombok.Getter;
-import lombok.extern.java.Log;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
@@ -17,9 +17,11 @@ import java.util.List;
 @Named("productTemplateView")
 @ViewScoped
 @Getter
+@Setter
 public class ProductTemplateView implements Serializable {
 
-    private List<ProductTemplate> productTemplates = new ArrayList<>();
+    private List<ProductTemplate> productTemplateList = new ArrayList<>();
+    private List<ConfigurableField> configurableFieldList = new ArrayList<>();
 
     private List<String> productTemplateNames = new ArrayList<>();
 
@@ -27,17 +29,23 @@ public class ProductTemplateView implements Serializable {
 
     private int changeCounter = 0;
 
+    private ProductTemplate selectedTemplate;
+
     @Inject
     private ProductTemplateService service;
 
     @PostConstruct
     public void init() {
-        productTemplates = service.retrieveTemplates();
+        productTemplateList = service.retrieveTemplates();
+        ProductTemplate template;
+        for (int i = 0; i < productTemplateList.size(); i++) {
+            template = productTemplateList.get(i);
+            template.setFieldCount(template.getFields().size());
+        }
     }
 
-    public void changeSelectedTemplate() {
-        changeCounter++;
-        log.info("template changed");
+    public void templateButtonClicked(ProductTemplate template) {
+        this.selectedTemplate = template;
+        this.configurableFieldList = template.getFields();
     }
-
 }

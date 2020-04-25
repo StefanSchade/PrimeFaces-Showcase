@@ -17,16 +17,18 @@
 
         <ui:define name="center">
 <!--            <h:graphicImage value="#{resource['images:wave.med.gif']}"/>-->
-            <h:outputText value="You are in the Main abc #{productTemplateView.productTemplates[1].templatename}"/>
+            <h:outputText value="You are in the Main abc #{productTemplateView.productTemplateList[1].templatename}"/>
 
-            <p:dataTable var="currenttemplate" value="#{productTemplateView.productTemplates}">
+            <p:dataTable var="currenttemplate" value="#{productTemplateView.productTemplateList}">
                 <p:column headerText="name">
                     <h:outputText value="#{currenttemplate.templatename}" />
                 </p:column>
                 <p:column headerText="Felder">
-                    <h:outputText value="#{currenttemplate.fields}" />
+                    <h:outputText value="#{currenttemplate.fieldCount}" />
                 </p:column>
             </p:dataTable>
+
+
 
         </ui:define>
     </ui:composition>

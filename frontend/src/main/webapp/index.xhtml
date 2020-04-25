@@ -10,8 +10,50 @@
     <ui:define name="pagetitle">Product Templates</ui:define>
     <ui:define name="content">
         <f:view>
+
+            <h:dataTable value="#{productTemplateView.productTemplateList}" var="template">
+
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    #{template.templatename}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Anzahl Felder</f:facet>
+                    #{template.fieldCount}
+                </h:column>
+
+                <h:column>
+
+                    <h:column>
+                        <h:commandButton value="Details">
+                            <f:ajax listener="#{productTemplateView.templateButtonClicked(template)}"
+                                    render="fieldtable"/>
+                        </h:commandButton>
+                    </h:column>
+
+                </h:column>
+
+            </h:dataTable>
+
+            <h:dataTable id="fieldtable" value="#{productTemplateView.configurableFieldList}" var="field">
+
+                <h:column>
+                    <f:facet name="header">Field</f:facet>
+                    #{field.fieldname}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Type</f:facet>
+                    #{field.fieldType}
+                </h:column>
+
+
+            </h:dataTable>
+
             <h:form>
                 <h:panelGrid columns="2">
+
                     <h:outputText value="Auswahl 1"/>
                     <h:selectOneListbox value="#{productTemplate.templatename}">
                         <f:selectItems value="#{productTemplateView.productTemplateNames}"></f:selectItems>

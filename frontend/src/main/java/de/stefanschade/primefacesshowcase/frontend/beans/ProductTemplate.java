@@ -17,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ProductTemplate {
+    private int fieldCount;
     private String templatename;
     private List<ConfigurableField> fields;
 }
