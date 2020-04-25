@@ -20,12 +20,14 @@ import java.util.List;
 @ApplicationScoped
 public class BackendRestClient {
 
+
     private final String BASE_URI =
-            "http://localhost:8082";
+            "http://localhost:";
+    private final String PORT = "8082";
 
     public List<ProductTemplate> productTemplates1() {
         Client client = ClientBuilder.newBuilder().build();
-        WebTarget target = client.target("http://localhost:8082/producttemplate");
+        WebTarget target = client.target(BASE_URI + PORT + "/producttemplate");
 
         Response response = target.request().get();
 
@@ -42,7 +44,7 @@ public class BackendRestClient {
 
 //        Client client = javax.ws.rs.client.ClientBuilder.newClient();
 //
-//        WebTarget  webTarget = client.target(BASE_URI);
+//        WebTarget  webTarget = client.target(BASE_URI + PORT);
 //        WebTarget resource = webTarget.path("producttemplate");
 //        javax.ws.rs.client.Invocation.Builder builder=resource.
 //                request(javax.ws.rs.core.MediaType.APPLICATION_JSON);
@@ -52,7 +54,7 @@ public class BackendRestClient {
 //        log.info("backend returned {} product templates", productTemplates.size());
 
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(BASE_URI + "/producttemplate");
+        WebTarget target = client.target(BASE_URI + PORT + "/producttemplatelist");
         Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
         List<ProductTemplate> productTemplates =
                 builder.get(new GenericType<List<ProductTemplate>>() {

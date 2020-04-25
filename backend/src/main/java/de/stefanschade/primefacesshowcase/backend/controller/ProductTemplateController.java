@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -18,15 +17,14 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("producttemplate")
 public class ProductTemplateController {
 
     @Autowired
     ProductTemplateService productTemplateService;
 
-    @GetMapping
+    @GetMapping("/producttemplatelist")
     public List<ProductTemplateResponseModel> getAllProductTemplates() {
-        List<ProductTemplateDto>  productTemplateDtoList = productTemplateService.getAll();
+        List<ProductTemplateDto> productTemplateDtoList = productTemplateService.getAll();
         List<ProductTemplateResponseModel> returnValue = new ArrayList<>(productTemplateDtoList.size());
         Iterator<ProductTemplateDto> productTemplateDtoIterator = productTemplateDtoList.iterator();
         while (productTemplateDtoIterator.hasNext()) {
@@ -38,14 +36,12 @@ public class ProductTemplateController {
             while (configurableFieldDtoIterator.hasNext()) {
                 ConfigurableFieldDto currentFieldDto = configurableFieldDtoIterator.next();
                 ConfigurableFieldResponseModel currentFieldResponseModel = new ConfigurableFieldResponseModel();
-                BeanUtils.copyProperties(currentFieldDto,currentFieldResponseModel);
+                BeanUtils.copyProperties(currentFieldDto, currentFieldResponseModel);
                 configurableFieldResponseModelList.add(currentFieldResponseModel);
             }
-// list commented out at the moment
-// productTemplateResponseModel.setFields(configurableFieldResponseModelList);
+            productTemplateResponseModel.setFields(configurableFieldResponseModelList);
             returnValue.add(productTemplateResponseModel);
         }
         return returnValue;
     }
-
 }

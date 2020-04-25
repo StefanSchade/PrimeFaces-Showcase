@@ -14,5 +14,5 @@ import java.util.List;
 public class ProductTemplateResponseModel {
 
     private String templatename;
-//    private List<ConfigurableFieldResponseModel> fields;
+    private List<ConfigurableFieldResponseModel> fields;
 }

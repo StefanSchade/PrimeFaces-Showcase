@@ -15,11 +15,12 @@ public class HelloWorldClient {
 
 
     private final String BASE_URI =
-            "http://localhost:8082";
+            "http://localhost:";
+    private final String PORT = "8082";
 
     public void JerseyHelloWorld() {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("http://localhost:8080/helloworld");
+        WebTarget target = client.target(BASE_URI + PORT + "/helloworld");
         Invocation.Builder builder = target.request();
         HelloWorld result = builder.get(HelloWorld.class);
         System.out.println(result);
@@ -29,7 +30,7 @@ public class HelloWorldClient {
     // http://www.adam-bien.com/roller/abien/entry/jax_rs_retrieving_a_list
     public void JerseyHelloWorldList() {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("http://localhost:8082/helloworldlist");
+        WebTarget target = client.target(BASE_URI + PORT + "/helloworldlist");
         Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
         List<HelloWorld> resultList = builder.get(new GenericType<List<HelloWorld>>() {
         });
@@ -38,18 +39,19 @@ public class HelloWorldClient {
     }
 
     public void JerseyClientForShowcase() {
+        System.out.println("checking "+ BASE_URI + PORT + "/producttemplatelist");
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(BASE_URI + "/producttemplate");
+        WebTarget target = client.target(BASE_URI + PORT + "/producttemplatelist");
         Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
         List<ProductTemplate> productTemplates =
                 builder.get(new GenericType<List<ProductTemplate>>() {
                 });
         System.out.println(productTemplates);
 
-        ProductTemplate template = productTemplates.get(11);
+        ProductTemplate template = productTemplates.get(0);
 
         System.out.println("name: " + template.getTemplatename());
-//        System.out.println("fields: " + template.getFields());
+        System.out.println("fields: " + template.getFields());
 
         client.close();
     }
