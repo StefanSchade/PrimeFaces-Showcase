@@ -27,7 +27,7 @@ public class ProductTemplateView implements Serializable {
 
     private List<ConfigurableField> configurableFields = new ArrayList<>();
 
-    private int changeCounter = 0;
+    private int selectCounter = 0;
 
     private ProductTemplate selectedTemplate;
 
@@ -47,5 +47,6 @@ public class ProductTemplateView implements Serializable {
     public void templateButtonClicked(ProductTemplate template) {
         this.selectedTemplate = template;
         this.configurableFieldList = template.getFields();
+        this.selectCounter++;
     }
 }

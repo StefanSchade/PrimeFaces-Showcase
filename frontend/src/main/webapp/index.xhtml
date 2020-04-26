@@ -49,25 +49,9 @@
             </h:dataTable>
 
             <h:form>
-                <h:panelGrid columns="2">
-
-                    <h:outputText value="Auswahl 1"/>
-                    <h:selectOneListbox value="#{productTemplate.templatename}">
-                        <f:selectItems value="#{productTemplateView.productTemplateNames}"></f:selectItems>
-                        <f:ajax event="valueChange" listener="#{productTemplateView.changeSelectedTemplate}"
-                                render="fieldList"/>
-                    </h:selectOneListbox>j
-
-                    <h:outputText value="anzahl aenderungen"/>
-                    <h:outputText value="#{productTemplateView.changeCounter}" id="fieldList"/>
-
-                    <h:outputText value="abc" id="sm"/> <br/>
-
-                    <h:commandButton value="Abspeichern" action="#{book.save}" actionListener="#{book.saveListener}"/>
-
-                </h:panelGrid>
 
             </h:form>
+
         </f:view>
 
     </ui:define>
