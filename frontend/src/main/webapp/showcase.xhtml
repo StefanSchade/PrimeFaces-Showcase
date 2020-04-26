@@ -19,6 +19,8 @@
 <!--            <h:graphicImage value="#{resource['images:wave.med.gif']}"/>-->
             <h:outputText value="You are in the Main abc #{productTemplateView.productTemplateList[1].templatename}"/>
 
+
+
             <p:dataTable var="currenttemplate" value="#{productTemplateView.productTemplateList}">
                 <p:column headerText="name">
                     <h:outputText value="#{currenttemplate.templatename}" />

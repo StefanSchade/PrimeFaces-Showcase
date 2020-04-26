@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -32,6 +33,9 @@ public class ProductTemplateView implements Serializable {
     private ProductTemplate selectedTemplate;
 
     @Inject
+    private UserData user;
+
+    @Inject
     private ProductTemplateService service;
 
     @PostConstruct
@@ -42,6 +46,7 @@ public class ProductTemplateView implements Serializable {
             template = productTemplateList.get(i);
             template.setFieldCount(template.getFields().size());
         }
+        user.setEmail("thisismyemail@yahoo.com");
     }
 
     public void templateButtonClicked(ProductTemplate template) {
