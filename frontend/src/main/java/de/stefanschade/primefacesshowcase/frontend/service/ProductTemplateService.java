@@ -20,9 +20,15 @@ public class ProductTemplateService {
     private BackendRestClient backendRestClient;
 
     public List<ProductTemplate> retrieveTemplates() {
-        log.info("Simple Logging facade works now");
-
         return backendRestClient.productTemplates();
     }
+
+
+    public List<ProductTemplate> retrieveTemplates(int size, int page) {
+        return backendRestClient.productTemplates(size,page);
+    }
+
+
+
 
 }

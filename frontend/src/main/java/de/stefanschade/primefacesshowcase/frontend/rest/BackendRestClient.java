@@ -54,7 +54,7 @@ public class BackendRestClient {
         return productTemplates;
     }
 
-    public List<ProductTemplate> productTemplatesPaginated(int size, int page) {
+    public List<ProductTemplate> productTemplates(int size, int page) {
 
         System.out.println("checking " + BASE_URI + PORT + "/producttemplatelistpaginated");
         Client client = ClientBuilder.newClient();

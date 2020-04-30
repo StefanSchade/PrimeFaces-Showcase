@@ -11,30 +11,53 @@
     <ui:define name="content">
         <f:view>
 
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="2" border="1"
+                         cellpadding="10" cellspacing="1">
+
 
                 <h:form>
 
-                    <h:dataTable id="templatetable" value="#{productTemplateView.productTemplateList}" var="template">
+                    <h:panelGrid>
 
-                        <h:column>
-                            <f:facet name="header">Name</f:facet>
-                            <h:outputText value="#{template.templatename}"/>
-                        </h:column>
+                        <h:dataTable id="templatetable" value="#{paginatedTableContent.productTemplateList}"
+                                     var="template">
 
-                        <h:column>
-                            <f:facet name="header">Anzahl Felder</f:facet>
-                            <h:outputText value="#{template.fieldCount}"/>
-                        </h:column>
+                            <h:column>
+                                <f:facet name="header">Name</f:facet>
+                                <h:outputText value="#{template.templatename}"/>
+                            </h:column>
 
-                        <h:column>
-                            <h:commandButton value="Details">
-                                <f:ajax listener="#{productTemplateView.templateButtonClicked(template)}"
-                                        render="fieldtable"/>
+                            <h:column>
+                                <f:facet name="header">Anzahl Felder</f:facet>
+                                <h:outputText value="#{template.fieldCount}"/>
+                            </h:column>
+
+                            <h:column>
+                                <h:commandButton value="Details">
+                                    <f:ajax listener="#{productTemplateView.templateButtonClicked(template)}"
+                                            render="fieldtable"/>
+                                </h:commandButton>
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <h:panelGrid columns="2" border="1"
+                                     cellpadding="10" cellspacing="1">
+
+                            <h:commandButton value="back">
+                                <f:ajax listener="#{paginatedTableContent.backButtonClick()}"
+                                        render="templatetable"/>
                             </h:commandButton>
-                        </h:column>
 
-                    </h:dataTable>
+
+                            <h:commandButton value="next">
+                                <f:ajax listener="#{paginatedTableContent.nextButtonClick()}"
+                                        render="templatetable"/>
+                            </h:commandButton>
+
+                        </h:panelGrid>
+
+                    </h:panelGrid>
 
                 </h:form>
 
