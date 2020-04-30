@@ -27,7 +27,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     @Autowired
     RandomDataGenerator randomDataGenerator;
 
-    private final int NUMBERTEMPLATES = 2500;
+    private final int NUMBERTEMPLATES = 100;
     private final int MINIMUMNUMBEROFFIELDS = 10;
     private final int MAXIMUMNUMBEROFFIELDS = 20;
     private final int TEMPLATENAMELENGTH = 10;

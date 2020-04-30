@@ -14,7 +14,6 @@
             <h:panelGrid columns="2" border="1"
                          cellpadding="10" cellspacing="1">
 
-
                 <h:form>
 
                     <h:panelGrid>
@@ -41,19 +40,20 @@
 
                         </h:dataTable>
 
-                        <h:panelGrid columns="2" border="1"
-                                     cellpadding="10" cellspacing="1">
+                        <h:panelGrid  id="paginationbuttons" columns="3">
 
-                            <h:commandButton value="back">
+                            <h:commandButton value="back" rendered="#{paginatedTableContent.showBackButton  }">
                                 <f:ajax listener="#{paginatedTableContent.backButtonClick()}"
-                                        render="templatetable"/>
+                                        render="templatetable paginationbuttons"/>
                             </h:commandButton>
 
 
-                            <h:commandButton value="next">
+                            <h:commandButton value="next" rendered="#{paginatedTableContent.showNextButton}">
                                 <f:ajax listener="#{paginatedTableContent.nextButtonClick()}"
-                                        render="templatetable"/>
+                                        render="templatetable paginationbuttons"/>
                             </h:commandButton>
+
+                            <h:outputText value="page #{paginatedTableContent.page+1}"/>
 
                         </h:panelGrid>
 

@@ -1,7 +1,5 @@
 package de.stefanschade.primefacesshowcase.frontend.rest;
 
-import de.stefanschade.primefacesshowcase.frontend.beans.ConfigurableField;
-import de.stefanschade.primefacesshowcase.frontend.beans.FieldType;
 import de.stefanschade.primefacesshowcase.frontend.beans.ProductTemplate;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +11,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -75,5 +72,4 @@ public class BackendRestClient {
 
         return productTemplates;
     }
-
 }

@@ -3,6 +3,7 @@ package de.stefanschade.primefacesshowcase.frontend.beans;
 import de.stefanschade.primefacesshowcase.frontend.service.ProductTemplateService;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -11,6 +12,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+@Slf4j
 @Named
 @Getter
 @Setter
@@ -30,25 +32,48 @@ public class PaginatedTableContent implements Serializable {
 
     int lastEntry = size;
 
+    boolean showBackButton = true;
+
+    boolean showNextButton = true;
+
     @PostConstruct
     public void init() {
-        productTemplateList = service.retrieveTemplates(size, page);
+        updateFields();
     }
 
     public void nextButtonClick() {
-        productTemplateList = service.retrieveTemplates(size, ++page);
+        page++;
         updateFields();
     }
 
     public void backButtonClick() {
-        productTemplateList = service.retrieveTemplates(size, --page);
+        page--;
         updateFields();
     }
 
     private void updateFields() {
+        productTemplateList = service.retrieveTemplates(size, page);
+        if (page < 1) {
+            setShowBackButton(false);
+        } else {
+            setShowBackButton(true);
+        }
+        if (productTemplateList.size() < size) {
+            setShowNextButton(false);
+        } else {
+            setShowNextButton(true);
+        }
         firstEntry = page * size + 1;
         lastEntry = firstEntry + productTemplateList.size();
         for (ProductTemplate temp : productTemplateList)
             temp.setFieldCount(temp.getFields().size());
+
+        log.info("page " + page
+                + " size " + size
+                + " firstEntry " + firstEntry
+                + " lastEntry " + lastEntry
+                + " showNextButton " + showNextButton
+                + " showBackButton " + showBackButton );
+
     }
 }
