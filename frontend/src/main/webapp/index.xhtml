@@ -13,27 +13,30 @@
 
             <h:panelGrid columns="2">
 
-                <h:dataTable value="#{productTemplateView.productTemplateList}" var="template">
+                <h:form>
 
-                    <h:column>
-                        <f:facet name="header">Name</f:facet>
-                        #{template.templatename}
-                    </h:column>
+                    <h:dataTable id="templatetable" value="#{productTemplateView.productTemplateList}" var="template">
 
-                    <h:column>
-                        <f:facet name="header">Anzahl Felder</f:facet>
-                        #{template.fieldCount}
-                    </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            <h:outputText value="#{template.templatename}"/>
+                        </h:column>
 
-                    <h:column>
-                        <h:commandButton value="Details">
-                            <f:ajax listener="#{productTemplateView.templateButtonClicked(template)}"
-                                    render="fieldtable"/>
-                        </h:commandButton>
-                    </h:column>
+                        <h:column>
+                            <f:facet name="header">Anzahl Felder</f:facet>
+                            <h:outputText value="#{template.fieldCount}"/>
+                        </h:column>
 
+                        <h:column>
+                            <h:commandButton value="Details">
+                                <f:ajax listener="#{productTemplateView.templateButtonClicked(template)}"
+                                        render="fieldtable"/>
+                            </h:commandButton>
+                        </h:column>
 
-                </h:dataTable>
+                    </h:dataTable>
+
+                </h:form>
 
                 <h:dataTable id="fieldtable" value="#{productTemplateView.configurableFieldList}" var="field">
 
@@ -47,20 +50,9 @@
                         #{field.fieldType}
                     </h:column>
 
-
                 </h:dataTable>
 
             </h:panelGrid>
-
-            <h:form>
-
-            </h:form>
-
-
-            <h:inputText id="emailDetails" value="#{productTemplateView.user.email}" size="20">
-                <f:validator validatorId="de.stefanschade.primefacesshowcase.frontend.validator.EmailValidator"/>
-            </h:inputText>
-
 
         </f:view>
 

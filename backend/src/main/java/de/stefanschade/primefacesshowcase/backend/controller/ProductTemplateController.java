@@ -8,6 +8,9 @@ import de.stefanschade.primefacesshowcase.backend.service.ProductTemplateService
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +28,22 @@ public class ProductTemplateController {
     @GetMapping("/producttemplatelist")
     public List<ProductTemplateResponseModel> getAllProductTemplates() {
         List<ProductTemplateDto> productTemplateDtoList = productTemplateService.getAll();
-        List<ProductTemplateResponseModel> returnValue = new ArrayList<>(productTemplateDtoList.size());
+        return mapProductTemplateDtoListToResponseList(productTemplateDtoList);
+    }
+
+    // see https://www.baeldung.com/rest-api-pagination-in-spring
+    // http://localhost:8082/producttemplatelistpaginated?size=10&page=100&sort=templatename
+    @GetMapping("/producttemplatelistpaginated")
+    public List<ProductTemplateResponseModel> getAllProductTemplatesPaginated(
+            @PageableDefault(size = 5) Pageable pageable) {
+        List<ProductTemplateDto> productTemplateDtoList = productTemplateService.findAll(pageable);
+        return mapProductTemplateDtoListToResponseList(productTemplateDtoList);
+
+    }
+
+    private List<ProductTemplateResponseModel> mapProductTemplateDtoListToResponseList(List<ProductTemplateDto> productTemplateDtoList) {
         Iterator<ProductTemplateDto> productTemplateDtoIterator = productTemplateDtoList.iterator();
+        List<ProductTemplateResponseModel> returnValue = new ArrayList<>(productTemplateDtoList.size());
         while (productTemplateDtoIterator.hasNext()) {
             ProductTemplateResponseModel productTemplateResponseModel = new ProductTemplateResponseModel();
             ProductTemplateDto productTemplateDto = productTemplateDtoIterator.next();
@@ -44,4 +61,5 @@ public class ProductTemplateController {
         }
         return returnValue;
     }
+
 }

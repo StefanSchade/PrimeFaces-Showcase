@@ -27,7 +27,7 @@ public class BackendRestClient {
 
     public List<ProductTemplate> productTemplates1() {
         Client client = ClientBuilder.newBuilder().build();
-        WebTarget target = client.target(BASE_URI + PORT + "/producttemplate");
+        WebTarget target = client.target(BASE_URI + PORT + "/producttemplatelistpaginated");
 
         Response response = target.request().get();
 

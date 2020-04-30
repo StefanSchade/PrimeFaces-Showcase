@@ -38,16 +38,34 @@ public class HelloWorldClient {
         client.close();
     }
 
+    // https://eclipse-ee4j.github.io/jersey/
     public void JerseyClientForShowcase() {
-        System.out.println("checking "+ BASE_URI + PORT + "/producttemplatelist");
+        System.out.println("checking " + BASE_URI + PORT + "/producttemplatelistpaginated");
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(BASE_URI + PORT + "/producttemplatelist");
+        // https://docs.oracle.com/javaee/7/api/javax/ws/rs/client/Invocation.Builder.html
+        WebTarget target = client.target(BASE_URI + PORT)
+                .path("/producttemplatelistpaginated")
+                .queryParam("page", "1")
+                .queryParam("size", "2")
+                .queryParam("offset", "100");
+
+
         Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
+//                .property("page", "1")
+//                .property("size", "2");
+
+        //   List<ProductTemplate> productTemplates =
+        //           builder.get(new GenericType<List<ProductTemplate>>() {
+        //           });
+
+//        Invocation inv = builder.buildGet();
+
         List<ProductTemplate> productTemplates =
                 builder.get(new GenericType<List<ProductTemplate>>() {
                 });
-        System.out.println(productTemplates);
 
+        System.out.println(productTemplates);
+        System.out.println("****length*** " + productTemplates.size());
         ProductTemplate template = productTemplates.get(0);
 
         System.out.println("name: " + template.getTemplatename());
