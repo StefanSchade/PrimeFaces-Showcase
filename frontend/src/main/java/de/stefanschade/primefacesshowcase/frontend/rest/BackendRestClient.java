@@ -42,17 +42,6 @@ public class BackendRestClient {
 
     public List<ProductTemplate> productTemplates() {
 
-//        Client client = javax.ws.rs.client.ClientBuilder.newClient();
-//
-//        WebTarget  webTarget = client.target(BASE_URI + PORT);
-//        WebTarget resource = webTarget.path("producttemplate");
-//        javax.ws.rs.client.Invocation.Builder builder=resource.
-//                request(javax.ws.rs.core.MediaType.APPLICATION_JSON);
-//        Invocation invocation=builder.buildGet();
-//        GenericType responseType=new GenericType<List<ProductTemplate>>() { };
-//        List<ProductTemplate> productTemplates = (List<ProductTemplate>) invocation.invoke(responseType);
-//        log.info("backend returned {} product templates", productTemplates.size());
-
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(BASE_URI + PORT + "/producttemplatelist");
         Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
@@ -62,15 +51,29 @@ public class BackendRestClient {
         System.out.println(productTemplates);
         client.close();
 
-//        List<ConfigurableField> configurableFieldList = new ArrayList<>();
-//
-//        configurableFieldList.add(new ConfigurableField("field01",FieldType.INTEGER));
-//        configurableFieldList.add(new ConfigurableField("field02",FieldType.INTEGER));
-//        configurableFieldList.add(new ConfigurableField("field03",FieldType.INTEGER));
-//        configurableFieldList.add(new ConfigurableField("field04",FieldType.INTEGER));
+        return productTemplates;
+    }
 
-//        productTemplates.add(0,new ProductTemplate("MyTepmplate Name",configurableFieldList));
+    public List<ProductTemplate> productTemplatesPaginated(int size, int page) {
+
+        System.out.println("checking " + BASE_URI + PORT + "/producttemplatelistpaginated");
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(BASE_URI + PORT)
+                .path("/producttemplatelistpaginated")
+                .queryParam("page", Integer.toString(page))
+                .queryParam("size", Integer.toString(size));
+
+        Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
+
+        List<ProductTemplate> productTemplates =
+                builder.get(new GenericType<List<ProductTemplate>>() {
+                });
+
+        ProductTemplate template = productTemplates.get(0);
+
+        client.close();
 
         return productTemplates;
     }
+
 }
