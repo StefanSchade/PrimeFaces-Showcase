@@ -52,17 +52,21 @@ public class PaginatedTableContent implements Serializable {
     }
 
     private void updateFields() {
+
         productTemplateList = service.retrieveTemplates(size, page);
+        boolean nextPageHasContent = service.retrieveTemplates(size, page+1).size()>0;
+
         if (page < 1) {
             setShowBackButton(false);
         } else {
             setShowBackButton(true);
         }
-        if (productTemplateList.size() < size) {
+        if (productTemplateList.size() < size | !nextPageHasContent) {
             setShowNextButton(false);
         } else {
             setShowNextButton(true);
         }
+
         firstEntry = page * size + 1;
         lastEntry = firstEntry + productTemplateList.size();
         for (ProductTemplate temp : productTemplateList)

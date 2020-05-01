@@ -66,8 +66,6 @@ public class BackendRestClient {
                 builder.get(new GenericType<List<ProductTemplate>>() {
                 });
 
-        ProductTemplate template = productTemplates.get(0);
-
         client.close();
 
         return productTemplates;
