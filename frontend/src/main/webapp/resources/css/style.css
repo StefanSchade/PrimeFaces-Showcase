@@ -5,6 +5,10 @@ body {
 	background-color: white;
 }
 
+td {
+	vertical-align: top;
+}
+
 #container {
 	width: 100%;
 }

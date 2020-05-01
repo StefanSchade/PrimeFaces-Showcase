@@ -29,7 +29,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     private final int NUMBERTEMPLATES = 98;
     private final int MINIMUMNUMBEROFFIELDS = 10;
-    private final int MAXIMUMNUMBEROFFIELDS = 20;
+    private final int MAXIMUMNUMBEROFFIELDS = 60;
     private final int TEMPLATENAMELENGTH = 10;
     private final int FIELDNAMELENGTH = 10;
 

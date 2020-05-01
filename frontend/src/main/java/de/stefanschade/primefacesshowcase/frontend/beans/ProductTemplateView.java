@@ -21,37 +21,10 @@ import java.util.List;
 @Setter
 public class ProductTemplateView implements Serializable {
 
-    private List<ProductTemplate> productTemplateList = new ArrayList<>();
     private List<ConfigurableField> configurableFieldList = new ArrayList<>();
-
-    private List<String> productTemplateNames = new ArrayList<>();
-
-    private List<ConfigurableField> configurableFields = new ArrayList<>();
-
-    private int selectCounter = 0;
-
-    private ProductTemplate selectedTemplate;
-
-    @Inject
-    private UserData user;
-
-    @Inject
-    private ProductTemplateService service;
 
     @PostConstruct
     public void init() {
-        productTemplateList = service.retrieveTemplates();
-        ProductTemplate template;
-        for (int i = 0; i < productTemplateList.size(); i++) {
-            template = productTemplateList.get(i);
-            template.setFieldCount(template.getFields().size());
-        }
-        user.setEmail("thisismyemail@yahoo.com");
     }
 
-    public void templateButtonClicked(ProductTemplate template) {
-        this.selectedTemplate = template;
-        this.configurableFieldList = template.getFields();
-        this.selectCounter++;
-    }
 }

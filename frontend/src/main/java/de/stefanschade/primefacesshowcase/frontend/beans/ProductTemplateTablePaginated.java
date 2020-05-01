@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @ViewScoped
-public class PaginatedTableContent implements Serializable {
+public class ProductTemplateTablePaginated implements Serializable {
 
     @Inject
     private ProductTemplateService service;
@@ -52,10 +52,12 @@ public class PaginatedTableContent implements Serializable {
     }
 
     private void updateFields() {
-
         productTemplateList = service.retrieveTemplates(size, page);
-        boolean nextPageHasContent = service.retrieveTemplates(size, page+1).size()>0;
 
+        for (ProductTemplate template : productTemplateList)
+            template.setFieldCount(template.getFields().size());
+
+        boolean nextPageHasContent = service.retrieveTemplates(size, page + 1).size() > 0;
         if (page < 1) {
             setShowBackButton(false);
         } else {
@@ -69,15 +71,13 @@ public class PaginatedTableContent implements Serializable {
 
         firstEntry = page * size + 1;
         lastEntry = firstEntry + productTemplateList.size();
-        for (ProductTemplate temp : productTemplateList)
-            temp.setFieldCount(temp.getFields().size());
 
-        log.info("page " + page
+        log.info("ProductTemplate updated: "
+                + " page " + page
                 + " size " + size
                 + " firstEntry " + firstEntry
                 + " lastEntry " + lastEntry
                 + " showNextButton " + showNextButton
-                + " showBackButton " + showBackButton );
-
+                + " showBackButton " + showBackButton);
     }
 }
