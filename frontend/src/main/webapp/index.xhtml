@@ -10,107 +10,76 @@
     <ui:define name="pagetitle">Product Templates</ui:define>
     <ui:define name="content">
         <f:view>
-
             <h:form>
-
                 <h:panelGrid columns="2">
-
                     <h:dataTable id="templatetable" value="#{productTemplateTablePaginated.currentProductTemplateList}"
                                  var="template">
-
                         <h:column>
                             <f:facet name="header">Name</f:facet>
                             <h:outputText value="#{template.templatename}"/>
                         </h:column>
-
                         <h:column>
                             <f:facet name="header">Anzahl Felder</f:facet>
                             <h:outputText value="#{template.fieldCount}"/>
                         </h:column>
-
                         <h:column>
                             <h:commandButton value="Template Details">
                                 <f:ajax listener="#{configurableFieldTablePaginated.templateDetailsButtonClicked(template)}"
                                         render="fieldtable fieldbuttons"/>
                             </h:commandButton>
                         </h:column>
-
                     </h:dataTable>
-
-                    <h:panelGrid id="fieldtable">
-
+                    <h:panelGroup id="fieldtable">
                         <h:outputText value=" Select a product template"
                                       rendered="#{!configurableFieldTablePaginated.showConfigurableFieldTable}"/>
-
-
                         <h:dataTable value="#{configurableFieldTablePaginated.configurableFieldPagedList}"
-                                     var="field">
-
+                                     var="field"
+                                     rendered="#{configurableFieldTablePaginated.showConfigurableFieldTable}">
                             <h:column>
                                 <f:facet name="header">Field</f:facet>
                                 #{field.fieldname}
                             </h:column>
-
                             <h:column>
                                 <f:facet name="header">Type</f:facet>
                                 #{field.fieldType}
                             </h:column>
-
                             <h:column>
                                 <h:commandButton value="Field Details">
                                     <f:ajax listener="#{configurableFieldTablePaginated.fieldsDetailsButtonClicked(field)}"
-                                            render="abc"/>
+                                            render=""/>
                                 </h:commandButton>
                             </h:column>
-
                         </h:dataTable>
-
-                    </h:panelGrid>
-
-
+                    </h:panelGroup>
                     <h:panelGrid id="templatebuttons" columns="3">
-
                         <h:commandButton value="back" rendered="#{productTemplateTablePaginated.showBackButton}">
                             <f:ajax listener="#{productTemplateTablePaginated.backButtonClick()}"
                                     render="templatetable templatebuttons"/>
                         </h:commandButton>
-
-
                         <h:commandButton value="next" rendered="#{productTemplateTablePaginated.showNextButton}">
                             <f:ajax listener="#{productTemplateTablePaginated.nextButtonClick()}"
                                     render="templatetable templatebuttons"/>
                         </h:commandButton>
-
                         <h:outputText value="page #{productTemplateTablePaginated.page+1}"/>
-
                     </h:panelGrid>
-
-
-                    <h:panelGrid id="fieldbuttons" columns="3">
-
-                        <h:commandButton value="back" rendered="#{configurableFieldTablePaginated.showBackButton}">
-                            <f:ajax listener="#{configurableFieldTablePaginated.backButtonClick()}"
-                                    render="fieldtable fieldbuttons"/>
-                        </h:commandButton>
-
-
-                        <h:commandButton value="next" rendered="#{configurableFieldTablePaginated.showNextButton}">
-                            <f:ajax listener="#{configurableFieldTablePaginated.nextButtonClick()}"
-                                    render="fieldtable fieldbuttons"/>
-                        </h:commandButton>
-
-                        <h:outputText value="page #{configurableFieldTablePaginated.page+1}"/>
-
-                    </h:panelGrid>
-
+                    <h:panelGroup id="fieldbuttons">
+                        <h:panelGrid rendered="#{configurableFieldTablePaginated.showConfigurableFieldTable}"
+                                     columns="3">
+                            <h:commandButton value="back" rendered="#{configurableFieldTablePaginated.showBackButton}">
+                                <f:ajax listener="#{configurableFieldTablePaginated.backButtonClick()}"
+                                        render="fieldtable fieldbuttons"/>
+                            </h:commandButton>
+                            <h:commandButton value="next" rendered="#{configurableFieldTablePaginated.showNextButton}">
+                                <f:ajax listener="#{configurableFieldTablePaginated.nextButtonClick()}"
+                                        render="fieldtable fieldbuttons"/>
+                            </h:commandButton>
+                            <h:outputText value="page #{configurableFieldTablePaginated.page+1}"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
                 </h:panelGrid>
-
             </h:form>
-
         </f:view>
-
     </ui:define>
-
 </ui:composition>
-Ein Text
+Text
 </html>

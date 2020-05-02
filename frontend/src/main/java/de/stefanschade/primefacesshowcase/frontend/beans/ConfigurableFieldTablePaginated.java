@@ -16,7 +16,7 @@ import java.util.List;
 @ViewScoped
 public class ConfigurableFieldTablePaginated implements Serializable {
 
-    private boolean showConfigurableFieldTable = false;
+    private boolean showConfigurableFieldTable = true;
 
     private List<ConfigurableField> configurableFieldTotalList;
 
@@ -67,7 +67,9 @@ public class ConfigurableFieldTablePaginated implements Serializable {
                 + " lastEntry " + lastEntry
                 + " showNextButton " + showNextButton
                 + " showBackButton " + showBackButton
-                + " numberOfFields " + configurableFieldTotalList.size());
+                + " numberOfFields " + configurableFieldTotalList.size()
+                + " visibleflag " + showConfigurableFieldTable
+        );
 
         int from = firstEntry;
         int to = configurableFieldTotalList.size() < lastEntry ? configurableFieldTotalList.size() : lastEntry;
@@ -87,5 +89,6 @@ public class ConfigurableFieldTablePaginated implements Serializable {
         log.info("details field " + field.getFieldname() + " type " + field.getFieldType() + " requested");
     }
 
+    // https://stackoverflow.com/questions/15787376/fajax-render-someid-does-not-update-target-component-but-fajax-render
 
 }
