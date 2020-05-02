@@ -22,7 +22,9 @@ public class ProductTemplateTablePaginated implements Serializable {
     @Inject
     private ProductTemplateService service;
 
-    private List<ProductTemplate> productTemplateList;
+    private List<ProductTemplate> currentProductTemplateList;
+
+    private List<ProductTemplate> nextProductTemplateList;
 
     int page = 0;
 
@@ -38,39 +40,41 @@ public class ProductTemplateTablePaginated implements Serializable {
 
     @PostConstruct
     public void init() {
+        currentProductTemplateList = service.retrieveTemplates(size, 0);
+        nextProductTemplateList = service.retrieveTemplates(size,  1);
         updateFields();
     }
 
     public void nextButtonClick() {
-        page++;
+        currentProductTemplateList = nextProductTemplateList;
+        nextProductTemplateList = service.retrieveTemplates(size, ++page);
         updateFields();
     }
 
     public void backButtonClick() {
-        page--;
+        nextProductTemplateList = currentProductTemplateList;
+        currentProductTemplateList = service.retrieveTemplates(size, --page);
         updateFields();
     }
 
     private void updateFields() {
-        productTemplateList = service.retrieveTemplates(size, page);
-
-        for (ProductTemplate template : productTemplateList)
+        for (ProductTemplate template : currentProductTemplateList)
             template.setFieldCount(template.getFields().size());
 
-        boolean nextPageHasContent = service.retrieveTemplates(size, page + 1).size() > 0;
+        boolean nextPageHasContent = nextProductTemplateList.size() > 0;
         if (page < 1) {
             setShowBackButton(false);
         } else {
             setShowBackButton(true);
         }
-        if (productTemplateList.size() < size | !nextPageHasContent) {
+        if (currentProductTemplateList.size() < size | !nextPageHasContent) {
             setShowNextButton(false);
         } else {
             setShowNextButton(true);
         }
 
         firstEntry = page * size + 1;
-        lastEntry = firstEntry + productTemplateList.size();
+        lastEntry = firstEntry + currentProductTemplateList.size();
 
         log.info("ProductTemplate updated: "
                 + " page " + page

@@ -15,7 +15,7 @@
 
                 <h:panelGrid columns="2">
 
-                    <h:dataTable id="templatetable" value="#{productTemplateTablePaginated.productTemplateList}"
+                    <h:dataTable id="templatetable" value="#{productTemplateTablePaginated.currentProductTemplateList}"
                                  var="template">
 
                         <h:column>
@@ -29,7 +29,7 @@
                         </h:column>
 
                         <h:column>
-                            <h:commandButton value="Details">
+                            <h:commandButton value="Template Details">
                                 <f:ajax listener="#{configurableFieldTablePaginated.templateDetailsButtonClicked(template)}"
                                         render="fieldtable fieldbuttons"/>
                             </h:commandButton>
@@ -55,6 +55,13 @@
                             <h:column>
                                 <f:facet name="header">Type</f:facet>
                                 #{field.fieldType}
+                            </h:column>
+
+                            <h:column>
+                                <h:commandButton value="Field Details">
+                                    <f:ajax listener="#{configurableFieldTablePaginated.fieldsDetailsButtonClicked(field)}"
+                                            render="abc"/>
+                                </h:commandButton>
                             </h:column>
 
                         </h:dataTable>

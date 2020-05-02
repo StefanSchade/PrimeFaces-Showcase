@@ -76,9 +76,16 @@ public class ConfigurableFieldTablePaginated implements Serializable {
     }
 
     public void templateDetailsButtonClicked(ProductTemplate template) {
+        log.info("details template " + template.getTemplatename() + " " + template.getFields().size() + " fields");
         configurableFieldTotalList = template.getFields();
         showConfigurableFieldTable = true;
         updateFields();
     }
+
+
+    public void fieldsDetailsButtonClicked(ConfigurableField field) {
+        log.info("details field " + field.getFieldname() + " type " + field.getFieldType() + " requested");
+    }
+
 
 }
