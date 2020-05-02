@@ -37,15 +37,14 @@
 
                     </h:dataTable>
 
-                    <h:panelGrid  id="fieldtable">
+                    <h:panelGrid id="fieldtable">
 
                         <h:outputText value=" Select a product template"
                                       rendered="#{!configurableFieldTablePaginated.showConfigurableFieldTable}"/>
 
 
                         <h:dataTable value="#{configurableFieldTablePaginated.configurableFieldPagedList}"
-                                     var="field"
-                                     rendered="#{configurableFieldTablePaginated.showConfigurableFieldTable}">
+                                     var="field">
 
                             <h:column>
                                 <f:facet name="header">Field</f:facet>
@@ -71,7 +70,7 @@
 
                     <h:panelGrid id="templatebuttons" columns="3">
 
-                        <h:commandButton value="back" rendered="#{productTemplateTablePaginated.showBackButton  }">
+                        <h:commandButton value="back" rendered="#{productTemplateTablePaginated.showBackButton}">
                             <f:ajax listener="#{productTemplateTablePaginated.backButtonClick()}"
                                     render="templatetable templatebuttons"/>
                         </h:commandButton>
@@ -89,7 +88,7 @@
 
                     <h:panelGrid id="fieldbuttons" columns="3">
 
-                        <h:commandButton value="back" rendered="#{configurableFieldTablePaginated.showBackButton  }">
+                        <h:commandButton value="back" rendered="#{configurableFieldTablePaginated.showBackButton}">
                             <f:ajax listener="#{configurableFieldTablePaginated.backButtonClick()}"
                                     render="fieldtable fieldbuttons"/>
                         </h:commandButton>
