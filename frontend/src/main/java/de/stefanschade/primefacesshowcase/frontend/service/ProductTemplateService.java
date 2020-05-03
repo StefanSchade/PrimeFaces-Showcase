@@ -1,6 +1,6 @@
 package de.stefanschade.primefacesshowcase.frontend.service;
 
-import de.stefanschade.primefacesshowcase.frontend.beans.ProductTemplate;
+import de.stefanschade.primefacesshowcase.frontend.beans.entities.ProductTemplate;
 import de.stefanschade.primefacesshowcase.frontend.rest.BackendRestClient;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +23,8 @@ public class ProductTemplateService {
         return backendRestClient.productTemplates();
     }
 
-
     public List<ProductTemplate> retrieveTemplates(int size, int page) {
+        log.info("retrieve page " + page);
         return backendRestClient.productTemplates(size,page);
     }
-
-
-
-
 }

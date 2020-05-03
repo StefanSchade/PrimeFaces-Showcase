@@ -1,6 +1,5 @@
-package de.stefanschade.primefacesshowcase.frontend.beans;
+package de.stefanschade.primefacesshowcase.frontend.beans.entities;
 
-import de.stefanschade.primefacesshowcase.frontend.beans.ConfigurableField;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

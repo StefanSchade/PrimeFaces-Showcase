@@ -1,8 +1,8 @@
 package de.stefanschade.primefacesshowcase.frontend;
 
 //import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-//import de.stefanschade.primefacesshowcase.frontend.beans.ConfigurableField;
-//import de.stefanschade.primefacesshowcase.frontend.beans.ProductTemplate;
+//import de.stefanschade.primefacesshowcase.frontend.beans.entities.ConfigurableField;
+//import de.stefanschade.primefacesshowcase.frontend.beans.entities.ProductTemplate;
 //import de.stefanschade.primefacesshowcase.frontend.rest.BackendRestClient;
 //
 //import javax.ws.rs.core.Application;

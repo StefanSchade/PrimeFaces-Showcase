@@ -1,5 +1,6 @@
-package de.stefanschade.primefacesshowcase.frontend.beans;
+package de.stefanschade.primefacesshowcase.frontend.beans.view;
 
+import de.stefanschade.primefacesshowcase.frontend.beans.entities.ProductTemplate;
 import de.stefanschade.primefacesshowcase.frontend.service.ProductTemplateService;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,10 @@ public class ProductTemplateTablePaginated implements Serializable {
 
     private List<ProductTemplate> nextProductTemplateList;
 
+    private ProductTemplate currentlySelectedTemplate = null;
+
+    private boolean templateIsSelected = false;
+
     int page = 0;
 
     final int size = 20;
@@ -42,22 +47,10 @@ public class ProductTemplateTablePaginated implements Serializable {
     public void init() {
         currentProductTemplateList = service.retrieveTemplates(size, 0);
         nextProductTemplateList = service.retrieveTemplates(size,  1);
-        updateFields();
+        update();
     }
 
-    public void nextButtonClick() {
-        currentProductTemplateList = nextProductTemplateList;
-        nextProductTemplateList = service.retrieveTemplates(size, ++page);
-        updateFields();
-    }
-
-    public void backButtonClick() {
-        nextProductTemplateList = currentProductTemplateList;
-        currentProductTemplateList = service.retrieveTemplates(size, --page);
-        updateFields();
-    }
-
-    private void updateFields() {
+    private void update() {
         for (ProductTemplate template : currentProductTemplateList)
             template.setFieldCount(template.getFields().size());
 
@@ -83,5 +76,27 @@ public class ProductTemplateTablePaginated implements Serializable {
                 + " lastEntry " + lastEntry
                 + " showNextButton " + showNextButton
                 + " showBackButton " + showBackButton);
+    }
+
+    public void selectTemplate(ProductTemplate template) {
+        templateIsSelected = true;
+        this.currentlySelectedTemplate = template;
+    }
+
+    public void unSelectTemplate() {
+        templateIsSelected = false;
+        this.currentlySelectedTemplate = null;
+    }
+
+    public void retrieveNext() {
+        currentProductTemplateList = nextProductTemplateList;
+        nextProductTemplateList = service.retrieveTemplates(size, ++page + 1);
+        update();
+    }
+
+    public void retrieveLast() {
+        nextProductTemplateList = currentProductTemplateList;
+        currentProductTemplateList = service.retrieveTemplates(size, --page);
+        update();
     }
 }
