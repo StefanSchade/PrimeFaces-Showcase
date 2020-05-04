@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-    <title><ui:insert name="pagetitle">Buchverwaltung</ui:insert></title>
+    <title><ui:insert name="pagetitle">abc</ui:insert></title>
     <link href="#{request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet"/>
+<!--    <h:outputStylesheet library="default" name="css/style.css"/>-->
 </h:head>
 <h:body>
     <f:view>
         <div id="header">
-            <ui:insert name="pagetitel">Title</ui:insert>
+            <ui:insert name="pagetitle">Default Title</ui:insert>
         </div>
         <div id="content">
-            <ui:insert name="content"> This should be replaced by content </ui:insert>
+            <ui:insert name="content">This will be replaced by the content </ui:insert>
         </div>
         <div id="footer">
-            <ui:insert name="footer">Footer
+            <ui:insert name="footer">Default Footer
                 <h:outputText value="#{session.lastAccessedTime}">
                     <f:convertDateTime timeStyle="full" type="time"/>
                 </h:outputText>

@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <ui:composition template="/WEB-INF/templates/template.xhtml">
 
-    <ui:define name="pagetitle">Product Templates</ui:define>
+    <ui:define name="header">
+        Product Templates
+    </ui:define>
     <ui:define name="content">
         <f:view>
             <h:panelGrid columns="2">
                 <h:panelGrid columns="2">
                     <h:dataTable id="templatetable" value="#{templateTable.currentProductTemplateList}"
-                                 var="template">
-                        <h:column>
-                            <f:facet name="header">Name</f:facet>
+                                 var="template"
+                                 styleClass="primary"
+                                 cellspacing="0"
+                                 cellpadding="0"
+                                 border="0"
+                                 rowClasses="odd,even"
+                                 columnClasses="name,fieldcount,button">
+                        <h:column headerstyleClass="first">
+                            <f:facet name="header">Template</f:facet>
                             <h:outputText value="#{template.templatename}"/>
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Anzahl Felder</f:facet>
+                            <f:facet name="header">Number of Fields</f:facet>
                             <h:outputText value="#{template.fieldCount}"/>
                         </h:column>
-                        <h:column>
+                        <h:column headerstyleClass="last">
                             <h:form>
                                 <h:commandButton value="Template Details">
                                     <f:ajax listener="#{productTemplateView.templateDetailsButtonClicked(template)}"
@@ -36,6 +44,11 @@
                                       rendered="#{!templateTable.templateIsSelected}"/>
                         <h:dataTable value="#{fieldTable.pagedFieldList}"
                                      var="field"
+                                     styleClass="secondary"
+                                     cellspacing="0"
+                                     cellpadding="0"
+                                     border="0"
+                                     rowClasses="odd,even"
                                      rendered="#{templateTable.templateIsSelected}">
                             <h:column>
                                 <f:facet name="header">Field</f:facet>
@@ -91,11 +104,14 @@
                 <h:panelGroup id="fielddetails">
                     <h:panelGrid columns="2" rendered="#{fieldTable.fieldSelectedFlag}">
                         <h:outputText value="Attribute 1"/>
-                        <h:outputText value="This could display further information on #{fieldTable.fieldSelectedCurrently.fieldname}"/>
+                        <h:outputText
+                                value="This could display further information on #{fieldTable.fieldSelectedCurrently.fieldname}"/>
                         <h:outputText value="Attribute 2"/>
-                        <h:outputText value="This could display further information on #{fieldTable.fieldSelectedCurrently.fieldname}"/>
+                        <h:outputText
+                                value="This could display further information on #{fieldTable.fieldSelectedCurrently.fieldname}"/>
                         <h:outputText value="Attribute 3"/>
-                        <h:outputText value="This could display further information on #{fieldTable.fieldSelectedCurrently.fieldname}"/>
+                        <h:outputText
+                                value="This could display further information on #{fieldTable.fieldSelectedCurrently.fieldname}"/>
                     </h:panelGrid>
                 </h:panelGroup>
             </h:panelGrid>
