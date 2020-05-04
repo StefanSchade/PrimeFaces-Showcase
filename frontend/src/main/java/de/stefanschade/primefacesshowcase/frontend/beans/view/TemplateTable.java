@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @ViewScoped
-public class ProductTemplateTablePaginated implements Serializable {
+public class TemplateTable implements Serializable {
 
     @Inject
     private ProductTemplateService service;
@@ -69,13 +69,13 @@ public class ProductTemplateTablePaginated implements Serializable {
         firstEntry = page * size + 1;
         lastEntry = firstEntry + currentProductTemplateList.size();
 
-        log.info("ProductTemplate updated: "
+        log.info("Template Table updated: "
                 + " page " + page
                 + " size " + size
-                + " firstEntry " + firstEntry
-                + " lastEntry " + lastEntry
-                + " showNextButton " + showNextButton
-                + " showBackButton " + showBackButton);
+                + " first " + firstEntry
+                + " last " + lastEntry
+                + " next " + showNextButton
+                + " back " + showBackButton);
     }
 
     public void selectTemplate(ProductTemplate template) {

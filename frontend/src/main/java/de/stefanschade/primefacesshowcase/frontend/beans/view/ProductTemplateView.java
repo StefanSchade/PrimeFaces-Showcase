@@ -20,40 +20,40 @@ import java.io.Serializable;
 public class ProductTemplateView implements Serializable {
 
     @Inject
-    private ConfigurableFieldTablePaginated configurableFieldTablePaginated;
+    private FieldTable fieldTable;
 
     @Inject
-    private ProductTemplateTablePaginated productTemplateTablePaginated;
+    private TemplateTable templateTable;
 
     public void templateDetailsButtonClicked(ProductTemplate template) {
-        productTemplateTablePaginated.selectTemplate(template);
-        configurableFieldTablePaginated.selectTemplate(template.getFields());
+        templateTable.selectTemplate(template);
+        fieldTable.selectTemplate(template.getFields());
     }
 
     public void templateNextButtonClick() {
-        productTemplateTablePaginated.unSelectTemplate();
-        productTemplateTablePaginated.retrieveNext();
-        configurableFieldTablePaginated.unSelectFieldDetails();
+        templateTable.unSelectTemplate();
+        templateTable.retrieveNext();
+        fieldTable.unSelectFieldDetails();
     }
 
     public void templateBackButtonClick() {
-        productTemplateTablePaginated.unSelectTemplate();
-        productTemplateTablePaginated.retrieveLast();
-        configurableFieldTablePaginated.unSelectFieldDetails();
+        templateTable.unSelectTemplate();
+        templateTable.retrieveLast();
+        fieldTable.unSelectFieldDetails();
     }
 
     public void fieldsNextButtonClick() {
-        configurableFieldTablePaginated.retrieveNext();
-        configurableFieldTablePaginated.unSelectFieldDetails();
+        fieldTable.retrieveNext();
+        fieldTable.unSelectFieldDetails();
     }
 
     public void fieldsBackButtonClick() {
-        configurableFieldTablePaginated.retrieveLast();
-        configurableFieldTablePaginated.unSelectFieldDetails();
+        fieldTable.retrieveLast();
+        fieldTable.unSelectFieldDetails();
     }
 
     public void fieldsDetailsButtonClicked(ConfigurableField field) {
-        configurableFieldTablePaginated.selectFieldDetails(field);
+        fieldTable.selectFieldDetails(field);
     }
 
 }

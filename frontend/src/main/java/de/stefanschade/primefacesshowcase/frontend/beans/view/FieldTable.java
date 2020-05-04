@@ -15,15 +15,15 @@ import java.util.List;
 @Getter
 @Setter
 @ViewScoped
-public class ConfigurableFieldTablePaginated implements Serializable {
+public class FieldTable implements Serializable {
 
-    private boolean configurableFieldDetailsCurrentlySelected = false;
+    private boolean fieldSelectedFlag = false;
 
-    private ConfigurableField currentlySelectedConfigurableField = null;
+    private ConfigurableField fieldSelectedCurrently = null;
 
-    private List<ConfigurableField> configurableFieldTotalList;
+    private List<ConfigurableField> completeFieldList;
 
-    private List<ConfigurableField> configurableFieldPagedList;
+    private List<ConfigurableField> pagedFieldList;
 
     boolean showBackButton = true;
 
@@ -40,45 +40,47 @@ public class ConfigurableFieldTablePaginated implements Serializable {
     public void update() {
         firstEntry = page * size;
         lastEntry = firstEntry + size;
+
         if (page == 0) {
             setShowBackButton(false);
         } else {
             setShowBackButton(true);
         }
-        if (lastEntry < configurableFieldTotalList.size()) {
+        if (lastEntry < completeFieldList.size()) {
             setShowNextButton(true);
         } else {
             setShowNextButton(false);
         }
-        log.info("Fields updated: "
+
+        log.info("Field Table updated: "
                 + " page " + page
                 + " size " + size
-                + " firstEntry " + firstEntry
-                + " lastEntry " + lastEntry
-                + " showNextButton " + showNextButton
-                + " showBackButton " + showBackButton
-                + " numberOfFields " + configurableFieldTotalList.size()
-        );
+                + " from " + firstEntry
+                + " to " + lastEntry
+                + " showNext " + showNextButton
+                + " showBack " + showBackButton
+                + " nrFields " + completeFieldList.size());
+
         int from = firstEntry;
-        int to = configurableFieldTotalList.size() < lastEntry ? configurableFieldTotalList.size() : lastEntry;
-        configurableFieldPagedList = configurableFieldTotalList.subList(from, to);
+        int to = completeFieldList.size() < lastEntry ? completeFieldList.size() : lastEntry;
+        pagedFieldList = completeFieldList.subList(from, to);
     }
 
     public void selectTemplate(List<ConfigurableField> fields) {
-        configurableFieldTotalList = fields;
+        completeFieldList = fields;
         unSelectFieldDetails();
-        page = 0;
         update();
+        page = 0;
     }
 
     public void selectFieldDetails(ConfigurableField field) {
-        currentlySelectedConfigurableField = field;
-        configurableFieldDetailsCurrentlySelected = true;
+        fieldSelectedCurrently = field;
+        fieldSelectedFlag = true;
     }
 
     public void unSelectFieldDetails() {
-        currentlySelectedConfigurableField = null;
-        configurableFieldDetailsCurrentlySelected = false;
+        fieldSelectedCurrently = null;
+        fieldSelectedFlag = false;
     }
 
     public void retrieveNext() {
@@ -90,7 +92,4 @@ public class ConfigurableFieldTablePaginated implements Serializable {
         page--;
         update();
     }
-
-    // https://stackoverflow.com/questions/15787376/fajax-render-someid-does-not-update-target-component-but-fajax-render
-
 }

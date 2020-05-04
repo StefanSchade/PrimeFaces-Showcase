@@ -12,7 +12,7 @@
         <f:view>
             <h:panelGrid columns="2">
                 <h:panelGrid columns="2">
-                    <h:dataTable id="templatetable" value="#{productTemplateTablePaginated.currentProductTemplateList}"
+                    <h:dataTable id="templatetable" value="#{templateTable.currentProductTemplateList}"
                                  var="template">
                         <h:column>
                             <f:facet name="header">Name</f:facet>
@@ -33,10 +33,10 @@
                     </h:dataTable>
                     <h:panelGroup id="fieldtable">
                         <h:outputText value=" Select a product template"
-                                      rendered="#{!productTemplateTablePaginated.templateIsSelected}"/>
-                        <h:dataTable value="#{configurableFieldTablePaginated.configurableFieldPagedList}"
+                                      rendered="#{!templateTable.templateIsSelected}"/>
+                        <h:dataTable value="#{fieldTable.pagedFieldList}"
                                      var="field"
-                                     rendered="#{productTemplateTablePaginated.templateIsSelected}">
+                                     rendered="#{templateTable.templateIsSelected}">
                             <h:column>
                                 <f:facet name="header">Field</f:facet>
                                 #{field.fieldname}
@@ -57,45 +57,45 @@
                     </h:panelGroup>
                     <h:panelGrid id="templatebuttons" columns="3">
                         <h:form>
-                            <h:commandButton value="back" rendered="#{productTemplateTablePaginated.showBackButton}">
+                            <h:commandButton value="back" rendered="#{templateTable.showBackButton}">
                                 <f:ajax listener="#{productTemplateView.templateBackButtonClick()}"
                                         render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
                             </h:commandButton>
-                            <h:commandButton value="next" rendered="#{productTemplateTablePaginated.showNextButton}">
+                            <h:commandButton value="next" rendered="#{templateTable.showNextButton}">
                                 <f:ajax listener="#{productTemplateView.templateNextButtonClick()}"
                                         render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
                             </h:commandButton>
                         </h:form>
-                        <h:outputText value="page #{productTemplateTablePaginated.page+1}"/>
+                        <h:outputText value="page #{templateTable.page+1}"/>
                     </h:panelGrid>
                     <h:panelGroup id="fieldbuttons">
 
-                        <h:panelGrid rendered="#{productTemplateTablePaginated.templateIsSelected}"
+                        <h:panelGrid rendered="#{templateTable.templateIsSelected}"
                                      columns="3">
                             <h:form>
                                 <h:commandButton value="back"
-                                                 rendered="#{configurableFieldTablePaginated.showBackButton}">
+                                                 rendered="#{fieldTable.showBackButton}">
                                     <f:ajax listener="#{productTemplateView.fieldsBackButtonClick()}"
                                             render="fieldtable fieldbuttons fielddetails"/>
                                 </h:commandButton>
                                 <h:commandButton value="next"
-                                                 rendered="#{configurableFieldTablePaginated.showNextButton}">
+                                                 rendered="#{fieldTable.showNextButton}">
                                     <f:ajax listener="#{productTemplateView.fieldsNextButtonClick()}"
                                             render="fieldtable fieldbuttons fielddetails"/>
                                 </h:commandButton>
                             </h:form>
-                            <h:outputText value="page #{configurableFieldTablePaginated.page+1}"/>
+                            <h:outputText value="page #{fieldTable.page+1}"/>
                         </h:panelGrid>
                     </h:panelGroup>
                 </h:panelGrid>
                 <h:panelGroup id="fielddetails">
-                    <h:panelGrid columns="2" rendered="#{configurableFieldTablePaginated.configurableFieldDetailsCurrentlySelected}">
+                    <h:panelGrid columns="2" rendered="#{fieldTable.fieldSelectedFlag}">
                         <h:outputText value="Attribute 1"/>
-                        <h:outputText value="This could display further information on #{configurableFieldTablePaginated.currentlySelectedConfigurableField.fieldname}"/>
+                        <h:outputText value="This could display further information on #{fieldTable.fieldSelectedCurrently.fieldname}"/>
                         <h:outputText value="Attribute 2"/>
-                        <h:outputText value="This could display further information on #{configurableFieldTablePaginated.currentlySelectedConfigurableField.fieldname}"/>
+                        <h:outputText value="This could display further information on #{fieldTable.fieldSelectedCurrently.fieldname}"/>
                         <h:outputText value="Attribute 3"/>
-                        <h:outputText value="This could display further information on #{configurableFieldTablePaginated.currentlySelectedConfigurableField.fieldname}"/>
+                        <h:outputText value="This could display further information on #{fieldTable.fieldSelectedCurrently.fieldname}"/>
                     </h:panelGrid>
                 </h:panelGroup>
             </h:panelGrid>
