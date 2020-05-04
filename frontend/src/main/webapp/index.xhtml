@@ -14,31 +14,33 @@
         <f:view>
             <h:panelGrid columns="2">
                 <h:panelGrid columns="2">
-                    <h:dataTable id="templatetable" value="#{templateTable.currentProductTemplateList}"
-                                 var="template"
-                                 styleClass="primary"
-                                 cellspacing="0"
-                                 cellpadding="0"
-                                 border="0"
-                                 rowClasses="#{templateTable.rowClasses()}"
-                                 columnClasses="name,fieldcount,button">
-                        <h:column headerstyleClass="first">
-                            <f:facet name="header">Template</f:facet>
-                            <h:outputText value="#{template.templatename}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Number of Fields</f:facet>
-                            <h:outputText value="#{template.fieldCount}"/>
-                        </h:column>
-                        <h:column headerstyleClass="last">
-                            <h:form>
-                                <h:commandButton value="Template Details">
-                                    <f:ajax listener="#{productTemplateView.templateDetailsButtonClicked(template)}"
-                                            render="fieldtable fieldbuttons fielddetails templatetable"/>
-                                </h:commandButton>
-                            </h:form>
-                        </h:column>
-                    </h:dataTable>
+                    <h:panelGroup id="templatetable">
+                        <h:dataTable value="#{templateTable.currentProductTemplateList}"
+                                     var="template"
+                                     styleClass="primary"
+                                     cellspacing="0"
+                                     cellpadding="0"
+                                     border="0"
+                                     rowClasses="#{templateTable.rowClasses()}"
+                                     columnClasses="name,fieldcount,button">
+                            <h:column headerstyleClass="first">
+                                <f:facet name="header">Template</f:facet>
+                                <h:outputText value="#{template.templatename}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Number of Fields</f:facet>
+                                <h:outputText value="#{template.fieldCount}"/>
+                            </h:column>
+                            <h:column headerstyleClass="last">
+                                <h:form>
+                                    <h:commandButton value="Template Details">
+                                        <f:ajax listener="#{productTemplateView.templateDetailsButtonClicked(template)}"
+                                                render="fieldtable fieldbuttons fielddetails templatetable"/>
+                                    </h:commandButton>
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
                     <h:panelGroup id="fieldtable">
                         <h:outputText value=" Select a product template"
                                       rendered="#{!templateTable.templateIsSelected}"/>

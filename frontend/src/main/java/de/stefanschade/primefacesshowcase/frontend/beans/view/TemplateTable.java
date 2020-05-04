@@ -66,7 +66,7 @@ public class TemplateTable implements Serializable {
         firstEntry = page * size + 1;
         lastEntry = firstEntry + currentProductTemplateList.size();
 
-        log.debug("Template Table updated: "
+        log.info("Template Table updated: "
                 + " page " + page
                 + " size " + size
                 + " first " + firstEntry

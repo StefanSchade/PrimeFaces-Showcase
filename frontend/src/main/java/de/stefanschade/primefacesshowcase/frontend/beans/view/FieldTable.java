@@ -48,7 +48,7 @@ public class FieldTable implements Serializable {
             setShowNextButton(false);
         }
 
-        log.debug("Field Table updated: "
+        log.info("Field Table updated: "
                 + " page " + page
                 + " size " + size
                 + " from " + firstEntry
@@ -64,9 +64,9 @@ public class FieldTable implements Serializable {
 
     public void selectTemplate(List<ConfigurableField> fields) {
         completeFieldList = fields;
-        unSelectFieldDetails();
+        page=0;
         update();
-        page = 0;
+        unSelectFieldDetails();
     }
 
     public void selectFieldDetails(ConfigurableField field) {
