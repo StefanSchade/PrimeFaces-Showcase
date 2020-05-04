@@ -22,25 +22,15 @@ public class TemplateTable implements Serializable {
 
     @Inject
     private ProductTemplateService service;
-
     private List<ProductTemplate> currentProductTemplateList;
-
     private List<ProductTemplate> nextProductTemplateList;
-
     private ProductTemplate currentlySelectedTemplate = null;
-
     private boolean templateIsSelected = false;
-
     int page = 0;
-
     final int size = 20;
-
     int firstEntry = 1;
-
     int lastEntry = size;
-
     boolean showBackButton = true;
-
     boolean showNextButton = true;
 
     @PostConstruct
@@ -69,7 +59,7 @@ public class TemplateTable implements Serializable {
         firstEntry = page * size + 1;
         lastEntry = firstEntry + currentProductTemplateList.size();
 
-        log.info("Template Table updated: "
+        log.debug("Template Table updated: "
                 + " page " + page
                 + " size " + size
                 + " first " + firstEntry

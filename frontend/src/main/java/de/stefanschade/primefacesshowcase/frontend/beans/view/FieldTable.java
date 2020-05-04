@@ -18,23 +18,14 @@ import java.util.List;
 public class FieldTable implements Serializable {
 
     private boolean fieldSelectedFlag = false;
-
     private ConfigurableField fieldSelected = null;
-
     private List<ConfigurableField> completeFieldList;
-
     private List<ConfigurableField> pagedFieldList;
-
     boolean showBackButton = true;
-
     boolean showNextButton = true;
-
     int page = 0;
-
     final int size = 20;
-
     int firstEntry = 0;
-
     int lastEntry = size;
 
     public void update() {
@@ -52,7 +43,7 @@ public class FieldTable implements Serializable {
             setShowNextButton(false);
         }
 
-        log.info("Field Table updated: "
+        log.debug("Field Table updated: "
                 + " page " + page
                 + " size " + size
                 + " from " + firstEntry

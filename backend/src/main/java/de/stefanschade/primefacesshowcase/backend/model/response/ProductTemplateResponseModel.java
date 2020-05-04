@@ -16,3 +16,4 @@ public class ProductTemplateResponseModel {
     private String templatename;
     private List<ConfigurableFieldResponseModel> fields;
 }
+

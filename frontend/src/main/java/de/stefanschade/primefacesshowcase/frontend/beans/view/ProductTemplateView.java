@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -55,5 +54,4 @@ public class ProductTemplateView implements Serializable {
     public void fieldsDetailsButtonClicked(ConfigurableField field) {
         fieldTable.selectFieldDetails(field);
     }
-
 }

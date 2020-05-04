@@ -22,7 +22,7 @@ public class ProductTemplateEntity {
     @NonNull
     private String templatename;
 
-    @OneToMany(mappedBy = "template", cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "template", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.EAGER)
     @Column(nullable = false)
     @JsonManagedReference
     private List<ConfigurableFieldEntity> fields;
