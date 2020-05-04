@@ -19,7 +19,7 @@ public class FieldTable implements Serializable {
 
     private boolean fieldSelectedFlag = false;
 
-    private ConfigurableField fieldSelectedCurrently = null;
+    private ConfigurableField fieldSelected = null;
 
     private List<ConfigurableField> completeFieldList;
 
@@ -74,12 +74,12 @@ public class FieldTable implements Serializable {
     }
 
     public void selectFieldDetails(ConfigurableField field) {
-        fieldSelectedCurrently = field;
+        fieldSelected = field;
         fieldSelectedFlag = true;
     }
 
     public void unSelectFieldDetails() {
-        fieldSelectedCurrently = null;
+        fieldSelected = null;
         fieldSelectedFlag = false;
     }
 
