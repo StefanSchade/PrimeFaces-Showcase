@@ -20,7 +20,7 @@
                                  cellspacing="0"
                                  cellpadding="0"
                                  border="0"
-                                 rowClasses="odd,even"
+                                 rowClasses="#{templateTable.rowClasses()}"
                                  columnClasses="name,fieldcount,button">
                         <h:column headerstyleClass="first">
                             <f:facet name="header">Template</f:facet>
@@ -34,7 +34,7 @@
                             <h:form>
                                 <h:commandButton value="Template Details">
                                     <f:ajax listener="#{productTemplateView.templateDetailsButtonClicked(template)}"
-                                            render="fieldtable fieldbuttons fielddetails"/>
+                                            render="fieldtable fieldbuttons fielddetails templatetable"/>
                                 </h:commandButton>
                             </h:form>
                         </h:column>
@@ -48,7 +48,7 @@
                                      cellspacing="0"
                                      cellpadding="0"
                                      border="0"
-                                     rowClasses="odd,even"
+                                     rowClasses="#{fieldTable.rowClasses()}"
                                      rendered="#{templateTable.templateIsSelected}">
                             <h:column>
                                 <f:facet name="header">Field</f:facet>
@@ -62,7 +62,7 @@
                                 <h:form>
                                     <h:commandButton value="Field Details">
                                         <f:ajax listener="#{productTemplateView.fieldsDetailsButtonClicked(field)}"
-                                                render="fielddetails"/>
+                                                render="fielddetails fieldtable"/>
                                     </h:commandButton>
                                 </h:form>
                             </h:column>
@@ -102,7 +102,7 @@
                     </h:panelGroup>
                 </h:panelGrid>
                 <h:panelGroup id="fielddetails">
-                    <h:panelGrid columns="2" rendered="#{fieldTable.fieldSelectedFlag}">
+                    <h:panelGrid columns="2" rendered="#{fieldTable.fieldIsSelected}">
                         <h:outputText value="Attribute 1"/>
                         <h:outputText
                                 value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>

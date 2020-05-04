@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 @Slf4j
@@ -17,14 +18,18 @@ import java.util.List;
 @ViewScoped
 public class FieldTable implements Serializable {
 
-    private boolean fieldSelectedFlag = false;
     private ConfigurableField fieldSelected = null;
+    private boolean fieldIsSelected = false;
+
     private List<ConfigurableField> completeFieldList;
     private List<ConfigurableField> pagedFieldList;
+
     boolean showBackButton = true;
     boolean showNextButton = true;
-    int page = 0;
+
     final int size = 20;
+    int page = 0;
+
     int firstEntry = 0;
     int lastEntry = size;
 
@@ -66,12 +71,12 @@ public class FieldTable implements Serializable {
 
     public void selectFieldDetails(ConfigurableField field) {
         fieldSelected = field;
-        fieldSelectedFlag = true;
+        fieldIsSelected = true;
     }
 
     public void unSelectFieldDetails() {
         fieldSelected = null;
-        fieldSelectedFlag = false;
+        fieldIsSelected = false;
     }
 
     public void retrieveNext() {
@@ -83,4 +88,29 @@ public class FieldTable implements Serializable {
         page--;
         update();
     }
+
+    public String rowClasses() {
+        if (!fieldIsSelected) return "odd, even";
+
+        StringBuilder returnValue = new StringBuilder();
+        Iterator<ConfigurableField> iterator = this.pagedFieldList.iterator();
+        boolean oddEvenFlip = false;
+
+        while (iterator.hasNext()) {
+            if (iterator.next().equals(this.fieldSelected)) {
+                returnValue.append("highlight");
+            } else {
+                returnValue.append(oddEvenFlip ? "even" : "odd");
+            }
+            oddEvenFlip = !oddEvenFlip;
+            if (iterator.hasNext()) {
+                returnValue.append(", ");
+            }
+        }
+
+        log.info("field rowClasses " + returnValue.toString());
+
+        return returnValue.toString();
+    }
+
 }

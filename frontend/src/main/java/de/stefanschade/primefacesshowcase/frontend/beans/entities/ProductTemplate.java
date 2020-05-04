@@ -1,9 +1,6 @@
 package de.stefanschade.primefacesshowcase.frontend.beans.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Named;
@@ -13,6 +10,7 @@ import java.util.List;
 @Named
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Getter
 @Setter
 public class ProductTemplate {

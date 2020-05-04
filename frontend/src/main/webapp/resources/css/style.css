@@ -42,10 +42,17 @@ table.primary tr.even {
 	background-color: blanchedalmond;
 }
 
+table.primary tr.highlight {
+	background-color: red;
+}
+
+table.secondary tr.highlight {
+	background-color: red;
+}
+
 table.primary tr.odd td {
 	border-top: 1px solid #444    ;
 }
-
 
 table.secondary {
 	width: 100%;
@@ -74,4 +81,12 @@ table.secondary tr.odd {
 
 table.secondary tr.odd td {
 	border-top: 1px solid #444    ;
+}
+
+table.new tr {
+	background-color: darkred;
+}
+
+table.new tr {
+	background-color: greenyellow;
 }
