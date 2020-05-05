@@ -12,8 +12,8 @@
     </ui:define>
     <ui:define name="content">
         <f:view>
-            <h:panelGrid columns="2">
-                <h:panelGrid columns="2">
+            <h:panelGrid columns="2" styleClass="pagelayout">
+                <h:panelGrid columns="2" styleClass="pagelayout">
                     <h:panelGroup id="templatetable">
                         <h:dataTable value="#{templateTable.currentProductTemplateList}"
                                      var="template"
@@ -23,7 +23,7 @@
                                      border="0"
                                      rowClasses="#{templateTable.rowClasses()}"
                                      columnClasses="name,fieldcount,button">
-                            <h:column headerstyleClass="first">
+                            <h:column headerstyleClass="first" >
                                 <f:facet name="header">Template</f:facet>
                                 <h:outputText value="#{template.templatename}"/>
                             </h:column>
@@ -33,7 +33,7 @@
                             </h:column>
                             <h:column headerstyleClass="last">
                                 <h:form>
-                                    <h:commandButton value="Template Details">
+                                    <h:commandButton value="Template Details" styleClass="primarybutton">
                                         <f:ajax listener="#{productTemplateView.templateDetailsButtonClicked(template)}"
                                                 render="fieldtable fieldbuttons fielddetails templatetable"/>
                                     </h:commandButton>
