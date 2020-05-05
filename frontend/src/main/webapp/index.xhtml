@@ -31,7 +31,7 @@
                                 <f:facet name="header">Number of Fields</f:facet>
                                 <h:outputText value="#{template.fieldCount}"/>
                             </h:column>
-                            <h:column headerstyleClass="last">
+                            <h:column>
                                 <h:form>
                                     <h:commandButton value="Template Details" styleClass="primarybutton">
                                         <f:ajax listener="#{productTemplateView.templateDetailsButtonClicked(template)}"
@@ -62,7 +62,7 @@
                             </h:column>
                             <h:column>
                                 <h:form>
-                                    <h:commandButton value="Field Details">
+                                    <h:commandButton value="Field Details"  styleClass="secondarybutton">
                                         <f:ajax listener="#{productTemplateView.fieldsDetailsButtonClicked(field)}"
                                                 render="fielddetails fieldtable"/>
                                     </h:commandButton>
