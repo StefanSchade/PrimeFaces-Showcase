@@ -23,7 +23,7 @@
                                      border="0"
                                      rowClasses="#{templateTable.rowClasses()}"
                                      columnClasses="name,fieldcount,button">
-                            <h:column headerstyleClass="first" >
+                            <h:column headerstyleClass="first">
                                 <f:facet name="header">Template</f:facet>
                                 <h:outputText value="#{template.templatename}"/>
                             </h:column>
@@ -62,7 +62,7 @@
                             </h:column>
                             <h:column>
                                 <h:form>
-                                    <h:commandButton value="Field Details"  styleClass="secondarybutton">
+                                    <h:commandButton value="Field Details" styleClass="secondarybutton">
                                         <f:ajax listener="#{productTemplateView.fieldsDetailsButtonClicked(field)}"
                                                 render="fielddetails fieldtable"/>
                                     </h:commandButton>
@@ -117,6 +117,15 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:panelGrid>
+
+            <h1><b>In flow ?
+                #{null != facesContext.application.flowHandler.currentFlow}
+            </b></h1><br/><br/>
+
+            <h:form>
+                <h:commandLink action="productconfig" value="Product Configuration" immediate="true"/>
+            </h:form>
+
         </f:view>
     </ui:define>
 </ui:composition>

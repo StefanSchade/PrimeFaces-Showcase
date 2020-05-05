@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.3" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
+
+    <flow-definition id="productconfig">
+        <start-node>fieldselection</start-node>
+        <view id="fieldselection">
+            <vdl-document>/productconfig/fieldselection.xhtml</vdl-document>
+        </view>
+        <view id="fieldscopes">
+            <vdl-document>/productconfig/fieldscopes.xhtml</vdl-document>
+        </view>
+        <view id="defaultvalues">
+            <vdl-document>/productconfig/defaultvalues.xhtml</vdl-document>
+        </view>
+        <view id="reviewresults">
+            <vdl-document>/productconfig/reviewresults.xhtml</vdl-document>
+        </view>
+        <flow-return id="finishproductconfig">
+            <from-outcome>/index.xhtml</from-outcome>
+        </flow-return>
+    </flow-definition>
+</faces-config>

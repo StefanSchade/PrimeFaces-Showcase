@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title><h:outputText value="Field Selection"/></title>
+</h:head>
+
+<h:body>
+
+    <h1><b>In flow ?
+        #{null != facesContext.application.flowHandler.currentFlow}
+    </b></h1><br/><br/>
+    <h:form>
+        <h1> Select, which fields are editable or visible and store them in a flow bean </h1>
+        <h:panelGrid columns="2">
+
+            <h:outputText value="Describe your selection of visible Fields"/>
+            <h:inputText value="#{productConfigView.visibleFields}"/>
+            <h:outputText value="Describe your selection of editable Fields"/>
+            <h:inputText value="#{productConfigView.editableFields}"/>
+        </h:panelGrid>
+
+        <h:commandButton value="Next" action="fieldscopes"/>
+    </h:form>
+</h:body>
+</html>

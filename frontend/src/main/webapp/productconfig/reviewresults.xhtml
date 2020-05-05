@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title><h:outputText value="Field Selection"/></title>
+</h:head>
+<h:body>
+
+    <h1><b>In flow ?
+        #{null != facesContext.application.flowHandler.currentFlow}
+    </b></h1><br/><br/>
+
+    <h1> Selected: </h1>
+    <h:outputText value="Visible Fields: #{productConfigView.visibleFields}"/><br/><br/>
+    <h:outputText value="Visible Fields Default Values: #{productConfigView.visibleFieldsDefaultValues}"/><br/><br/>
+    <h:outputText value="Editable Fields #{productConfigView.editableFields}"/><br/><br/>
+    <h:outputText value="Editable Fields Scopes #{productConfigView.editableFieldsScopes}"/><br/><br/>
+    <h:outputText value="Editable Fields Default Values: #{productConfigView.editableFieldsScopes}"/><br/><br/>
+    <h:form>
+        <h:commandButton value="Change" action="fieldselection"/>
+        <h:commandButton value="Close" action="#{productConfigView.finish()}"/>
+    </h:form>
+</h:body>
+</html>
