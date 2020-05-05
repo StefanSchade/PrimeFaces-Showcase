@@ -27,15 +27,12 @@ public class FieldTable implements Serializable {
     boolean showBackButton = true;
     boolean showNextButton = true;
 
-    final int size = 20;
+    int size = 20;
     int page = 0;
 
-    int firstEntry = 0;
-    int lastEntry = size;
-
     public void update() {
-        firstEntry = page * size;
-        lastEntry = firstEntry + size;
+        int firstEntry = page * size;
+        int lastEntry = firstEntry + size;
 
         if (page == 0) {
             setShowBackButton(false);
@@ -59,7 +56,7 @@ public class FieldTable implements Serializable {
 
         int from = firstEntry;
         int to = completeFieldList.size() < lastEntry ? completeFieldList.size() : lastEntry;
-        pagedFieldList = completeFieldList.subList(from, to);
+        this.pagedFieldList = completeFieldList.subList(from, to);
     }
 
     public void selectTemplate(List<ConfigurableField> fields) {
@@ -109,8 +106,6 @@ public class FieldTable implements Serializable {
         }
 
         log.info("field rowClasses " + returnValue.toString());
-
         return returnValue.toString();
     }
-
 }

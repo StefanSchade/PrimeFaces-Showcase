@@ -60,11 +60,13 @@ table.primary tr.even {
 }
 
 table.primary tr.highlight {
-	background-color: red;
+	background-color: #cc4400;
+	color:white;
 }
 
 table.secondary tr.highlight {
-	background-color: red;
+	background-color: #cc4400;
+	color:white;
 }
 
 table.primary tr.odd td {

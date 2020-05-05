@@ -31,11 +31,8 @@ public class TemplateTable implements Serializable {
     private List<ProductTemplate> currentProductTemplateList;
     private List<ProductTemplate> nextProductTemplateList;
 
-    final int size = 20;
+    int size = 20;
     int page = 0;
-
-    int firstEntry = 1;
-    int lastEntry = size;
 
     boolean showBackButton = true;
     boolean showNextButton = true;;
@@ -63,47 +60,48 @@ public class TemplateTable implements Serializable {
             setShowNextButton(true);
         }
 
-        firstEntry = page * size + 1;
-        lastEntry = firstEntry + currentProductTemplateList.size();
+        int firstEntry = page * size + 1;
+        int lastEntry = firstEntry + currentProductTemplateList.size();
 
         log.info("Template Table updated: "
-                + " page " + page
-                + " size " + size
-                + " first " + firstEntry
-                + " last " + lastEntry
-                + " next " + showNextButton
-                + " back " + showBackButton);
+                + " page " +    page
+                + " size " +    size
+                + " first " +   firstEntry
+                + " last " +    lastEntry
+                + " next " +    showNextButton
+                + " back " +    showBackButton
+        );
     }
 
     public void selectTemplate(ProductTemplate template) {
-        templateIsSelected = true;
+        this.templateIsSelected = true;
         this.templateSelected = template;
     }
 
     public void unSelectTemplate() {
-        templateIsSelected = false;
+        this.templateIsSelected = false;
         this.templateSelected = null;
     }
 
     public void retrieveNext() {
-        currentProductTemplateList = nextProductTemplateList;
-        nextProductTemplateList = service.retrieveTemplates(size, ++page + 1);
+        this.currentProductTemplateList = nextProductTemplateList;
+        this.nextProductTemplateList = service.retrieveTemplates(size, ++page + 1);
         update();
     }
 
     public void retrieveLast() {
-        nextProductTemplateList = currentProductTemplateList;
-        currentProductTemplateList = service.retrieveTemplates(size, --page);
+        this.nextProductTemplateList = currentProductTemplateList;
+        this.currentProductTemplateList = service.retrieveTemplates(size, --page);
         update();
     }
 
     public boolean checkTemplateForSelection(ProductTemplate template) {
-        if (!templateIsSelected) return false;
+        if (!this.templateIsSelected) return false;
         return template.equals(this.templateSelected);
     }
 
     public String rowClasses() {
-        if (!templateIsSelected) return "odd, even";
+        if (!this.templateIsSelected) return "odd, even";
 
         StringBuilder returnValue = new StringBuilder();
         Iterator<ProductTemplate> iterator = this.currentProductTemplateList.iterator();
@@ -122,7 +120,6 @@ public class TemplateTable implements Serializable {
         }
 
         log.info("template rowClasses " + returnValue.toString());
-
         return returnValue.toString();
     }
 }
