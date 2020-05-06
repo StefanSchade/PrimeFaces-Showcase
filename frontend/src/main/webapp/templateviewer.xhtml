@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="header">
+        Product Templates
+    </ui:define>
+    <ui:define name="content">
+        <f:view>
+            <h:panelGrid columns="2" styleClass="pagelayout">
+                <h:panelGrid columns="2" styleClass="pagelayout">
+                    <h:panelGroup id="templatetable">
+                        <h:dataTable value="#{templateTable.currentProductTemplateList}"
+                                     var="template"
+                                     styleClass="primary"
+                                     cellspacing="0"
+                                     cellpadding="0"
+                                     border="0"
+                                     rowClasses="#{templateTable.rowClasses()}"
+                                     columnClasses="name,fieldcount,button">
+                            <h:column headerstyleClass="first">
+                                <f:facet name="header">Template</f:facet>
+                                <h:outputText value="#{template.templatename}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Number of Fields</f:facet>
+                                <h:outputText value="#{template.fieldCount}"/>
+                            </h:column>
+                            <h:column>
+                                <h:form>
+                                    <h:commandButton value="Template Details" styleClass="primarybutton">
+                                        <f:ajax listener="#{productTemplateView.templateDetailsButtonClicked(template)}"
+                                                render="fieldtable fieldbuttons fielddetails templatetable"/>
+                                    </h:commandButton>
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                    <h:panelGroup id="fieldtable">
+                        <h:outputText value=" Select a product template"
+                                      rendered="#{!templateTable.templateIsSelected}"/>
+                        <h:dataTable value="#{fieldTable.pagedFieldList}"
+                                     var="field"
+                                     styleClass="secondary"
+                                     cellspacing="0"
+                                     cellpadding="0"
+                                     border="0"
+                                     rowClasses="#{fieldTable.rowClasses()}"
+                                     rendered="#{templateTable.templateIsSelected}">
+                            <h:column>
+                                <f:facet name="header">Field</f:facet>
+                                #{field.fieldname}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Type</f:facet>
+                                #{field.fieldType}
+                            </h:column>
+                            <h:column>
+                                <h:form>
+                                    <h:commandButton value="Field Details" styleClass="secondarybutton">
+                                        <f:ajax listener="#{productTemplateView.fieldsDetailsButtonClicked(field)}"
+                                                render="fielddetails fieldtable"/>
+                                    </h:commandButton>
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                    <h:panelGrid id="templatebuttons" columns="3">
+                        <h:form>
+                            <h:commandButton value="back" rendered="#{templateTable.showBackButton}">
+                                <f:ajax listener="#{productTemplateView.templateBackButtonClick()}"
+                                        render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
+                            </h:commandButton>
+                            <h:commandButton value="next" rendered="#{templateTable.showNextButton}">
+                                <f:ajax listener="#{productTemplateView.templateNextButtonClick()}"
+                                        render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
+                            </h:commandButton>
+                        </h:form>
+                        <h:outputText value="page #{templateTable.page+1}"/>
+                    </h:panelGrid>
+                    <h:panelGroup id="fieldbuttons">
+
+                        <h:panelGrid rendered="#{templateTable.templateIsSelected}"
+                                     columns="3">
+                            <h:form>
+                                <h:commandButton value="back"
+                                                 rendered="#{fieldTable.showBackButton}">
+                                    <f:ajax listener="#{productTemplateView.fieldsBackButtonClick()}"
+                                            render="fieldtable fieldbuttons fielddetails"/>
+                                </h:commandButton>
+                                <h:commandButton value="next"
+                                                 rendered="#{fieldTable.showNextButton}">
+                                    <f:ajax listener="#{productTemplateView.fieldsNextButtonClick()}"
+                                            render="fieldtable fieldbuttons fielddetails"/>
+                                </h:commandButton>
+                            </h:form>
+                            <h:outputText value="page #{fieldTable.page+1}"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </h:panelGrid>
+                <h:panelGroup id="fielddetails">
+                    <h:panelGrid columns="2" rendered="#{fieldTable.fieldIsSelected}">
+                        <h:outputText value="Attribute 1"/>
+                        <h:outputText
+                                value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>
+                        <h:outputText value="Attribute 2"/>
+                        <h:outputText
+                                value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>
+                        <h:outputText value="Attribute 3"/>
+                        <h:outputText
+                                value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+            </h:panelGrid>
+
+            <h1><b>In flow ?
+                #{null != facesContext.application.flowHandler.currentFlow}
+            </b></h1><br/><br/>
+
+            <h:form>
+                <h:commandLink action="index" value="back to index" immediate="true"/>
+            </h:form>
+
+        </f:view>
+    </ui:define>
+</ui:composition>
+Text
+</html>
