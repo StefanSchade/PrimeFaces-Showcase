@@ -53,19 +53,13 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
     }
 
     private List<ProductTemplateDto> mapProductTemplateEntityIterableToDtoList(Iterable <ProductTemplateEntity> productTemplateEntityList) {
-        Iterator<ProductTemplateEntity> ProductTemplateEntityIterator = productTemplateEntityList.iterator();
         List<ProductTemplateDto> returnProductTemplateList = new ArrayList<>();
-        while (ProductTemplateEntityIterator.hasNext()) {
+        for(ProductTemplateEntity currentProductTemplateEntity :  productTemplateEntityList) {
             ProductTemplateDto currentProductTemplateDTO = new ProductTemplateDto();
-            ProductTemplateEntity currentProductTemplateEntity = ProductTemplateEntityIterator.next();
             BeanUtils.copyProperties(currentProductTemplateEntity, currentProductTemplateDTO);
             List<ConfigurableFieldEntity> fieldsForCurrentTemplateEntity
                     = configurableFieldRepository.findByTemplate(currentProductTemplateEntity);
-            Iterator<ConfigurableFieldEntity> fieldEntityIterator = fieldsForCurrentTemplateEntity.iterator();
-            log.info("processing template " + currentProductTemplateDTO.getTemplatename());
-            while (fieldEntityIterator.hasNext()) {
-                ConfigurableFieldEntity configurableFieldEntity = fieldEntityIterator.next();
-                log.info("processing field " + configurableFieldEntity.getFieldname());
+            for (ConfigurableFieldEntity configurableFieldEntity : fieldsForCurrentTemplateEntity) {
                 ConfigurableFieldDto configurableFieldDto = new ConfigurableFieldDto();
                 BeanUtils.copyProperties(configurableFieldEntity, configurableFieldDto);
                 currentProductTemplateDTO.getFieldsdto().add(configurableFieldDto);

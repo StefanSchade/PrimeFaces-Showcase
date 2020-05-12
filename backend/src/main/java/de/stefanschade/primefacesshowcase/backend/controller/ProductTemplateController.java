@@ -8,14 +8,12 @@ import de.stefanschade.primefacesshowcase.backend.service.ProductTemplateService
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Slf4j
@@ -42,16 +40,13 @@ public class ProductTemplateController {
     }
 
     private List<ProductTemplateResponseModel> mapProductTemplateDtoListToResponseList(List<ProductTemplateDto> productTemplateDtoList) {
-        Iterator<ProductTemplateDto> productTemplateDtoIterator = productTemplateDtoList.iterator();
         List<ProductTemplateResponseModel> returnValue = new ArrayList<>(productTemplateDtoList.size());
-        while (productTemplateDtoIterator.hasNext()) {
-            ProductTemplateResponseModel productTemplateResponseModel = new ProductTemplateResponseModel();
-            ProductTemplateDto productTemplateDto = productTemplateDtoIterator.next();
+        ProductTemplateResponseModel productTemplateResponseModel;
+        for (ProductTemplateDto productTemplateDto : productTemplateDtoList) {
+            productTemplateResponseModel = new ProductTemplateResponseModel();
             BeanUtils.copyProperties(productTemplateDto, productTemplateResponseModel);
-            Iterator<ConfigurableFieldDto> configurableFieldDtoIterator = productTemplateDto.getFieldsdto().iterator();
             List<ConfigurableFieldResponseModel> configurableFieldResponseModelList = new ArrayList<>();
-            while (configurableFieldDtoIterator.hasNext()) {
-                ConfigurableFieldDto currentFieldDto = configurableFieldDtoIterator.next();
+            for (ConfigurableFieldDto currentFieldDto : productTemplateDto.getFieldsdto()) {
                 ConfigurableFieldResponseModel currentFieldResponseModel = new ConfigurableFieldResponseModel();
                 BeanUtils.copyProperties(currentFieldDto, currentFieldResponseModel);
                 configurableFieldResponseModelList.add(currentFieldResponseModel);
@@ -61,5 +56,4 @@ public class ProductTemplateController {
         }
         return returnValue;
     }
-
 }

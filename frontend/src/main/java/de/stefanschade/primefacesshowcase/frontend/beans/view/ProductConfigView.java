@@ -22,5 +22,4 @@ public class ProductConfigView implements Serializable {
     public String finish() {
         return "finishproductconfig";
     }
-
 }
