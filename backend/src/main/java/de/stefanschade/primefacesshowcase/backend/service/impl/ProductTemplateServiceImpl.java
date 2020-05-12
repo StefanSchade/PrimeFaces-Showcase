@@ -16,7 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -49,16 +50,16 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
 
     @Override
     public List<ProductTemplateDto> getAll() {
-       return mapProductTemplateEntityIterableToDtoList(productTemplateRepository.findAll());
+        return mapProductTemplateEntityIterableToDtoList(productTemplateRepository.findAll());
     }
 
-    private List<ProductTemplateDto> mapProductTemplateEntityIterableToDtoList(Iterable <ProductTemplateEntity> productTemplateEntityList) {
+    private List<ProductTemplateDto> mapProductTemplateEntityIterableToDtoList(Iterable<ProductTemplateEntity> productTemplateEntityList) {
         List<ProductTemplateDto> returnProductTemplateList = new ArrayList<>();
-        for(ProductTemplateEntity currentProductTemplateEntity :  productTemplateEntityList) {
+        for (ProductTemplateEntity currentProductTemplateEntity : productTemplateEntityList) {
             ProductTemplateDto currentProductTemplateDTO = new ProductTemplateDto();
             BeanUtils.copyProperties(currentProductTemplateEntity, currentProductTemplateDTO);
             List<ConfigurableFieldEntity> fieldsForCurrentTemplateEntity
-                    = configurableFieldRepository.findByTemplate(currentProductTemplateEntity);
+                    = currentProductTemplateEntity.getFields();
             for (ConfigurableFieldEntity configurableFieldEntity : fieldsForCurrentTemplateEntity) {
                 ConfigurableFieldDto configurableFieldDto = new ConfigurableFieldDto();
                 BeanUtils.copyProperties(configurableFieldEntity, configurableFieldDto);
