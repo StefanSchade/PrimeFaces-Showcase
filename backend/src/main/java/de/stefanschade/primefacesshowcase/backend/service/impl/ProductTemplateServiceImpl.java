@@ -1,9 +1,8 @@
 package de.stefanschade.primefacesshowcase.backend.service.impl;
 
-import de.stefanschade.primefacesshowcase.backend.domain.ConfigurableFieldEntity;
 import de.stefanschade.primefacesshowcase.backend.domain.ProductTemplateEntity;
-import de.stefanschade.primefacesshowcase.backend.dto.ConfigurableFieldDto;
 import de.stefanschade.primefacesshowcase.backend.dto.ProductTemplateDto;
+import de.stefanschade.primefacesshowcase.backend.mapper.ProductTemplateMapper;
 import de.stefanschade.primefacesshowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.primefacesshowcase.backend.repositories.ProductTemplateRepository;
 import de.stefanschade.primefacesshowcase.backend.repositories.ProductTemplateRepositoryPagination;
@@ -32,6 +31,9 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
     @Autowired
     ProductTemplateRepositoryPagination productTemplateRepositoryPagination;
 
+    @Autowired
+    ProductTemplateMapper productTemplateMapper;
+
     @Override
     public ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto) {
         ProductTemplateEntity entityToBeStored = new ProductTemplateEntity();
@@ -56,16 +58,7 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
     private List<ProductTemplateDto> mapProductTemplateEntityIterableToDtoList(Iterable<ProductTemplateEntity> productTemplateEntityList) {
         List<ProductTemplateDto> returnProductTemplateList = new ArrayList<>();
         for (ProductTemplateEntity currentProductTemplateEntity : productTemplateEntityList) {
-            ProductTemplateDto currentProductTemplateDTO = new ProductTemplateDto();
-            BeanUtils.copyProperties(currentProductTemplateEntity, currentProductTemplateDTO);
-            List<ConfigurableFieldEntity> fieldsForCurrentTemplateEntity
-                    = currentProductTemplateEntity.getFields();
-            for (ConfigurableFieldEntity configurableFieldEntity : fieldsForCurrentTemplateEntity) {
-                ConfigurableFieldDto configurableFieldDto = new ConfigurableFieldDto();
-                BeanUtils.copyProperties(configurableFieldEntity, configurableFieldDto);
-                currentProductTemplateDTO.getFieldsdto().add(configurableFieldDto);
-            }
-            returnProductTemplateList.add(currentProductTemplateDTO);
+            returnProductTemplateList.add(productTemplateMapper.productTemplateEntityToProductTemplateDto(currentProductTemplateEntity));
         }
         return returnProductTemplateList;
     }

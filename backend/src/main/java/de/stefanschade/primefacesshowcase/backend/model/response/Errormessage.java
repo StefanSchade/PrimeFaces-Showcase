@@ -3,7 +3,7 @@ package de.stefanschade.primefacesshowcase.backend.model.response;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum Errormessages {
+public enum Errormessage {
 
     MISSING_REQUIRED_FIELD("Missing required filed"),
     RECORD_ALREADY_EXISTS("Record already exists"),
