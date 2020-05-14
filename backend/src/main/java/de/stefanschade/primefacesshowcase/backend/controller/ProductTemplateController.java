@@ -11,8 +11,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -41,11 +41,9 @@ public class ProductTemplateController {
     }
 
     private List<ProductTemplateResponseModel> mapProductTemplateDtoListToResponseList(List<ProductTemplateDto> productTemplateDtoList) {
-        List<ProductTemplateResponseModel> returnValue = new ArrayList<>(productTemplateDtoList.size());
-        for (ProductTemplateDto productTemplateDto : productTemplateDtoList) {
-            ProductTemplateResponseModel productTemplateResponseModel = productTemplateMapper.productTemplateDtoToProductTemplateResponseModel(productTemplateDto);
-            returnValue.add(productTemplateResponseModel);
-        }
-        return returnValue;
+        return productTemplateDtoList
+                .stream()
+                .map(productTemplateMapper::productTemplateDtoToProductTemplateResponseModel)
+                .collect(Collectors.toList());
     }
 }
