@@ -1,16 +1,15 @@
 package de.stefanschade.primefacesshowcase.backend.bootstrap;
 
-import de.stefanschade.primefacesshowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.primefacesshowcase.backend.domain.ConfigurableFieldEntity;
 import de.stefanschade.primefacesshowcase.backend.domain.ProductTemplateEntity;
 import de.stefanschade.primefacesshowcase.backend.dto.FieldType;
+import de.stefanschade.primefacesshowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.primefacesshowcase.backend.repositories.ProductTemplateRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 
 import java.util.ArrayList;
 
@@ -71,8 +70,6 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         }
 
         template.setFields(new ArrayList<>());
-
-        log.info("templatename " + templatename + " fields " + fieldnames.length + " types " + fieldtypes.length);
         for (int i = 0; i<fieldnames.length;i++){
             log.info("Field #"+i+": "+fieldnames[i] + "   " + fieldtypes[i]);
         }

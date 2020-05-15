@@ -5,7 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Component
@@ -21,48 +24,40 @@ public class RandomDataGenerator {
         return generateRandomString(length);
     }
 
+    public List<FieldType> getRandomFieldTypeList(int length) {
+        return Stream.generate(() -> getRandomFieldType())
+                .limit(length)
+                .collect(Collectors.toList());
+    }
+
     public FieldType[] getRandomFieldTypeArray(int length) {
-        FieldType[] returnValue = new FieldType[length];
-        for (int i = 0; i < length; i++) {
-            returnValue[i] = getRandomFieldType();
-        }
-        return returnValue;
+        return getRandomFieldTypeList(length).toArray(new FieldType[length]);
+    }
+
+    public List<String> getRandomStringList(int lengthOfList, int lengthOfEachString) {
+        return Stream.generate(() -> getRandomString(lengthOfEachString))
+                .limit(lengthOfList)
+                .collect(Collectors.toList());
     }
 
     public String[] getRandomStringArray(int lengthOfArray, int lengthOfEachString) {
-        String[] returnValue = new String[lengthOfArray];
-        for (int i = 0; i < lengthOfArray; i++) {
-            returnValue[i] = getRandomString(lengthOfEachString);
-        }
-
-        for (int i = 0;i<lengthOfArray;i++) {
-            log.info("String Array: Field #" + i + ": " + returnValue[i]);
-        }
-
-        return returnValue;
+        return getRandomStringList(lengthOfArray, lengthOfEachString).toArray(new String[0]);
     }
 
     private FieldType getRandomFieldType() {
-        int pick = RANDOM.nextInt(fieldTypes.length);
-        return fieldTypes[pick];
+        return fieldTypes[RANDOM.nextInt(fieldTypes.length)];
     }
 
     private String generateRandomString(int length) {
-        StringBuilder returnValue = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
-            returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
-        }
-        return new String(returnValue);
+        return Stream.generate(() -> RANDOM.nextInt(ALPHABET.length()))
+                .map(i -> ALPHABET.charAt(i))
+                .map(Object::toString)
+                .limit(length)
+                .collect(Collectors.joining(""));
     }
 
     public int getRandomIntInRange(int from, int to) {
-        if (to == from) {
-            return to;
-        } else if (to < from) {
-            throw new IllegalArgumentException("to: " + to + " from: " + from);
-        } else {
-            int rangelength = to - from;
-            return RANDOM.nextInt(rangelength) + from;
-        }
+        if (to < from) throw new IllegalArgumentException("to: " + to + " from: " + from);
+        return RANDOM.nextInt(to - from + 1) + from - 1;
     }
 }

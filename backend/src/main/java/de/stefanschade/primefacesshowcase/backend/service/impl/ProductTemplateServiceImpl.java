@@ -15,8 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
@@ -55,22 +56,20 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
         return mapProductTemplateEntityIterableToDtoList(productTemplateRepository.findAll());
     }
 
-    private List<ProductTemplateDto> mapProductTemplateEntityIterableToDtoList(Iterable<ProductTemplateEntity> productTemplateEntityList) {
-        List<ProductTemplateDto> returnProductTemplateList = new ArrayList<>();
-        for (ProductTemplateEntity currentProductTemplateEntity : productTemplateEntityList) {
-            returnProductTemplateList.add(productTemplateMapper.productTemplateEntityToProductTemplateDto(currentProductTemplateEntity));
-        }
-        return returnProductTemplateList;
+    private List<ProductTemplateDto> mapProductTemplateEntityIterableToDtoList(Iterable<ProductTemplateEntity> productTemplateEntityIterable) {
+        return StreamSupport.stream(productTemplateEntityIterable.spliterator(), false)
+                .map(productTemplateMapper::productTemplateEntityToProductTemplateDto)
+                .collect(Collectors.toList());
     }
 
     // https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-part-seven-pagination/
     @Transactional(readOnly = true)
     @Override
     public List<ProductTemplateDto> findAll(Pageable pageable) {
-
         Page<ProductTemplateEntity> page = productTemplateRepositoryPagination.findAll(pageable);
-        Iterable<ProductTemplateEntity> productTemplateEntityIterable = page.getContent();
-        return mapProductTemplateEntityIterableToDtoList(productTemplateEntityIterable);
+        List<ProductTemplateEntity> productTemplateEntityList = page.getContent();
+        log.info("Page count " + page.getTotalPages() + " Element count " + page.getTotalElements());
+        return mapProductTemplateEntityIterableToDtoList(productTemplateEntityList);
     }
 }
 
