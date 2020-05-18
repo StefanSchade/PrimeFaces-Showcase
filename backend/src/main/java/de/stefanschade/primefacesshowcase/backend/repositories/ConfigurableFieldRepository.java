@@ -1,7 +1,7 @@
 package de.stefanschade.primefacesshowcase.backend.repositories;
 
-import de.stefanschade.primefacesshowcase.backend.domain.ConfigurableFieldEntity;
-import de.stefanschade.primefacesshowcase.backend.domain.ProductTemplateEntity;
+import de.stefanschade.primefacesshowcase.backend.entities.ConfigurableFieldEntity;
+import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

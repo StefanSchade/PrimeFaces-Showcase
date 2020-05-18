@@ -1,6 +1,6 @@
 package de.stefanschade.primefacesshowcase.backend.mapper;
 
-import de.stefanschade.primefacesshowcase.backend.domain.ConfigurableFieldEntity;
+import de.stefanschade.primefacesshowcase.backend.entities.ConfigurableFieldEntity;
 import de.stefanschade.primefacesshowcase.backend.dto.ConfigurableFieldDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

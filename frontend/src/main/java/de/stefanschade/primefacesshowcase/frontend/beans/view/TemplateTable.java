@@ -1,6 +1,5 @@
 package de.stefanschade.primefacesshowcase.frontend.beans.view;
 
-import de.stefanschade.primefacesshowcase.frontend.beans.entities.ConfigurableField;
 import de.stefanschade.primefacesshowcase.frontend.beans.entities.ProductTemplate;
 import de.stefanschade.primefacesshowcase.frontend.service.ProductTemplateService;
 import lombok.Getter;
@@ -35,7 +34,7 @@ public class TemplateTable implements Serializable {
     int page = 0;
 
     boolean showBackButton = true;
-    boolean showNextButton = true;;
+    boolean showNextButton = true;
 
     @PostConstruct
     public void init() {
@@ -48,29 +47,8 @@ public class TemplateTable implements Serializable {
         for (ProductTemplate template : currentProductTemplateList)
             template.setFieldCount(template.getFields().size());
 
-        boolean nextPageHasContent = nextProductTemplateList.size() > 0;
-        if (page < 1) {
-            setShowBackButton(false);
-        } else {
-            setShowBackButton(true);
-        }
-        if (currentProductTemplateList.size() < size | !nextPageHasContent) {
-            setShowNextButton(false);
-        } else {
-            setShowNextButton(true);
-        }
-
-        int firstEntry = page * size + 1;
-        int lastEntry = firstEntry + currentProductTemplateList.size();
-
-        log.info("Template Table updated: "
-                + " page " +    page
-                + " size " +    size
-                + " first " +   firstEntry
-                + " last " +    lastEntry
-                + " next " +    showNextButton
-                + " back " +    showBackButton
-        );
+        showBackButton = (page >= 1) ? true : false;
+        showNextButton = currentProductTemplateList.size() == size & nextProductTemplateList.size() > 0;
     }
 
     public void selectTemplate(ProductTemplate template) {

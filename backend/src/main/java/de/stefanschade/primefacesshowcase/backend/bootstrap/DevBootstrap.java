@@ -1,7 +1,7 @@
 package de.stefanschade.primefacesshowcase.backend.bootstrap;
 
-import de.stefanschade.primefacesshowcase.backend.domain.ConfigurableFieldEntity;
-import de.stefanschade.primefacesshowcase.backend.domain.ProductTemplateEntity;
+import de.stefanschade.primefacesshowcase.backend.entities.ConfigurableFieldEntity;
+import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import de.stefanschade.primefacesshowcase.backend.dto.FieldType;
 import de.stefanschade.primefacesshowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.primefacesshowcase.backend.repositories.ProductTemplateRepository;

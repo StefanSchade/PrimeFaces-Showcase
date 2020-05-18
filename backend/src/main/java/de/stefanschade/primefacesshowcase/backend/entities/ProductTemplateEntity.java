@@ -1,4 +1,4 @@
-package de.stefanschade.primefacesshowcase.backend.domain;
+package de.stefanschade.primefacesshowcase.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;

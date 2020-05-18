@@ -1,6 +1,6 @@
 package de.stefanschade.primefacesshowcase.backend.repositories;
 
-import de.stefanschade.primefacesshowcase.backend.domain.ProductTemplateEntity;
+import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;

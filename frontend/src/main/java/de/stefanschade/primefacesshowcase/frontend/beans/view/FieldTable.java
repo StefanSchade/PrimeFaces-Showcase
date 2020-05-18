@@ -32,31 +32,11 @@ public class FieldTable implements Serializable {
 
     public void update() {
         int firstEntry = page * size;
-        int lastEntry = firstEntry + size;
+        int lastEntry = completeFieldList.size() < firstEntry + size ? completeFieldList.size() : firstEntry + size;
+        this.pagedFieldList = completeFieldList.subList(firstEntry, lastEntry);
 
-        if (page == 0) {
-            setShowBackButton(false);
-        } else {
-            setShowBackButton(true);
-        }
-        if (lastEntry < completeFieldList.size()) {
-            setShowNextButton(true);
-        } else {
-            setShowNextButton(false);
-        }
-
-        log.info("Field Table updated: "
-                + " page " + page
-                + " size " + size
-                + " from " + firstEntry
-                + " to " + lastEntry
-                + " showNext " + showNextButton
-                + " showBack " + showBackButton
-                + " nrFields " + completeFieldList.size());
-
-        int from = firstEntry;
-        int to = completeFieldList.size() < lastEntry ? completeFieldList.size() : lastEntry;
-        this.pagedFieldList = completeFieldList.subList(from, to);
+        showBackButton = (page >= 1) ? true : false;
+        showNextButton = lastEntry < completeFieldList.size();
     }
 
     public void selectTemplate(List<ConfigurableField> fields) {

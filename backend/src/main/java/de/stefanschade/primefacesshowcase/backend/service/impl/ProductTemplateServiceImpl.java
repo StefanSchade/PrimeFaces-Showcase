@@ -1,6 +1,6 @@
 package de.stefanschade.primefacesshowcase.backend.service.impl;
 
-import de.stefanschade.primefacesshowcase.backend.domain.ProductTemplateEntity;
+import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import de.stefanschade.primefacesshowcase.backend.dto.ProductTemplateDto;
 import de.stefanschade.primefacesshowcase.backend.mapper.ProductTemplateMapper;
 import de.stefanschade.primefacesshowcase.backend.repositories.ConfigurableFieldRepository;
