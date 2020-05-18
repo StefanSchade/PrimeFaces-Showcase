@@ -80,24 +80,15 @@ public class TemplateTable implements Serializable {
 
     public String rowClasses() {
         if (!this.templateIsSelected) return "odd, even";
-
         StringBuilder returnValue = new StringBuilder();
         Iterator<ProductTemplate> iterator = this.currentProductTemplateList.iterator();
         boolean oddEvenFlip = false;
-
         while (iterator.hasNext()) {
-            if (iterator.next().equals(this.templateSelected)) {
-                returnValue.append("highlight");
-            } else {
-                returnValue.append(oddEvenFlip ? "even" : "odd");
-            }
+            if (iterator.next().equals(this.templateSelected)) returnValue.append("highlight");
+            else returnValue.append(oddEvenFlip ? "even" : "odd");
+            if (iterator.hasNext()) returnValue.append(", ");
             oddEvenFlip = !oddEvenFlip;
-            if (iterator.hasNext()) {
-                returnValue.append(", ");
-            }
         }
-
-        log.info("template rowClasses " + returnValue.toString());
         return returnValue.toString();
     }
 }

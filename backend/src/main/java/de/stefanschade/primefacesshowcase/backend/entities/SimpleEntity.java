@@ -12,5 +12,4 @@ public class SimpleEntity {
     private String name;
     private int integerValue;
 
-
 }

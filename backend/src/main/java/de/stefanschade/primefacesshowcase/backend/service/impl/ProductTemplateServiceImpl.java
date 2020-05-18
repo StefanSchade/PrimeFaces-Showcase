@@ -72,4 +72,3 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
         return mapProductTemplateEntityIterableToDtoList(productTemplateEntityList);
     }
 }
-

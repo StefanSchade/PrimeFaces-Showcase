@@ -13,10 +13,8 @@ public class ProductConfigView implements Serializable {
 
     private String visibleFields;
     private String editableFields;
-
     private String visibleFieldsDefaultValues;
     private String editableFieldsDefaultValues;
-
     private String editableFieldsScopes;
 
     public String finish() {
