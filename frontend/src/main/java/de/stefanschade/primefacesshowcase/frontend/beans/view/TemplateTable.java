@@ -18,7 +18,7 @@ import java.util.List;
 @ViewScoped
 public class TemplateTable implements Serializable {
 
-    private final int PAGESIZE = 20;
+    private static final int PAGESIZE = 20;
 
     @Getter private int currentPage;
     @Getter private List<ProductTemplate> productTemplateListCurrentPage;
@@ -33,26 +33,26 @@ public class TemplateTable implements Serializable {
     @PostConstruct
     public void init() {
         this.currentPage = 0;
-        this.productTemplateListCurrentPage = productTemplateService.retrieveTemplates(PAGESIZE, 0);
-        this.productTemplateListNextPage = productTemplateService.retrieveTemplates(PAGESIZE, 1);
+        this.productTemplateListCurrentPage = this.productTemplateService.retrieveTemplates(PAGESIZE, 0);
+        this.productTemplateListNextPage = this.productTemplateService.retrieveTemplates(PAGESIZE, 1);
         this.updateVisibilityOfPaginationButtons();
     }
 
     protected void retrieveNext() {
-        this.productTemplateListCurrentPage = productTemplateListNextPage;
-        this.productTemplateListNextPage = productTemplateService.retrieveTemplates(PAGESIZE, ++currentPage + 1);
+        this.productTemplateListCurrentPage = this.productTemplateListNextPage;
+        this.productTemplateListNextPage = this.productTemplateService.retrieveTemplates(PAGESIZE, ++this.currentPage + 1);
         this.updateVisibilityOfPaginationButtons();
     }
 
     protected void retrievePrevious() {
-        this.productTemplateListNextPage = productTemplateListCurrentPage;
-        this.productTemplateListCurrentPage = productTemplateService.retrieveTemplates(PAGESIZE, --currentPage);
+        this.productTemplateListNextPage = this.productTemplateListCurrentPage;
+        this.productTemplateListCurrentPage = this.productTemplateService.retrieveTemplates(PAGESIZE, --this.currentPage);
         this.updateVisibilityOfPaginationButtons();
     }
 
     private void updateVisibilityOfPaginationButtons() {
-        this.backButtonVisible = currentPage >= 1;
-        this.nextButtonVisible = productTemplateListCurrentPage.size() == PAGESIZE & productTemplateListNextPage.size() > 0;
+        this.backButtonVisible = this.currentPage >= 1;
+        this.nextButtonVisible = productTemplateListCurrentPage.size() == PAGESIZE & this.productTemplateListNextPage.size() > 0;
     }
 
     protected void selectTemplate(ProductTemplate productTemplate) {

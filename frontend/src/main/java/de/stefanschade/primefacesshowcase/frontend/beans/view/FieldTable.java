@@ -15,7 +15,7 @@ import java.util.List;
 @ViewScoped
 public class FieldTable implements Serializable {
 
-    private final int PAGESIZE = 20;
+    private static final int PAGESIZE = 20;
 
     @Getter private int currentPage = 0;
     @Getter private List<ConfigurableField> fieldListCurrentPage;
@@ -46,15 +46,16 @@ public class FieldTable implements Serializable {
     }
 
     private void updatePaginatedFieldList() {
-        this.firstEntryOnCurrentPage = currentPage * PAGESIZE;
-        this.lastEntryOnCurrentPage = fieldListComplete.size() < firstEntryOnCurrentPage + PAGESIZE ? fieldListComplete.size() : firstEntryOnCurrentPage + PAGESIZE;
-        this.fieldListCurrentPage = fieldListComplete.subList(firstEntryOnCurrentPage, lastEntryOnCurrentPage);
+        this.firstEntryOnCurrentPage = this.currentPage * PAGESIZE;
+        this.lastEntryOnCurrentPage = this.fieldListComplete.size() < this.firstEntryOnCurrentPage + PAGESIZE
+                ? this.fieldListComplete.size() : this.firstEntryOnCurrentPage + PAGESIZE;
+        this.fieldListCurrentPage = fieldListComplete.subList(this.firstEntryOnCurrentPage, this.lastEntryOnCurrentPage);
         this.updateVisibilityOfPaginationButtons();
     }
 
     public void updateVisibilityOfPaginationButtons() {
-        this.backButtonVisibility = currentPage >= 1;
-        this.nextButtonVisibility = lastEntryOnCurrentPage < fieldListComplete.size();
+        this.backButtonVisibility = this.currentPage >= 1;
+        this.nextButtonVisibility = this.lastEntryOnCurrentPage < fieldListComplete.size();
     }
 
     public void selectFieldDetails(ConfigurableField configurableField) {
