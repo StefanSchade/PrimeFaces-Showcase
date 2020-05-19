@@ -9,6 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Getter
@@ -24,7 +25,11 @@ public class ProductTemplateService {
     }
 
     public List<ProductTemplate> retrieveTemplates(int size, int page) {
-        log.info("retrieve page " + page);
-        return backendRestClient.productTemplates(size,page);
+        return backendRestClient.productTemplates(size, page)
+                .stream()
+                .map(template -> template.deriveFieldsNotReceivedFromBackend())
+                .collect(Collectors.toList());
     }
+
+
 }

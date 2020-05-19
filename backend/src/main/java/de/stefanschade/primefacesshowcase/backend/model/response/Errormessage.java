@@ -14,5 +14,5 @@ public enum Errormessage {
     COULD_NOT_DELETE_RECORD("Could not delete record"),
     EMAIL_ADDRESS_NOT_VERIFIED("Email address not verified");
 
-    private String errorMessage;
+    private final String errorMessage;
 }

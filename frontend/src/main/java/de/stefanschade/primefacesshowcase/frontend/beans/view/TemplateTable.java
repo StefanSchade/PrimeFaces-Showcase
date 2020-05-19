@@ -38,16 +38,25 @@ public class TemplateTable implements Serializable {
 
     @PostConstruct
     public void init() {
-        currentProductTemplateList = service.retrieveTemplates(size, 0);
-        nextProductTemplateList = service.retrieveTemplates(size, 1);
-        update();
+        this.currentProductTemplateList = service.retrieveTemplates(size, 0);
+        this.nextProductTemplateList = service.retrieveTemplates(size, 1);
+        this.updateVisibilityOfPaginationButtons();
     }
 
-    private void update() {
-        for (ProductTemplate template : currentProductTemplateList)
-            template.setFieldCount(template.getFields().size());
+    public void retrieveNext() {
+        this.currentProductTemplateList = nextProductTemplateList;
+        this.nextProductTemplateList = service.retrieveTemplates(size, ++page + 1);
+        this.updateVisibilityOfPaginationButtons();
+    }
 
-        showBackButton = (page >= 1) ? true : false;
+    public void retrieveLast() {
+        this.nextProductTemplateList = currentProductTemplateList;
+        this.currentProductTemplateList = service.retrieveTemplates(size, --page);
+        this.updateVisibilityOfPaginationButtons();
+    }
+    
+    private void updateVisibilityOfPaginationButtons(){
+        showBackButton = page >= 1;
         showNextButton = currentProductTemplateList.size() == size & nextProductTemplateList.size() > 0;
     }
 
@@ -61,18 +70,6 @@ public class TemplateTable implements Serializable {
         this.templateSelected = null;
     }
 
-    public void retrieveNext() {
-        this.currentProductTemplateList = nextProductTemplateList;
-        this.nextProductTemplateList = service.retrieveTemplates(size, ++page + 1);
-        update();
-    }
-
-    public void retrieveLast() {
-        this.nextProductTemplateList = currentProductTemplateList;
-        this.currentProductTemplateList = service.retrieveTemplates(size, --page);
-        update();
-    }
-
     public boolean checkTemplateForSelection(ProductTemplate template) {
         if (!this.templateIsSelected) return false;
         return template.equals(this.templateSelected);
@@ -82,10 +79,10 @@ public class TemplateTable implements Serializable {
         if (!this.templateIsSelected) return "odd, even";
         StringBuilder returnValue = new StringBuilder();
         Iterator<ProductTemplate> iterator = this.currentProductTemplateList.iterator();
-        boolean oddEvenFlip = false;
+        boolean oddEvenFlip = true;
         while (iterator.hasNext()) {
             if (iterator.next().equals(this.templateSelected)) returnValue.append("highlight");
-            else returnValue.append(oddEvenFlip ? "even" : "odd");
+            else returnValue.append(oddEvenFlip ? "odd" : "even");
             if (iterator.hasNext()) returnValue.append(", ");
             oddEvenFlip = !oddEvenFlip;
         }

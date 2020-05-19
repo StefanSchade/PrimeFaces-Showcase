@@ -23,6 +23,8 @@ public class FieldTable implements Serializable {
 
     private List<ConfigurableField> completeFieldList;
     private List<ConfigurableField> pagedFieldList;
+    int firstEntry;
+    int lastEntry;
 
     boolean showBackButton = true;
     boolean showNextButton = true;
@@ -30,20 +32,33 @@ public class FieldTable implements Serializable {
     int size = 20;
     int page = 0;
 
-    public void update() {
-        int firstEntry = page * size;
-        int lastEntry = completeFieldList.size() < firstEntry + size ? completeFieldList.size() : firstEntry + size;
-        this.pagedFieldList = completeFieldList.subList(firstEntry, lastEntry);
-
-        showBackButton = (page >= 1) ? true : false;
-        showNextButton = lastEntry < completeFieldList.size();
+    public void selectTemplate(List<ConfigurableField> fields) {
+        unSelectFieldDetails();
+        completeFieldList = fields;
+        page = 0;
+        updatePagedFieldList();
     }
 
-    public void selectTemplate(List<ConfigurableField> fields) {
-        completeFieldList = fields;
-        page=0;
-        update();
-        unSelectFieldDetails();
+    public void retrieveNext() {
+        page++;
+        updatePagedFieldList();
+    }
+
+    public void retrieveLast() {
+        page--;
+        updatePagedFieldList();
+    }
+
+    private void updatePagedFieldList() {
+        this.firstEntry = page * size;
+        this.lastEntry = completeFieldList.size() < firstEntry + size ? completeFieldList.size() : firstEntry + size;
+        this.pagedFieldList = completeFieldList.subList(firstEntry, lastEntry);
+        this.updateVisibilityOfPaginationButtons();
+    }
+
+    public void updateVisibilityOfPaginationButtons() {
+        showBackButton = page >= 1;
+        showNextButton = lastEntry < completeFieldList.size();
     }
 
     public void selectFieldDetails(ConfigurableField field) {
@@ -56,36 +71,17 @@ public class FieldTable implements Serializable {
         fieldIsSelected = false;
     }
 
-    public void retrieveNext() {
-        page++;
-        update();
-    }
-
-    public void retrieveLast() {
-        page--;
-        update();
-    }
-
     public String rowClasses() {
         if (!fieldIsSelected) return "odd, even";
-
         StringBuilder returnValue = new StringBuilder();
         Iterator<ConfigurableField> iterator = this.pagedFieldList.iterator();
         boolean oddEvenFlip = false;
-
         while (iterator.hasNext()) {
-            if (iterator.next().equals(this.fieldSelected)) {
-                returnValue.append("highlight");
-            } else {
-                returnValue.append(oddEvenFlip ? "even" : "odd");
-            }
+            if (iterator.next().equals(this.fieldSelected)) returnValue.append("highlight");
+            else returnValue.append(oddEvenFlip ? "even" : "odd");
             oddEvenFlip = !oddEvenFlip;
-            if (iterator.hasNext()) {
-                returnValue.append(", ");
-            }
+            if (iterator.hasNext()) returnValue.append(", ");
         }
-
-        log.info("field rowClasses " + returnValue.toString());
         return returnValue.toString();
     }
 }
