@@ -44,20 +44,20 @@ public class TemplateTable implements Serializable {
         this.updateVisibilityOfPaginationButtons();
     }
 
-    protected void retrieveLast() {
+    protected void retrievePrevious() {
         this.productTemplateListNextPage = productTemplateListCurrentPage;
         this.productTemplateListCurrentPage = productTemplateService.retrieveTemplates(PAGESIZE, --currentPage);
         this.updateVisibilityOfPaginationButtons();
     }
 
     private void updateVisibilityOfPaginationButtons() {
-        backButtonVisible = currentPage >= 1;
-        nextButtonVisible = productTemplateListCurrentPage.size() == PAGESIZE & productTemplateListNextPage.size() > 0;
+        this.backButtonVisible = currentPage >= 1;
+        this.nextButtonVisible = productTemplateListCurrentPage.size() == PAGESIZE & productTemplateListNextPage.size() > 0;
     }
 
-    protected void selectTemplate(ProductTemplate template) {
+    protected void selectTemplate(ProductTemplate productTemplate) {
         this.templateIsSelected = true;
-        this.templateSelected = template;
+        this.templateSelected = productTemplate;
     }
 
     protected void unSelectTemplate() {
@@ -65,9 +65,9 @@ public class TemplateTable implements Serializable {
         this.templateSelected = null;
     }
 
-    public boolean checkTemplateForSelection(ProductTemplate template) {
+    public boolean checkTemplateForSelection(ProductTemplate productTemplate) {
         if (!this.templateIsSelected) return false;
-        return template.equals(this.templateSelected);
+        return productTemplate.equals(this.templateSelected);
     }
 
     public String rowClasses() {

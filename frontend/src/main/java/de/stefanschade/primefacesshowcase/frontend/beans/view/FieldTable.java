@@ -28,24 +28,24 @@ public class FieldTable implements Serializable {
     private int firstEntryOnCurrentPage;
     private int lastEntryOnCurrentPage;
 
-    public void selectTemplate(List<ConfigurableField> fields) {
-        unSelectFieldDetails();
-        fieldListComplete = fields;
-        currentPage = 0;
-        updatePagedFieldList();
+    public void selectTemplate(List<ConfigurableField> configurableFieldList) {
+        this.fieldListComplete = configurableFieldList;
+        this.currentPage = 0;
+        this.unSelectFieldDetails();
+        this.updatePaginatedFieldList();
     }
 
     public void retrieveNext() {
-        currentPage++;
-        updatePagedFieldList();
+        this.currentPage++;
+        this.updatePaginatedFieldList();
     }
 
-    public void retrieveLast() {
-        currentPage--;
-        updatePagedFieldList();
+    public void retrievePrevious() {
+        this.currentPage--;
+        this.updatePaginatedFieldList();
     }
 
-    private void updatePagedFieldList() {
+    private void updatePaginatedFieldList() {
         this.firstEntryOnCurrentPage = currentPage * PAGESIZE;
         this.lastEntryOnCurrentPage = fieldListComplete.size() < firstEntryOnCurrentPage + PAGESIZE ? fieldListComplete.size() : firstEntryOnCurrentPage + PAGESIZE;
         this.fieldListCurrentPage = fieldListComplete.subList(firstEntryOnCurrentPage, lastEntryOnCurrentPage);
@@ -53,18 +53,18 @@ public class FieldTable implements Serializable {
     }
 
     public void updateVisibilityOfPaginationButtons() {
-        backButtonVisibility = currentPage >= 1;
-        nextButtonVisibility = lastEntryOnCurrentPage < fieldListComplete.size();
+        this.backButtonVisibility = currentPage >= 1;
+        this.nextButtonVisibility = lastEntryOnCurrentPage < fieldListComplete.size();
     }
 
-    public void selectFieldDetails(ConfigurableField field) {
-        fieldSelected = field;
-        fieldIsSelected = true;
+    public void selectFieldDetails(ConfigurableField configurableField) {
+        this.fieldSelected = configurableField;
+        this.fieldIsSelected = true;
     }
 
     public void unSelectFieldDetails() {
-        fieldSelected = null;
-        fieldIsSelected = false;
+        this.fieldSelected = null;
+        this.fieldIsSelected = false;
     }
 
     public String rowClasses() {

@@ -49,7 +49,7 @@ public class ProductTemplateView implements Serializable {
 
     public void templateBackButtonClick() {
         templateTable.unSelectTemplate();
-        templateTable.retrieveLast();
+        templateTable.retrievePrevious();
         fieldTable.unSelectFieldDetails();
     }
 
@@ -59,7 +59,7 @@ public class ProductTemplateView implements Serializable {
     }
 
     public void fieldsBackButtonClick() {
-        fieldTable.retrieveLast();
+        fieldTable.retrievePrevious();
         fieldTable.unSelectFieldDetails();
     }
 
