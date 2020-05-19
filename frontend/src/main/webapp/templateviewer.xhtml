@@ -12,8 +12,8 @@
     </ui:define>
     <ui:define name="content">
         <f:view>
-            <h:panelGrid columns="2" styleClass="pagelayout">
-                <h:panelGrid columns="2" styleClass="pagelayout">
+            <div class="Container">
+                <div class="col-md-4">
                     <h:panelGroup id="templatetable">
                         <h:dataTable value="#{templateTable.productTemplateListCurrentPage}"
                                      var="template"
@@ -38,6 +38,21 @@
                             </h:column>
                         </h:dataTable>
                     </h:panelGroup>
+                    <h:panelGrid id="templatebuttons" columns="3">
+                        <h:form>
+                            <h:commandButton value="back" rendered="#{templateTable.backButtonVisible}">
+                                <f:ajax listener="#{productTemplateView.templateBackButtonClick()}"
+                                        render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
+                            </h:commandButton>
+                            <h:commandButton value="next" rendered="#{templateTable.nextButtonVisible}">
+                                <f:ajax listener="#{productTemplateView.templateNextButtonClick()}"
+                                        render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
+                            </h:commandButton>
+                        </h:form>
+                        <h:outputText value="page #{templateTable.currentPage+1}"/>
+                    </h:panelGrid>
+                </div>
+                <div class="col-md-4">
                     <h:panelGroup id="fieldtable">
                         <h:outputText value=" Select a product template"
                                       rendered="#{!templateTable.templateIsSelected}"/>
@@ -64,21 +79,7 @@
                             </h:column>
                         </h:dataTable>
                     </h:panelGroup>
-                    <h:panelGrid id="templatebuttons" columns="3">
-                        <h:form>
-                            <h:commandButton value="back" rendered="#{templateTable.backButtonVisible}">
-                                <f:ajax listener="#{productTemplateView.templateBackButtonClick()}"
-                                        render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
-                            </h:commandButton>
-                            <h:commandButton value="next" rendered="#{templateTable.nextButtonVisible}">
-                                <f:ajax listener="#{productTemplateView.templateNextButtonClick()}"
-                                        render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
-                            </h:commandButton>
-                        </h:form>
-                        <h:outputText value="page #{templateTable.currentPage+1}"/>
-                    </h:panelGrid>
                     <h:panelGroup id="fieldbuttons">
-
                         <h:panelGrid rendered="#{templateTable.templateIsSelected}"
                                      columns="3">
                             <h:form>
@@ -96,22 +97,23 @@
                             <h:outputText value="page #{fieldTable.currentPage+1}"/>
                         </h:panelGrid>
                     </h:panelGroup>
-                </h:panelGrid>
-                <h:panelGroup id="fielddetails">
-                    <h:panelGrid columns="2" rendered="#{fieldTable.fieldIsSelected}">
-                        <h:outputText value="Attribute 1"/>
-                        <h:outputText
-                                value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>
-                        <h:outputText value="Attribute 2"/>
-                        <h:outputText
-                                value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>
-                        <h:outputText value="Attribute 3"/>
-                        <h:outputText
-                                value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>
-                    </h:panelGrid>
-                </h:panelGroup>
-            </h:panelGrid>
-
+                </div>
+                <div class="col-md-4">
+                    <h:panelGroup id="fielddetails">
+                        <h:panelGrid columns="2" rendered="#{fieldTable.fieldIsSelected}">
+                            <h:outputText value="Attribute 1"/>
+                            <h:outputText
+                                    value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>
+                            <h:outputText value="Attribute 2"/>
+                            <h:outputText
+                                    value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>
+                            <h:outputText value="Attribute 3"/>
+                            <h:outputText
+                                    value="This could display further information on #{fieldTable.fieldSelected.fieldname}"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </div>
+            </div>
             <h1><b>In flow ?
                 #{null != facesContext.application.flowHandler.currentFlow}
             </b></h1><br/><br/>

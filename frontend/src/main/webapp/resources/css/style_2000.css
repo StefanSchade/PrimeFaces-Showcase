@@ -13,6 +13,15 @@
 	font-weight: bold;
 }
 
+table.primary tr td input {
+	width: 200px;
+}
+
+
+table.secondary tr td input {
+	width: 200px;
+}
+
 td {
 	vertical-align: top;
 }
