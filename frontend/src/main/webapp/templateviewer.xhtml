@@ -15,7 +15,7 @@
             <h:panelGrid columns="2" styleClass="pagelayout">
                 <h:panelGrid columns="2" styleClass="pagelayout">
                     <h:panelGroup id="templatetable">
-                        <h:dataTable value="#{templateTable.currentProductTemplateList}"
+                        <h:dataTable value="#{templateTable.productTemplateListCurrentPage}"
                                      var="template"
                                      styleClass="primary"
                                      cellspacing="0"
@@ -44,7 +44,7 @@
                     <h:panelGroup id="fieldtable">
                         <h:outputText value=" Select a product template"
                                       rendered="#{!templateTable.templateIsSelected}"/>
-                        <h:dataTable value="#{fieldTable.pagedFieldList}"
+                        <h:dataTable value="#{fieldTable.fieldListCurrentPage}"
                                      var="field"
                                      styleClass="secondary"
                                      cellspacing="0"
@@ -72,16 +72,16 @@
                     </h:panelGroup>
                     <h:panelGrid id="templatebuttons" columns="3">
                         <h:form>
-                            <h:commandButton value="back" rendered="#{templateTable.showBackButton}">
+                            <h:commandButton value="back" rendered="#{templateTable.backButtonVisible}">
                                 <f:ajax listener="#{productTemplateView.templateBackButtonClick()}"
                                         render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
                             </h:commandButton>
-                            <h:commandButton value="next" rendered="#{templateTable.showNextButton}">
+                            <h:commandButton value="next" rendered="#{templateTable.nextButtonVisible}">
                                 <f:ajax listener="#{productTemplateView.templateNextButtonClick()}"
                                         render="templatetable templatebuttons fieldbuttons fieldtable fielddetails"/>
                             </h:commandButton>
                         </h:form>
-                        <h:outputText value="page #{templateTable.page+1}"/>
+                        <h:outputText value="page #{templateTable.currentPage+1}"/>
                     </h:panelGrid>
                     <h:panelGroup id="fieldbuttons">
 
@@ -89,17 +89,17 @@
                                      columns="3">
                             <h:form>
                                 <h:commandButton value="back"
-                                                 rendered="#{fieldTable.showBackButton}">
+                                                 rendered="#{fieldTable.backButtonVisibility}">
                                     <f:ajax listener="#{productTemplateView.fieldsBackButtonClick()}"
                                             render="fieldtable fieldbuttons fielddetails"/>
                                 </h:commandButton>
                                 <h:commandButton value="next"
-                                                 rendered="#{fieldTable.showNextButton}">
+                                                 rendered="#{fieldTable.nextButtonVisibility}">
                                     <f:ajax listener="#{productTemplateView.fieldsNextButtonClick()}"
                                             render="fieldtable fieldbuttons fielddetails"/>
                                 </h:commandButton>
                             </h:form>
-                            <h:outputText value="page #{fieldTable.page+1}"/>
+                            <h:outputText value="page #{fieldTable.currentPage+1}"/>
                         </h:panelGrid>
                     </h:panelGroup>
                 </h:panelGrid>

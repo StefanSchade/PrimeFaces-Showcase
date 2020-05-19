@@ -2,7 +2,6 @@ package de.stefanschade.primefacesshowcase.frontend.beans.view;
 
 import de.stefanschade.primefacesshowcase.frontend.beans.entities.ConfigurableField;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.faces.view.ViewScoped;
@@ -13,52 +12,49 @@ import java.util.List;
 
 @Slf4j
 @Named
-@Getter
-@Setter
 @ViewScoped
 public class FieldTable implements Serializable {
 
-    private ConfigurableField fieldSelected = null;
-    private boolean fieldIsSelected = false;
+    private final int PAGESIZE = 20;
 
-    private List<ConfigurableField> completeFieldList;
-    private List<ConfigurableField> pagedFieldList;
-    int firstEntry;
-    int lastEntry;
+    @Getter private int currentPage = 0;
+    @Getter private List<ConfigurableField> fieldListCurrentPage;
+    @Getter private boolean backButtonVisibility = true;
+    @Getter private boolean nextButtonVisibility = true;
+    @Getter private ConfigurableField fieldSelected = null;
+    @Getter private boolean fieldIsSelected = false;
 
-    boolean showBackButton = true;
-    boolean showNextButton = true;
-
-    int size = 20;
-    int page = 0;
+    private List<ConfigurableField> fieldListComplete;
+    private int firstEntryOnCurrentPage;
+    private int lastEntryOnCurrentPage;
 
     public void selectTemplate(List<ConfigurableField> fields) {
         unSelectFieldDetails();
-        completeFieldList = fields;
-        page = 0;
+        fieldListComplete = fields;
+        currentPage = 0;
         updatePagedFieldList();
     }
 
     public void retrieveNext() {
-        page++;
+        currentPage++;
         updatePagedFieldList();
     }
 
     public void retrieveLast() {
-        page--;
+        currentPage--;
         updatePagedFieldList();
     }
 
     private void updatePagedFieldList() {
-        this.firstEntry = page * size;
-        this.lastEntry = completeFieldList.size() < firstEntry + size ? completeFieldList.size() : firstEntry + size;
-        this.pagedFieldList = completeFieldList.subList(firstEntry, lastEntry);
+        this.firstEntryOnCurrentPage = currentPage * PAGESIZE;
+        this.lastEntryOnCurrentPage = fieldListComplete.size() < firstEntryOnCurrentPage + PAGESIZE ? fieldListComplete.size() : firstEntryOnCurrentPage + PAGESIZE;
+        this.fieldListCurrentPage = fieldListComplete.subList(firstEntryOnCurrentPage, lastEntryOnCurrentPage);
         this.updateVisibilityOfPaginationButtons();
     }
 
     public void updateVisibilityOfPaginationButtons() {
-        showBackButton = page >= 1;
-        showNextButton = lastEntry < completeFieldList.size();
+        backButtonVisibility = currentPage >= 1;
+        nextButtonVisibility = lastEntryOnCurrentPage < fieldListComplete.size();
     }
 
     public void selectFieldDetails(ConfigurableField field) {
@@ -74,7 +70,7 @@ public class FieldTable implements Serializable {
     public String rowClasses() {
         if (!fieldIsSelected) return "odd, even";
         StringBuilder returnValue = new StringBuilder();
-        Iterator<ConfigurableField> iterator = this.pagedFieldList.iterator();
+        Iterator<ConfigurableField> iterator = this.fieldListCurrentPage.iterator();
         boolean oddEvenFlip = false;
         while (iterator.hasNext()) {
             if (iterator.next().equals(this.fieldSelected)) returnValue.append("highlight");

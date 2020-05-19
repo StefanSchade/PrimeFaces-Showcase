@@ -22,5 +22,4 @@ public class ProductTemplate {
         this.setFieldCount(this.getFields().size());
         return this;
     }
-
 }

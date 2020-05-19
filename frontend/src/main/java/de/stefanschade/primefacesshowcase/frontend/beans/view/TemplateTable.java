@@ -3,7 +3,6 @@ package de.stefanschade.primefacesshowcase.frontend.beans.view;
 import de.stefanschade.primefacesshowcase.frontend.beans.entities.ProductTemplate;
 import de.stefanschade.primefacesshowcase.frontend.service.ProductTemplateService;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
@@ -16,56 +15,52 @@ import java.util.List;
 
 @Slf4j
 @Named
-@Getter
-@Setter
 @ViewScoped
 public class TemplateTable implements Serializable {
 
-    @Inject
-    private ProductTemplateService service;
+    private final int PAGESIZE = 20;
 
-    private ProductTemplate templateSelected = null;
-    private boolean templateIsSelected = false;
+    @Getter private int currentPage;
+    @Getter private List<ProductTemplate> productTemplateListCurrentPage;
+    @Getter private boolean backButtonVisible = true;
+    @Getter private boolean nextButtonVisible = true;
+    @Getter private ProductTemplate templateSelected = null;
+    @Getter private boolean templateIsSelected = false;
 
-    private List<ProductTemplate> currentProductTemplateList;
-    private List<ProductTemplate> nextProductTemplateList;
-
-    int size = 20;
-    int page = 0;
-
-    boolean showBackButton = true;
-    boolean showNextButton = true;
+    @Inject private ProductTemplateService productTemplateService;
+    private List<ProductTemplate> productTemplateListNextPage;
 
     @PostConstruct
     public void init() {
-        this.currentProductTemplateList = service.retrieveTemplates(size, 0);
-        this.nextProductTemplateList = service.retrieveTemplates(size, 1);
+        this.currentPage = 0;
+        this.productTemplateListCurrentPage = productTemplateService.retrieveTemplates(PAGESIZE, 0);
+        this.productTemplateListNextPage = productTemplateService.retrieveTemplates(PAGESIZE, 1);
         this.updateVisibilityOfPaginationButtons();
     }
 
-    public void retrieveNext() {
-        this.currentProductTemplateList = nextProductTemplateList;
-        this.nextProductTemplateList = service.retrieveTemplates(size, ++page + 1);
+    protected void retrieveNext() {
+        this.productTemplateListCurrentPage = productTemplateListNextPage;
+        this.productTemplateListNextPage = productTemplateService.retrieveTemplates(PAGESIZE, ++currentPage + 1);
         this.updateVisibilityOfPaginationButtons();
     }
 
-    public void retrieveLast() {
-        this.nextProductTemplateList = currentProductTemplateList;
-        this.currentProductTemplateList = service.retrieveTemplates(size, --page);
+    protected void retrieveLast() {
+        this.productTemplateListNextPage = productTemplateListCurrentPage;
+        this.productTemplateListCurrentPage = productTemplateService.retrieveTemplates(PAGESIZE, --currentPage);
         this.updateVisibilityOfPaginationButtons();
     }
-    
-    private void updateVisibilityOfPaginationButtons(){
-        showBackButton = page >= 1;
-        showNextButton = currentProductTemplateList.size() == size & nextProductTemplateList.size() > 0;
+
+    private void updateVisibilityOfPaginationButtons() {
+        backButtonVisible = currentPage >= 1;
+        nextButtonVisible = productTemplateListCurrentPage.size() == PAGESIZE & productTemplateListNextPage.size() > 0;
     }
 
-    public void selectTemplate(ProductTemplate template) {
+    protected void selectTemplate(ProductTemplate template) {
         this.templateIsSelected = true;
         this.templateSelected = template;
     }
 
-    public void unSelectTemplate() {
+    protected void unSelectTemplate() {
         this.templateIsSelected = false;
         this.templateSelected = null;
     }
@@ -78,7 +73,7 @@ public class TemplateTable implements Serializable {
     public String rowClasses() {
         if (!this.templateIsSelected) return "odd, even";
         StringBuilder returnValue = new StringBuilder();
-        Iterator<ProductTemplate> iterator = this.currentProductTemplateList.iterator();
+        Iterator<ProductTemplate> iterator = this.productTemplateListCurrentPage.iterator();
         boolean oddEvenFlip = true;
         while (iterator.hasNext()) {
             if (iterator.next().equals(this.templateSelected)) returnValue.append("highlight");
