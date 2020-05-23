@@ -11,15 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Getter
-@Setter
 public class ProductTemplate {
     private int fieldCount;
     private String templatename;
     private List<ConfigurableField> fields;
-
-    public ProductTemplate deriveFieldsNotReceivedFromBackend() {
-        this.setFieldCount(this.getFields().size());
-        return this;
-    }
 }

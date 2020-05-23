@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConfigurableField {
-
     private String fieldname;
     private FieldType fieldType;
 }

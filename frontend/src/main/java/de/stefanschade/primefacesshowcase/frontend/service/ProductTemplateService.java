@@ -27,9 +27,13 @@ public class ProductTemplateService {
     public List<ProductTemplate> retrieveTemplates(int size, int page) {
         return backendRestClient.productTemplates(size, page)
                 .stream()
-                .map(template -> template.deriveFieldsNotReceivedFromBackend())
+                .map(ProductTemplateService::deriveFieldsNotReceivedFromBackend)
                 .collect(Collectors.toList());
     }
 
+    public static ProductTemplate deriveFieldsNotReceivedFromBackend(ProductTemplate template) {
+        template.setFieldCount(template.getFields().size());
+        return template;
+    }
 
 }

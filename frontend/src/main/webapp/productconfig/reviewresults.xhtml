@@ -13,14 +13,14 @@
     </b></h1><br/><br/>
 
     <h1> Selected: </h1>
-    <h:outputText value="Visible Fields: #{productConfigView.visibleFields}"/><br/><br/>
-    <h:outputText value="Visible Fields Default Values: #{productConfigView.visibleFieldsDefaultValues}"/><br/><br/>
-    <h:outputText value="Editable Fields #{productConfigView.editableFields}"/><br/><br/>
-    <h:outputText value="Editable Fields Scopes #{productConfigView.editableFieldsScopes}"/><br/><br/>
-    <h:outputText value="Editable Fields Default Values: #{productConfigView.editableFieldsScopes}"/><br/><br/>
+    <h:outputText value="Visible Fields: #{productDefinitonFlow.visibleFields}"/><br/><br/>
+    <h:outputText value="Visible Fields Default Values: #{productDefinitonFlow.visibleFieldsDefaultValues}"/><br/><br/>
+    <h:outputText value="Editable Fields #{productDefinitonFlow.editableFields}"/><br/><br/>
+    <h:outputText value="Editable Fields Scopes #{productDefinitonFlow.editableFieldsScopes}"/><br/><br/>
+    <h:outputText value="Editable Fields Default Values: #{productDefinitonFlow.editableFieldsScopes}"/><br/><br/>
     <h:form>
         <h:commandButton value="Change" action="fieldselection"/>
-        <h:commandButton value="Close" action="#{productConfigView.finish()}"/>
+        <h:commandButton value="Close" action="#{productDefinitonFlow.finish()}"/>
     </h:form>
 </h:body>
 </html>

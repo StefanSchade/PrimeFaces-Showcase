@@ -1,4 +1,4 @@
-package de.stefanschade.primefacesshowcase.frontend.beans.view;
+package de.stefanschade.primefacesshowcase.frontend.beans.view.productdefinition;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @Named
 @FlowScoped("productconfig")
-public class ProductConfigView implements Serializable {
+public class ProductDefinitonFlow implements Serializable {
 
     private String visibleFields;
     private String editableFields;

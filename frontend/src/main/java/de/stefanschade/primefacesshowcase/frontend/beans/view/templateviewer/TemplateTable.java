@@ -1,4 +1,4 @@
-package de.stefanschade.primefacesshowcase.frontend.beans.view;
+package de.stefanschade.primefacesshowcase.frontend.beans.view.templateviewer;
 
 import de.stefanschade.primefacesshowcase.frontend.beans.entities.ProductTemplate;
 import de.stefanschade.primefacesshowcase.frontend.service.ProductTemplateService;
@@ -20,7 +20,7 @@ public class TemplateTable implements Serializable {
 
     private static final int PAGESIZE = 20;
 
-    @Getter private int currentPage;
+    @Getter private int currentPage = 0;
     @Getter private List<ProductTemplate> productTemplateListCurrentPage;
     @Getter private boolean backButtonVisible = true;
     @Getter private boolean nextButtonVisible = true;
@@ -32,11 +32,10 @@ public class TemplateTable implements Serializable {
 
     @PostConstruct
     public void init() {
-        this.currentPage = 0;
-        this.productTemplateListCurrentPage = this.productTemplateService.retrieveTemplates(PAGESIZE, 0);
-        this.productTemplateListNextPage = this.productTemplateService.retrieveTemplates(PAGESIZE, 1);
+        this.productTemplateListCurrentPage = this.productTemplateService.retrieveTemplates(PAGESIZE, currentPage);
+        this.productTemplateListNextPage = this.productTemplateService.retrieveTemplates(PAGESIZE, currentPage + 1);
         this.updateVisibilityOfPaginationButtons();
-    }
+}
 
     protected void retrieveNext() {
         this.productTemplateListCurrentPage = this.productTemplateListNextPage;
@@ -51,8 +50,8 @@ public class TemplateTable implements Serializable {
     }
 
     private void updateVisibilityOfPaginationButtons() {
-        this.backButtonVisible = this.currentPage >= 1;
-        this.nextButtonVisible = productTemplateListCurrentPage.size() == PAGESIZE & this.productTemplateListNextPage.size() > 0;
+        this.backButtonVisible = this.currentPage > 0;
+        this.nextButtonVisible = this.productTemplateListNextPage.size() > 0;
     }
 
     protected void selectTemplate(ProductTemplate productTemplate) {
@@ -65,7 +64,7 @@ public class TemplateTable implements Serializable {
         this.templateSelected = null;
     }
 
-    public boolean checkTemplateForSelection(ProductTemplate productTemplate) {
+    public boolean isThisTheSelectedTemplate(ProductTemplate productTemplate) {
         if (!this.templateIsSelected) return false;
         return productTemplate.equals(this.templateSelected);
     }
@@ -76,7 +75,7 @@ public class TemplateTable implements Serializable {
         Iterator<ProductTemplate> iterator = this.productTemplateListCurrentPage.iterator();
         boolean oddEvenFlip = true;
         while (iterator.hasNext()) {
-            if (iterator.next().equals(this.templateSelected)) returnValue.append("highlight");
+            if (isThisTheSelectedTemplate(iterator.next())) returnValue.append("highlight");
             else returnValue.append(oddEvenFlip ? "odd" : "even");
             if (iterator.hasNext()) returnValue.append(", ");
             oddEvenFlip = !oddEvenFlip;

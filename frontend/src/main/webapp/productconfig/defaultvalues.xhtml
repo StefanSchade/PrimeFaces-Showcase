@@ -14,18 +14,18 @@
 
     <h1> Selected: </h1>
     <h:outputText value="Visible Fields:"/>
-    <h:outputText value="#{productConfigView.visibleFields}"/><br/><br/>
+    <h:outputText value="#{productDefinitonFlow.visibleFields}"/><br/><br/>
     <h:outputText value="Editable Fields:"/>
-    <h:outputText value="#{productConfigView.editableFields}"/><br/><br/>
-    <h:outputText value="Editable Fields Scopes #{productConfigView.editableFieldsScopes}"/><br/><br/>
+    <h:outputText value="#{productDefinitonFlow.editableFields}"/><br/><br/>
+    <h:outputText value="Editable Fields Scopes #{productDefinitonFlow.editableFieldsScopes}"/><br/><br/>
 
     <h1> Specify: </h1>
     <h:form>
         <h:panelGrid columns="2">
             <h:outputText value="Visible fields default values"/>
-            <h:inputText value="#{productConfigView.visibleFieldsDefaultValues}"/>
+            <h:inputText value="#{productDefinitonFlow.visibleFieldsDefaultValues}"/>
             <h:outputText value="Editable fields default value"/>
-            <h:inputText value="#{productConfigView.visibleFieldsDefaultValues}"/>
+            <h:inputText value="#{productDefinitonFlow.visibleFieldsDefaultValues}"/>
         </h:panelGrid>
         <h:commandButton value="Back" action="fieldscopes"/>
         <h:commandButton value="Next" action="reviewresults"/>

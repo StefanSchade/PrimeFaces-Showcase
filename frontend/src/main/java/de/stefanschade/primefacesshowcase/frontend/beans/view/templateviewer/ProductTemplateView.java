@@ -1,4 +1,4 @@
-package de.stefanschade.primefacesshowcase.frontend.beans.view;
+package de.stefanschade.primefacesshowcase.frontend.beans.view.templateviewer;
 
 import de.stefanschade.primefacesshowcase.frontend.beans.entities.ConfigurableField;
 import de.stefanschade.primefacesshowcase.frontend.beans.entities.ProductTemplate;
@@ -20,17 +20,13 @@ import java.io.Serializable;
 @Setter
 public class ProductTemplateView implements Serializable {
 
-    @Inject
-    private SessionInformation sessionInformation;
+    @Inject private SessionInformation sessionInformation;
 
-    @Inject
-    private FieldTable fieldTable;
+    @Inject private FieldTable fieldTable;
 
-    @Inject
-    private TemplateTable templateTable;
+    @Inject private TemplateTable templateTable;
 
-    @PreDestroy
-    public void writeResults() {
+    @PreDestroy public void writeResults() {
         ProductTemplate productTemplate = templateTable.getTemplateSelected();
         if (productTemplate == null) sessionInformation.setResultTemplateBrowser("No Selection");
         else sessionInformation.setResultTemplateBrowser("Selected " + productTemplate.getTemplatename());

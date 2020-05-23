@@ -1,4 +1,4 @@
-package de.stefanschade.primefacesshowcase.frontend.beans.view;
+package de.stefanschade.primefacesshowcase.frontend.beans.view.templateviewer;
 
 import de.stefanschade.primefacesshowcase.frontend.beans.entities.ConfigurableField;
 import lombok.Getter;
@@ -25,8 +25,6 @@ public class FieldTable implements Serializable {
     @Getter private boolean fieldIsSelected = false;
 
     private List<ConfigurableField> fieldListComplete;
-    private int firstEntryOnCurrentPage;
-    private int lastEntryOnCurrentPage;
 
     public void selectTemplate(List<ConfigurableField> configurableFieldList) {
         this.fieldListComplete = configurableFieldList;
@@ -46,16 +44,15 @@ public class FieldTable implements Serializable {
     }
 
     private void updatePaginatedFieldList() {
-        this.firstEntryOnCurrentPage = this.currentPage * PAGESIZE;
-        this.lastEntryOnCurrentPage = this.fieldListComplete.size() < this.firstEntryOnCurrentPage + PAGESIZE
-                ? this.fieldListComplete.size() : this.firstEntryOnCurrentPage + PAGESIZE;
-        this.fieldListCurrentPage = fieldListComplete.subList(this.firstEntryOnCurrentPage, this.lastEntryOnCurrentPage);
-        this.updateVisibilityOfPaginationButtons();
+        int firstEntryOnCurrentPage = this.currentPage * PAGESIZE;
+        int lastEntryOnCurrentPage = Math.min(this.fieldListComplete.size(), firstEntryOnCurrentPage + PAGESIZE);
+        this.fieldListCurrentPage = fieldListComplete.subList(firstEntryOnCurrentPage, lastEntryOnCurrentPage);
+        this.updateVisibilityOfPaginationButtons(lastEntryOnCurrentPage);
     }
 
-    public void updateVisibilityOfPaginationButtons() {
+    public void updateVisibilityOfPaginationButtons(int lastEntryOnCurrentPage) {
         this.backButtonVisibility = this.currentPage >= 1;
-        this.nextButtonVisibility = this.lastEntryOnCurrentPage < fieldListComplete.size();
+        this.nextButtonVisibility = lastEntryOnCurrentPage < fieldListComplete.size();
     }
 
     public void selectFieldDetails(ConfigurableField configurableField) {

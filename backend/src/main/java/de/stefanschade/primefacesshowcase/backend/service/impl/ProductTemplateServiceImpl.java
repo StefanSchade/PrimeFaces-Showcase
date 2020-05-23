@@ -23,36 +23,25 @@ import java.util.stream.StreamSupport;
 @Service
 public class ProductTemplateServiceImpl implements ProductTemplateService {
 
-    @Autowired
-    ProductTemplateRepository productTemplateRepository;
+    @Autowired ProductTemplateRepository productTemplateRepository;
+    @Autowired ConfigurableFieldRepository configurableFieldRepository;
+    @Autowired ProductTemplateRepositoryPagination productTemplateRepositoryPagination;
+    @Autowired ProductTemplateMapper productTemplateMapper;
 
-    @Autowired
-    ConfigurableFieldRepository configurableFieldRepository;
-
-    @Autowired
-    ProductTemplateRepositoryPagination productTemplateRepositoryPagination;
-
-    @Autowired
-    ProductTemplateMapper productTemplateMapper;
-
-    @Override
-    public ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto) {
+    @Override public ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto) {
         ProductTemplateEntity entityToBeStored = new ProductTemplateEntity();
         BeanUtils.copyProperties(productTemplateDto, entityToBeStored); // will throw an error, if non-null annotation is violated
         ProductTemplateEntity enitityThatWasStored = productTemplateRepository.save(entityToBeStored);
         ProductTemplateDto returnValue = new ProductTemplateDto();
         BeanUtils.copyProperties(enitityThatWasStored, returnValue);
-        log.info("logging works here");
         return returnValue;
     }
 
-    @Override
-    public ProductTemplateDto getProductCategoryById(String id) {
+    @Override public ProductTemplateDto getProductCategoryById(String id) {
         return null;
     }
 
-    @Override
-    public List<ProductTemplateDto> getAll() {
+    @Override public List<ProductTemplateDto> getAll() {
         return mapProductTemplateEntityIterableToDtoList(productTemplateRepository.findAll());
     }
 
