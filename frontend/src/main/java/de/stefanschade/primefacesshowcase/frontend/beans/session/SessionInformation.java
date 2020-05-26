@@ -10,14 +10,13 @@ import java.io.Serializable;
 @Data
 @Named
 @SessionScoped
-public class SessionInformation implements Serializable  {
+public class SessionInformation implements Serializable {
 
     private String resultFlow1;
     private String resultFlow2;
     private String resultTemplateBrowser;
 
-    @PostConstruct
-    public void init() {
+    @PostConstruct public void init() {
         resultTemplateBrowser = "Template Browser not called yet";
     }
 

@@ -1,7 +1,7 @@
 package de.stefanschade.primefacesshowcase.backend.mapper;
 
-import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import de.stefanschade.primefacesshowcase.backend.dto.ProductTemplateDto;
+import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import de.stefanschade.primefacesshowcase.backend.model.response.ProductTemplateResponseModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

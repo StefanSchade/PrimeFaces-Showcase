@@ -16,25 +16,13 @@ import javax.persistence.*;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints={@UniqueConstraint(columnNames ={"template","fieldname"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"template", "fieldname"})})
 public class ConfigurableFieldEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "template", nullable = false)
-    @NonNull
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "template", nullable = false) @NonNull @JsonBackReference
     ProductTemplateEntity template;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) private Long Id;
+    @Column(nullable = false) @NonNull private String fieldname;
 
-    @Column(nullable = false)
-    @NonNull
-    private String fieldname;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NonNull
-    private FieldType fieldType;
+    @Column(nullable = false) @Enumerated(EnumType.STRING) @NonNull private FieldType fieldType;
 }

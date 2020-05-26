@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public interface ConfigurableFieldRepository extends CrudRepository<ConfigurableFieldEntity,Long>  {
+public interface ConfigurableFieldRepository extends CrudRepository<ConfigurableFieldEntity, Long> {
 
     List<ConfigurableFieldEntity> findByTemplate(ProductTemplateEntity template);
 

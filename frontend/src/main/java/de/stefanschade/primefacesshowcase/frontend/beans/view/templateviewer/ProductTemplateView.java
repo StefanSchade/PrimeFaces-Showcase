@@ -28,8 +28,11 @@ public class ProductTemplateView implements Serializable {
 
     @PreDestroy public void writeResults() {
         ProductTemplate productTemplate = templateTable.getTemplateSelected();
-        if (productTemplate == null) sessionInformation.setResultTemplateBrowser("No Selection");
-        else sessionInformation.setResultTemplateBrowser("Selected " + productTemplate.getTemplatename());
+        if (productTemplate == null) {
+            sessionInformation.setResultTemplateBrowser("No Selection");
+        } else {
+            sessionInformation.setResultTemplateBrowser("Selected " + productTemplate.getTemplatename());
+        }
     }
 
     public void templateDetailsButtonClicked(ProductTemplate template) {

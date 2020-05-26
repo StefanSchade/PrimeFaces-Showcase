@@ -30,22 +30,23 @@ public class TemplateTable implements Serializable {
     @Inject private ProductTemplateService productTemplateService;
     private List<ProductTemplate> productTemplateListNextPage;
 
-    @PostConstruct
-    public void init() {
+    @PostConstruct public void init() {
         this.productTemplateListCurrentPage = this.productTemplateService.retrieveTemplates(PAGESIZE, currentPage);
         this.productTemplateListNextPage = this.productTemplateService.retrieveTemplates(PAGESIZE, currentPage + 1);
         this.updateVisibilityOfPaginationButtons();
-}
+    }
 
     protected void retrieveNext() {
         this.productTemplateListCurrentPage = this.productTemplateListNextPage;
-        this.productTemplateListNextPage = this.productTemplateService.retrieveTemplates(PAGESIZE, ++this.currentPage + 1);
+        this.productTemplateListNextPage = this.productTemplateService.retrieveTemplates(PAGESIZE,
+                ++this.currentPage + 1);
         this.updateVisibilityOfPaginationButtons();
     }
 
     protected void retrievePrevious() {
         this.productTemplateListNextPage = this.productTemplateListCurrentPage;
-        this.productTemplateListCurrentPage = this.productTemplateService.retrieveTemplates(PAGESIZE, --this.currentPage);
+        this.productTemplateListCurrentPage = this.productTemplateService.retrieveTemplates(PAGESIZE,
+                --this.currentPage);
         this.updateVisibilityOfPaginationButtons();
     }
 
@@ -65,19 +66,28 @@ public class TemplateTable implements Serializable {
     }
 
     public boolean isThisTheSelectedTemplate(ProductTemplate productTemplate) {
-        if (!this.templateIsSelected) return false;
+        if (!this.templateIsSelected) {
+            return false;
+        }
         return productTemplate.equals(this.templateSelected);
     }
 
     public String rowClasses() {
-        if (!this.templateIsSelected) return "odd, even";
+        if (!this.templateIsSelected) {
+            return "odd, even";
+        }
         StringBuilder returnValue = new StringBuilder();
         Iterator<ProductTemplate> iterator = this.productTemplateListCurrentPage.iterator();
         boolean oddEvenFlip = true;
         while (iterator.hasNext()) {
-            if (isThisTheSelectedTemplate(iterator.next())) returnValue.append("highlight");
-            else returnValue.append(oddEvenFlip ? "odd" : "even");
-            if (iterator.hasNext()) returnValue.append(", ");
+            if (isThisTheSelectedTemplate(iterator.next())) {
+                returnValue.append("highlight");
+            } else {
+                returnValue.append(oddEvenFlip ? "odd" : "even");
+            }
+            if (iterator.hasNext()) {
+                returnValue.append(", ");
+            }
             oddEvenFlip = !oddEvenFlip;
         }
         return returnValue.toString();

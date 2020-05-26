@@ -8,12 +8,12 @@ public class DebugClient {
     public static void main(String[] args) {
 
         HelloWorldClient hwc = new HelloWorldClient();
-//        System.out.println("***********************************************");
-//        System.out.println("*    Retrieving an Object from                *");
-//        System.out.println("*    http://localhost:8080/helloworld         *");
-//        System.out.println("***********************************************");
-//        System.out.println();
-//        hwc.JerseyHelloWorld();
+        //        System.out.println("***********************************************");
+        //        System.out.println("*    Retrieving an Object from                *");
+        //        System.out.println("*    http://localhost:8080/helloworld         *");
+        //        System.out.println("***********************************************");
+        //        System.out.println();
+        //        hwc.JerseyHelloWorld();
 
         System.out.println();
         System.out.println("***************************************************************************");

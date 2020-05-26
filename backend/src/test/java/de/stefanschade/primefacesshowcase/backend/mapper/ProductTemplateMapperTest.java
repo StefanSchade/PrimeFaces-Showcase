@@ -1,9 +1,9 @@
 package de.stefanschade.primefacesshowcase.backend.mapper;
 
-import de.stefanschade.primefacesshowcase.backend.entities.ConfigurableFieldEntity;
-import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import de.stefanschade.primefacesshowcase.backend.dto.FieldType;
 import de.stefanschade.primefacesshowcase.backend.dto.ProductTemplateDto;
+import de.stefanschade.primefacesshowcase.backend.entities.ConfigurableFieldEntity;
+import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import de.stefanschade.primefacesshowcase.backend.model.response.ProductTemplateResponseModel;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +24,10 @@ class ProductTemplateMapperTest {
 
     public ProductTemplateEntity prepareProductTemplateEntity() {
         ProductTemplateEntity productTemplateEntity = new ProductTemplateEntity(NAME_TEMPLATE);
-        ConfigurableFieldEntity configurableFieldEntity1 = new ConfigurableFieldEntity(productTemplateEntity, NAME_FIELD_1, FieldType.DOUBLE);
-        ConfigurableFieldEntity configurableFieldEntity2 = new ConfigurableFieldEntity(productTemplateEntity, NAME_FIELD_2, FieldType.STRING);
+        ConfigurableFieldEntity configurableFieldEntity1 = new ConfigurableFieldEntity(productTemplateEntity,
+                NAME_FIELD_1, FieldType.DOUBLE);
+        ConfigurableFieldEntity configurableFieldEntity2 = new ConfigurableFieldEntity(productTemplateEntity,
+                NAME_FIELD_2, FieldType.STRING);
         List<ConfigurableFieldEntity> configurableFieldEntityList = new ArrayList<>(NR_OF_FIELDS);
         configurableFieldEntityList.add(configurableFieldEntity1);
         configurableFieldEntityList.add(configurableFieldEntity2);
@@ -33,13 +35,13 @@ class ProductTemplateMapperTest {
         return productTemplateEntity;
     }
 
-    @Test
-    public void productTemplateEntityToProductTemplateDto() throws Exception {
+    @Test public void productTemplateEntityToProductTemplateDto() throws Exception {
         //given
         ProductTemplateEntity productTemplateEntity = prepareProductTemplateEntity();
 
         //when
-        ProductTemplateDto productTemplateDto = productTemplateMapper.productTemplateEntityToProductTemplateDto(productTemplateEntity);
+        ProductTemplateDto productTemplateDto =
+                productTemplateMapper.productTemplateEntityToProductTemplateDto(productTemplateEntity);
 
         //then
         assertEquals(NAME_TEMPLATE, productTemplateDto.getTemplatename());
@@ -48,14 +50,15 @@ class ProductTemplateMapperTest {
     }
 
 
-    @Test
-    public void productTemplateDtoToProductTemplateResponseModel() throws Exception {
+    @Test public void productTemplateDtoToProductTemplateResponseModel() throws Exception {
         //given
         ProductTemplateEntity productTemplateEntity = prepareProductTemplateEntity();
-        ProductTemplateDto productTemplateDto = productTemplateMapper.productTemplateEntityToProductTemplateDto(productTemplateEntity);
+        ProductTemplateDto productTemplateDto =
+                productTemplateMapper.productTemplateEntityToProductTemplateDto(productTemplateEntity);
 
         //when
-        ProductTemplateResponseModel productTemplateResponseModel = productTemplateMapper.productTemplateDtoToProductTemplateResponseModel(productTemplateDto);
+        ProductTemplateResponseModel productTemplateResponseModel =
+                productTemplateMapper.productTemplateDtoToProductTemplateResponseModel(productTemplateDto);
 
         //then
         assertEquals(NAME_TEMPLATE, productTemplateResponseModel.getTemplatename());

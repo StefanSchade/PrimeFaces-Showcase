@@ -1,8 +1,8 @@
 package de.stefanschade.primefacesshowcase.backend.bootstrap;
 
+import de.stefanschade.primefacesshowcase.backend.dto.FieldType;
 import de.stefanschade.primefacesshowcase.backend.entities.ConfigurableFieldEntity;
 import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
-import de.stefanschade.primefacesshowcase.backend.dto.FieldType;
 import de.stefanschade.primefacesshowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.primefacesshowcase.backend.repositories.ProductTemplateRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,61 +17,51 @@ import java.util.ArrayList;
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    @Autowired
-    ProductTemplateRepository productTemplateRepository;
-
-    @Autowired
-    ConfigurableFieldRepository configurableFieldRepository;
-
-    @Autowired
-    RandomDataGenerator randomDataGenerator;
-
     private final int NUMBERTEMPLATES = 98;
     private final int MINIMUMNUMBEROFFIELDS = 10;
     private final int MAXIMUMNUMBEROFFIELDS = 60;
     private final int TEMPLATENAMELENGTH = 10;
     private final int FIELDNAMELENGTH = 10;
+    @Autowired ProductTemplateRepository productTemplateRepository;
+    @Autowired ConfigurableFieldRepository configurableFieldRepository;
+    @Autowired RandomDataGenerator randomDataGenerator;
 
-    @Override
-    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+    @Override public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
         log.info("generating testdata");
 
-        this.generateTestSample("loan",
-                new String[]{"business partner", "outstanding", "interest rate"},
+        this.generateTestSample("loan", new String[]{"business partner", "outstanding", "interest rate"},
                 new FieldType[]{FieldType.STRING, FieldType.DOUBLE, FieldType.DOUBLE});
 
-        this.generateTestSample("deposit",
-                new String[]{"business partner", "outstanding", "interest rate"},
+        this.generateTestSample("deposit", new String[]{"business partner", "outstanding", "interest rate"},
                 new FieldType[]{FieldType.STRING, FieldType.DOUBLE, FieldType.DOUBLE});
 
         for (int templateCounter = 0; templateCounter < NUMBERTEMPLATES; templateCounter++) {
             String templateName;
-//          templateName = randomDataGenerator.getRandomString(TEMPLATENAMELENGTH);
-            templateName = "Test-Template #"+ (templateCounter+1);
-            int fieldsInTemplate = randomDataGenerator.getRandomIntInRange(MINIMUMNUMBEROFFIELDS, MAXIMUMNUMBEROFFIELDS);
-            log.info("Templatename = "+templateName + " Fields: " + fieldsInTemplate);
+            //          templateName = randomDataGenerator.getRandomString(TEMPLATENAMELENGTH);
+            templateName = "Test-Template #" + (templateCounter + 1);
+            int fieldsInTemplate = randomDataGenerator.getRandomIntInRange(MINIMUMNUMBEROFFIELDS,
+                    MAXIMUMNUMBEROFFIELDS);
+            log.info("Templatename = " + templateName + " Fields: " + fieldsInTemplate);
             String[] fieldNames = new String[fieldsInTemplate];
             FieldType[] fieldTypes = new FieldType[fieldsInTemplate];
             fieldNames = randomDataGenerator.getRandomStringArray(fieldsInTemplate, FIELDNAMELENGTH);
             fieldTypes = randomDataGenerator.getRandomFieldTypeArray(fieldsInTemplate);
-            generateTestSample(templateName,fieldNames,fieldTypes);
+            generateTestSample(templateName, fieldNames, fieldTypes);
         }
     }
 
-    private void generateTestSample(String templatename,
-                                    String[] fieldnames, FieldType[] fieldtypes) {
+    private void generateTestSample(String templatename, String[] fieldnames, FieldType[] fieldtypes) {
 
         ProductTemplateEntity template = new ProductTemplateEntity(templatename);
 
         if (fieldnames.length != fieldtypes.length) {
-            throw new IllegalArgumentException("Arrays for fieldname (" + fieldnames.length
-                    + ") and fieldlength (" + fieldtypes.length + ") must have the same length!");
+            throw new IllegalArgumentException("Arrays for fieldname (" + fieldnames.length + ") and fieldlength (" + fieldtypes.length + ") must have the same length!");
         }
 
         template.setFields(new ArrayList<>());
-        for (int i = 0; i<fieldnames.length;i++){
-            log.info("Field #"+i+": "+fieldnames[i] + "   " + fieldtypes[i]);
+        for (int i = 0; i < fieldnames.length; i++) {
+            log.info("Field #" + i + ": " + fieldnames[i] + "   " + fieldtypes[i]);
         }
 
         productTemplateRepository.save(template);

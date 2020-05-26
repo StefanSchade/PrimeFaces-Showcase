@@ -23,9 +23,8 @@ public class BackendRestClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(BASE_URI + PORT + "/producttemplatelist");
         Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
-        List<ProductTemplate> productTemplates =
-                builder.get(new GenericType<List<ProductTemplate>>() {
-                });
+        List<ProductTemplate> productTemplates = builder.get(new GenericType<List<ProductTemplate>>() {
+        });
         System.out.println(productTemplates);
         client.close();
         return productTemplates;
@@ -34,14 +33,11 @@ public class BackendRestClient {
     public List<ProductTemplate> productTemplates(int size, int page) {
         System.out.println("checking " + BASE_URI + PORT + "/producttemplatelistpaginated");
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(BASE_URI + PORT)
-                .path("/producttemplatelistpaginated")
-                .queryParam("page", Integer.toString(page))
-                .queryParam("size", Integer.toString(size));
+        WebTarget target = client.target(BASE_URI + PORT).path("/producttemplatelistpaginated").queryParam("page",
+                Integer.toString(page)).queryParam("size", Integer.toString(size));
         Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
-        List<ProductTemplate> productTemplates =
-                builder.get(new GenericType<List<ProductTemplate>>() {
-                });
+        List<ProductTemplate> productTemplates = builder.get(new GenericType<List<ProductTemplate>>() {
+        });
         client.close();
         return productTemplates;
     }

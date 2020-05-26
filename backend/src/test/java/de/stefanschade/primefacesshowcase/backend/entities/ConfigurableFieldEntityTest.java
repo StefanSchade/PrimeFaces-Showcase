@@ -9,15 +9,13 @@ class ConfigurableFieldEntityTest {
 
     static ConfigurableFieldEntity configurableFieldEntity;
 
-    @BeforeAll
-    public static void setUp(){
+    @BeforeAll public static void setUp() {
         configurableFieldEntity = new ConfigurableFieldEntity();
     }
 
-    @Test
-    void getFieldname() {
+    @Test void getFieldname() {
         String fieldname = "fieldname";
         configurableFieldEntity.setFieldname(fieldname);
-        assertEquals(fieldname,configurableFieldEntity.getFieldname());
+        assertEquals(fieldname, configurableFieldEntity.getFieldname());
     }
 }

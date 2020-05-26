@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class HelloWorld  implements Serializable {
+public class HelloWorld implements Serializable {
 
     private long id;
     private String content;

@@ -14,8 +14,7 @@ import java.util.List;
 public class HelloWorldClient {
 
 
-    private final String BASE_URI =
-            "http://localhost:";
+    private final String BASE_URI = "http://localhost:";
     private final String PORT = "8082";
 
     public void JerseyHelloWorld() {
@@ -43,26 +42,22 @@ public class HelloWorldClient {
         System.out.println("checking " + BASE_URI + PORT + "/producttemplatelistpaginated");
         Client client = ClientBuilder.newClient();
         // https://docs.oracle.com/javaee/7/api/javax/ws/rs/client/Invocation.Builder.html
-        WebTarget target = client.target(BASE_URI + PORT)
-                .path("/producttemplatelistpaginated")
-                .queryParam("page", "1")
-                .queryParam("size", "2")
-                .queryParam("offset", "100");
+        WebTarget target = client.target(BASE_URI + PORT).path("/producttemplatelistpaginated").queryParam("page", "1"
+        ).queryParam("size", "2").queryParam("offset", "100");
 
 
         Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);
-//                .property("page", "1")
-//                .property("size", "2");
+        //                .property("page", "1")
+        //                .property("size", "2");
 
         //   List<ProductTemplate> productTemplates =
         //           builder.get(new GenericType<List<ProductTemplate>>() {
         //           });
 
-//        Invocation inv = builder.buildGet();
+        //        Invocation inv = builder.buildGet();
 
-        List<ProductTemplate> productTemplates =
-                builder.get(new GenericType<List<ProductTemplate>>() {
-                });
+        List<ProductTemplate> productTemplates = builder.get(new GenericType<List<ProductTemplate>>() {
+        });
 
         System.out.println(productTemplates);
         System.out.println("****length*** " + productTemplates.size());

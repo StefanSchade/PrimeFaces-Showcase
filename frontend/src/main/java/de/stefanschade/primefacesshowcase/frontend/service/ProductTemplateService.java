@@ -17,23 +17,19 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class ProductTemplateService {
 
-    @Inject
-    private BackendRestClient backendRestClient;
+    @Inject private BackendRestClient backendRestClient;
+
+    public static ProductTemplate deriveFieldsNotReceivedFromBackend(ProductTemplate template) {
+        template.setFieldCount(template.getFields().size());
+        return template;
+    }
 
     public List<ProductTemplate> retrieveTemplates() {
         return backendRestClient.productTemplates();
     }
 
     public List<ProductTemplate> retrieveTemplates(int size, int page) {
-        return backendRestClient.productTemplates(size, page)
-                .stream()
-                .map(ProductTemplateService::deriveFieldsNotReceivedFromBackend)
-                .collect(Collectors.toList());
-    }
-
-    public static ProductTemplate deriveFieldsNotReceivedFromBackend(ProductTemplate template) {
-        template.setFieldCount(template.getFields().size());
-        return template;
+        return backendRestClient.productTemplates(size, page).stream().map(ProductTemplateService::deriveFieldsNotReceivedFromBackend).collect(Collectors.toList());
     }
 
 }

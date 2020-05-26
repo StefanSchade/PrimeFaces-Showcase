@@ -66,15 +66,22 @@ public class FieldTable implements Serializable {
     }
 
     public String rowClasses() {
-        if (!fieldIsSelected) return "odd, even";
+        if (!fieldIsSelected) {
+            return "odd, even";
+        }
         StringBuilder returnValue = new StringBuilder();
         Iterator<ConfigurableField> iterator = this.fieldListCurrentPage.iterator();
         boolean oddEvenFlip = false;
         while (iterator.hasNext()) {
-            if (iterator.next().equals(this.fieldSelected)) returnValue.append("highlight");
-            else returnValue.append(oddEvenFlip ? "even" : "odd");
+            if (iterator.next().equals(this.fieldSelected)) {
+                returnValue.append("highlight");
+            } else {
+                returnValue.append(oddEvenFlip ? "even" : "odd");
+            }
             oddEvenFlip = !oddEvenFlip;
-            if (iterator.hasNext()) returnValue.append(", ");
+            if (iterator.hasNext()) {
+                returnValue.append(", ");
+            }
         }
         return returnValue.toString();
     }

@@ -1,7 +1,7 @@
 package de.stefanschade.primefacesshowcase.backend.service.impl;
 
-import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import de.stefanschade.primefacesshowcase.backend.dto.ProductTemplateDto;
+import de.stefanschade.primefacesshowcase.backend.entities.ProductTemplateEntity;
 import de.stefanschade.primefacesshowcase.backend.mapper.ProductTemplateMapper;
 import de.stefanschade.primefacesshowcase.backend.repositories.ConfigurableFieldRepository;
 import de.stefanschade.primefacesshowcase.backend.repositories.ProductTemplateRepository;
@@ -30,7 +30,8 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
 
     @Override public ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto) {
         ProductTemplateEntity entityToBeStored = new ProductTemplateEntity();
-        BeanUtils.copyProperties(productTemplateDto, entityToBeStored); // will throw an error, if non-null annotation is violated
+        BeanUtils.copyProperties(productTemplateDto, entityToBeStored); // will throw an error, if non-null
+        // annotation is violated
         ProductTemplateEntity enitityThatWasStored = productTemplateRepository.save(entityToBeStored);
         ProductTemplateDto returnValue = new ProductTemplateDto();
         BeanUtils.copyProperties(enitityThatWasStored, returnValue);
@@ -46,15 +47,11 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
     }
 
     private List<ProductTemplateDto> mapProductTemplateEntityIterableToDtoList(Iterable<ProductTemplateEntity> productTemplateEntityIterable) {
-        return StreamSupport.stream(productTemplateEntityIterable.spliterator(), false)
-                .map(productTemplateMapper::productTemplateEntityToProductTemplateDto)
-                .collect(Collectors.toList());
+        return StreamSupport.stream(productTemplateEntityIterable.spliterator(), false).map(productTemplateMapper::productTemplateEntityToProductTemplateDto).collect(Collectors.toList());
     }
 
     // https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-part-seven-pagination/
-    @Transactional(readOnly = true)
-    @Override
-    public List<ProductTemplateDto> findAll(Pageable pageable) {
+    @Transactional(readOnly = true) @Override public List<ProductTemplateDto> findAll(Pageable pageable) {
         Page<ProductTemplateEntity> page = productTemplateRepositoryPagination.findAll(pageable);
         List<ProductTemplateEntity> productTemplateEntityList = page.getContent();
         log.info("Page count " + page.getTotalPages() + " Element count " + page.getTotalElements());

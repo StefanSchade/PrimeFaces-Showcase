@@ -12,18 +12,18 @@ package de.stefanschade.primefacesshowcase.frontend;
 //
 //extends Application
 
-public class FrontendApplication  {
+public class FrontendApplication {
 
-//    @Override
-//    public Set<Class<?>> getClasses() {
-//
-//        Set<Class<?>> classes = new HashSet<>();
-//
-//        classes.add(JacksonJsonProvider.class);
-//        classes.add(ProductTemplate.class);
-//        classes.add(ConfigurableField.class);
-//        classes.add(ArrayList.class);
-//
-//        return classes;
-//    }
+    //    @Override
+    //    public Set<Class<?>> getClasses() {
+    //
+    //        Set<Class<?>> classes = new HashSet<>();
+    //
+    //        classes.add(JacksonJsonProvider.class);
+    //        classes.add(ProductTemplate.class);
+    //        classes.add(ConfigurableField.class);
+    //        classes.add(ArrayList.class);
+    //
+    //        return classes;
+    //    }
 }
