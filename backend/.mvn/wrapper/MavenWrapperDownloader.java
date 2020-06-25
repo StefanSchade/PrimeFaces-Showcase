@@ -19,11 +19,12 @@ import java.util.Properties;
 public class MavenWrapperDownloader {
 
     private static final String WRAPPER_VERSION = "0.5.6";
+
     /**
      * Default URL to download the maven-wrapper.jar from, if no 'downloadUrl' is provided.
      */
-    private static final String DEFAULT_DOWNLOAD_URL = "https://repo.maven.apache" +
-            ".org/maven2/io/takari/maven-wrapper/" + WRAPPER_VERSION + "/maven-wrapper-" + WRAPPER_VERSION + ".jar";
+    private static final String DEFAULT_DOWNLOAD_URL = "https://repo.maven.apache" + ".org/maven2/io/takari/maven" +
+            "-wrapper/" + WRAPPER_VERSION + "/maven-wrapper-" + WRAPPER_VERSION + ".jar";
 
     /**
      * Path to the maven-wrapper.properties file, which might contain a downloadUrl property to
@@ -72,9 +73,15 @@ public class MavenWrapperDownloader {
         System.out.println("- Downloading from: " + url);
 
         File outputFile = new File(baseDirectory.getAbsolutePath(), MAVEN_WRAPPER_JAR_PATH);
-        if (!outputFile.getParentFile().exists()) {
-            if (!outputFile.getParentFile().mkdirs()) {
-                System.out.println("- ERROR creating output directory '" + outputFile.getParentFile().getAbsolutePath() + "'");
+        if (!outputFile
+                .getParentFile()
+                .exists()) {
+            if (!outputFile
+                    .getParentFile()
+                    .mkdirs()) {
+                System.out.println("- ERROR creating output directory '" + outputFile
+                        .getParentFile()
+                        .getAbsolutePath() + "'");
             }
         }
         System.out.println("- Downloading to: " + outputFile.getAbsolutePath());
@@ -92,7 +99,9 @@ public class MavenWrapperDownloader {
     private static void downloadFileFromURL(String urlString, File destination) throws Exception {
         if (System.getenv("MVNW_USERNAME") != null && System.getenv("MVNW_PASSWORD") != null) {
             String username = System.getenv("MVNW_USERNAME");
-            char[] password = System.getenv("MVNW_PASSWORD").toCharArray();
+            char[] password = System
+                    .getenv("MVNW_PASSWORD")
+                    .toCharArray();
             Authenticator.setDefault(new Authenticator() {
                 @Override protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(username, password);
@@ -103,7 +112,9 @@ public class MavenWrapperDownloader {
         ReadableByteChannel rbc;
         rbc = Channels.newChannel(website.openStream());
         FileOutputStream fos = new FileOutputStream(destination);
-        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        fos
+                .getChannel()
+                .transferFrom(rbc, 0, Long.MAX_VALUE);
         fos.close();
         rbc.close();
     }

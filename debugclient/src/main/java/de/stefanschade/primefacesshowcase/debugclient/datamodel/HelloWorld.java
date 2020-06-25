@@ -10,7 +10,9 @@ import java.io.Serializable;
 public class HelloWorld implements Serializable {
 
     private long id;
+
     private String content;
+
     private SimpleEntity se;
 
     public HelloWorld(long id, String content, SimpleEntity se) {

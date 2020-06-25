@@ -24,8 +24,11 @@ import java.util.stream.StreamSupport;
 public class ProductTemplateServiceImpl implements ProductTemplateService {
 
     @Autowired ProductTemplateRepository productTemplateRepository;
+
     @Autowired ConfigurableFieldRepository configurableFieldRepository;
+
     @Autowired ProductTemplateRepositoryPagination productTemplateRepositoryPagination;
+
     @Autowired ProductTemplateMapper productTemplateMapper;
 
     @Override public ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto) {
@@ -47,7 +50,10 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
     }
 
     private List<ProductTemplateDto> mapProductTemplateEntityIterableToDtoList(Iterable<ProductTemplateEntity> productTemplateEntityIterable) {
-        return StreamSupport.stream(productTemplateEntityIterable.spliterator(), false).map(productTemplateMapper::productTemplateEntityToProductTemplateDto).collect(Collectors.toList());
+        return StreamSupport
+                .stream(productTemplateEntityIterable.spliterator(), false)
+                .map(productTemplateMapper::productTemplateEntityToProductTemplateDto)
+                .collect(Collectors.toList());
     }
 
     // https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-part-seven-pagination/

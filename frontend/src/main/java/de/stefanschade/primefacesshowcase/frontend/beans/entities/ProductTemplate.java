@@ -14,7 +14,10 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class ProductTemplate {
+
     private int fieldCount;
+
     private String templatename;
+
     private List<ConfigurableField> fields;
 }

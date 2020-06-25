@@ -21,13 +21,19 @@ public class TemplateTable implements Serializable {
     private static final int PAGESIZE = 20;
 
     @Getter private int currentPage = 0;
+
     @Getter private List<ProductTemplate> productTemplateListCurrentPage;
+
     @Getter private boolean backButtonVisible = true;
+
     @Getter private boolean nextButtonVisible = true;
+
     @Getter private ProductTemplate templateSelected = null;
+
     @Getter private boolean templateIsSelected = false;
 
     @Inject private ProductTemplateService productTemplateService;
+
     private List<ProductTemplate> productTemplateListNextPage;
 
     @PostConstruct public void init() {

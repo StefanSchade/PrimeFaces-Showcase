@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductTemplateRepository extends CrudRepository<ProductTemplateEntity, Long> {
+
     Iterable<ProductTemplateEntity> findAll();
 }

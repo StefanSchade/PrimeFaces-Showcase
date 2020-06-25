@@ -13,7 +13,9 @@ import java.io.Serializable;
 public class SessionInformation implements Serializable {
 
     private String resultFlow1;
+
     private String resultFlow2;
+
     private String resultTemplateBrowser;
 
     @PostConstruct public void init() {

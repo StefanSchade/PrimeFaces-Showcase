@@ -18,12 +18,19 @@ import java.util.ArrayList;
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final int NUMBERTEMPLATES = 98;
+
     private final int MINIMUMNUMBEROFFIELDS = 10;
+
     private final int MAXIMUMNUMBEROFFIELDS = 60;
+
     private final int TEMPLATENAMELENGTH = 10;
+
     private final int FIELDNAMELENGTH = 10;
+
     @Autowired ProductTemplateRepository productTemplateRepository;
+
     @Autowired ConfigurableFieldRepository configurableFieldRepository;
+
     @Autowired RandomDataGenerator randomDataGenerator;
 
     @Override public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -67,7 +74,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         productTemplateRepository.save(template);
         for (int i = 0; i < fieldnames.length; i++) {
             ConfigurableFieldEntity field = new ConfigurableFieldEntity(template, fieldnames[i], fieldtypes[i]);
-            template.getFields().add(field);
+            template
+                    .getFields()
+                    .add(field);
             configurableFieldRepository.save(field);
         }
     }

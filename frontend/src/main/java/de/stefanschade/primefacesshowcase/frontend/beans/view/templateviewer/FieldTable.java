@@ -18,10 +18,15 @@ public class FieldTable implements Serializable {
     private static final int PAGESIZE = 20;
 
     @Getter private int currentPage = 0;
+
     @Getter private List<ConfigurableField> fieldListCurrentPage;
+
     @Getter private boolean backButtonVisibility = true;
+
     @Getter private boolean nextButtonVisibility = true;
+
     @Getter private ConfigurableField fieldSelected = null;
+
     @Getter private boolean fieldIsSelected = false;
 
     private List<ConfigurableField> fieldListComplete;
@@ -73,7 +78,9 @@ public class FieldTable implements Serializable {
         Iterator<ConfigurableField> iterator = this.fieldListCurrentPage.iterator();
         boolean oddEvenFlip = false;
         while (iterator.hasNext()) {
-            if (iterator.next().equals(this.fieldSelected)) {
+            if (iterator
+                    .next()
+                    .equals(this.fieldSelected)) {
                 returnValue.append("highlight");
             } else {
                 returnValue.append(oddEvenFlip ? "even" : "odd");

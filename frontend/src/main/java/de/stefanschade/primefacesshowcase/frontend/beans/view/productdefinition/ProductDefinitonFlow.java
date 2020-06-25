@@ -12,9 +12,13 @@ import java.io.Serializable;
 public class ProductDefinitonFlow implements Serializable {
 
     private String visibleFields;
+
     private String editableFields;
+
     private String visibleFieldsDefaultValues;
+
     private String editableFieldsDefaultValues;
+
     private String editableFieldsScopes;
 
     public String finish() {

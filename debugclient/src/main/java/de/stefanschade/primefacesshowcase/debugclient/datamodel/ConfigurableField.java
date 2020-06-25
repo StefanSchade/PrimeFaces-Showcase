@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 public class ConfigurableField {
 
     private String fieldname;
+
     private FieldType fieldType;
 }

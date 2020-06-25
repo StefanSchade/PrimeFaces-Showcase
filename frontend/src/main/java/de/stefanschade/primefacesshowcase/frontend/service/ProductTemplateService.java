@@ -20,7 +20,10 @@ public class ProductTemplateService {
     @Inject private BackendRestClient backendRestClient;
 
     public static ProductTemplate deriveFieldsNotReceivedFromBackend(ProductTemplate template) {
-        template.setFieldCount(template.getFields().size());
+        int fieldCount = template
+                .getFields()
+                .size();
+        template.setFieldCount(fieldCount);
         return template;
     }
 
@@ -29,7 +32,11 @@ public class ProductTemplateService {
     }
 
     public List<ProductTemplate> retrieveTemplates(int size, int page) {
-        return backendRestClient.productTemplates(size, page).stream().map(ProductTemplateService::deriveFieldsNotReceivedFromBackend).collect(Collectors.toList());
+        return backendRestClient
+                .productTemplates(size, page)
+                .stream()
+                .map(ProductTemplateService::deriveFieldsNotReceivedFromBackend)
+                .collect(Collectors.toList());
     }
 
 }

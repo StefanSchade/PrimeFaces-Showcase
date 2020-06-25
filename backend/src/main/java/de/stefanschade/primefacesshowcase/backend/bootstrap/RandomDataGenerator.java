@@ -15,9 +15,13 @@ import java.util.stream.Stream;
 public class RandomDataGenerator {
 
     private final Random RANDOM = new SecureRandom();
+
     private final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
     private final int ITERATIONS = 1000;
+
     private final int KEY_LENGTH = 256;
+
     FieldType[] fieldTypes = FieldType.values();
 
     public String getRandomString(int length) {
@@ -25,7 +29,10 @@ public class RandomDataGenerator {
     }
 
     public List<FieldType> getRandomFieldTypeList(int length) {
-        return Stream.generate(() -> getRandomFieldType()).limit(length).collect(Collectors.toList());
+        return Stream
+                .generate(() -> getRandomFieldType())
+                .limit(length)
+                .collect(Collectors.toList());
     }
 
     public FieldType[] getRandomFieldTypeArray(int length) {
@@ -33,7 +40,10 @@ public class RandomDataGenerator {
     }
 
     public List<String> getRandomStringList(int lengthOfList, int lengthOfEachString) {
-        return Stream.generate(() -> getRandomString(lengthOfEachString)).limit(lengthOfList).collect(Collectors.toList());
+        return Stream
+                .generate(() -> getRandomString(lengthOfEachString))
+                .limit(lengthOfList)
+                .collect(Collectors.toList());
     }
 
     public String[] getRandomStringArray(int lengthOfArray, int lengthOfEachString) {
@@ -45,7 +55,12 @@ public class RandomDataGenerator {
     }
 
     private String generateRandomString(int length) {
-        return Stream.generate(() -> RANDOM.nextInt(ALPHABET.length())).map(i -> ALPHABET.charAt(i)).map(Object::toString).limit(length).collect(Collectors.joining(""));
+        return Stream
+                .generate(() -> RANDOM.nextInt(ALPHABET.length()))
+                .map(i -> ALPHABET.charAt(i))
+                .map(Object::toString)
+                .limit(length)
+                .collect(Collectors.joining(""));
     }
 
     public int getRandomIntInRange(int from, int to) {
