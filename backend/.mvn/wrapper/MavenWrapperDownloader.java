@@ -23,7 +23,7 @@ public class MavenWrapperDownloader {
     /**
      * Default URL to download the maven-wrapper.jar from, if no 'downloadUrl' is provided.
      */
-    private static final String DEFAULT_DOWNLOAD_URL = "https://repo.maven.apache" + ".org/maven2/io/takari/maven" +
+    private static final String DEFAULT_DOWNLOAD_URL = "https://repo.maven.apache" + ".org/maven2/io/takari/maven" + 
             "-wrapper/" + WRAPPER_VERSION + "/maven-wrapper-" + WRAPPER_VERSION + ".jar";
 
     /**
@@ -103,7 +103,8 @@ public class MavenWrapperDownloader {
                     .getenv("MVNW_PASSWORD")
                     .toCharArray();
             Authenticator.setDefault(new Authenticator() {
-                @Override protected PasswordAuthentication getPasswordAuthentication() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(username, password);
                 }
             });

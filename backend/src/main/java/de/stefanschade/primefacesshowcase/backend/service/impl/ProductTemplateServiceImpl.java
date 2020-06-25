@@ -31,21 +31,23 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
 
     @Autowired ProductTemplateMapper productTemplateMapper;
 
-    @Override public ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto) {
+    @Override
+    public ProductTemplateDto createProductTemplate(ProductTemplateDto productTemplateDto) {
         ProductTemplateEntity entityToBeStored = new ProductTemplateEntity();
-        BeanUtils.copyProperties(productTemplateDto, entityToBeStored); // will throw an error, if non-null
-        // annotation is violated
+        BeanUtils.copyProperties(productTemplateDto, entityToBeStored); // error, if non-null annotation violated
         ProductTemplateEntity enitityThatWasStored = productTemplateRepository.save(entityToBeStored);
         ProductTemplateDto returnValue = new ProductTemplateDto();
         BeanUtils.copyProperties(enitityThatWasStored, returnValue);
         return returnValue;
     }
 
-    @Override public ProductTemplateDto getProductCategoryById(String id) {
+    @Override
+    public ProductTemplateDto getProductCategoryById(String id) {
         return null;
     }
 
-    @Override public List<ProductTemplateDto> getAll() {
+    @Override
+    public List<ProductTemplateDto> getAll() {
         return mapProductTemplateEntityIterableToDtoList(productTemplateRepository.findAll());
     }
 
@@ -57,7 +59,9 @@ public class ProductTemplateServiceImpl implements ProductTemplateService {
     }
 
     // https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-part-seven-pagination/
-    @Transactional(readOnly = true) @Override public List<ProductTemplateDto> findAll(Pageable pageable) {
+    @Transactional(readOnly = true)
+    @Override
+    public List<ProductTemplateDto> findAll(Pageable pageable) {
         Page<ProductTemplateEntity> page = productTemplateRepositoryPagination.findAll(pageable);
         List<ProductTemplateEntity> productTemplateEntityList = page.getContent();
         log.info("Page count " + page.getTotalPages() + " Element count " + page.getTotalElements());

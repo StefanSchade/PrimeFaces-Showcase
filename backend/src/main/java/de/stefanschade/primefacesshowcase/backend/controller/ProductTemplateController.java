@@ -22,24 +22,25 @@ public class ProductTemplateController {
 
     @Autowired ProductTemplateMapper productTemplateMapper;
 
-    @GetMapping("/producttemplatelist") public List<ProductTemplateResponseModel> getAllProductTemplates() {
+    @GetMapping("/producttemplatelist")
+    public List<ProductTemplateResponseModel> getAllProductTemplates() {
         return mapProductTemplateDtoListToResponseList(productTemplateService.getAll());
     }
 
     // see https://www.baeldung.com/rest-api-pagination-in-spring
     // http://localhost:8082/producttemplatelistpaginated?size=10&page=100&sort=templatename
 
-    @GetMapping(
-            "/producttemplatelistpaginated") public List<ProductTemplateResponseModel> getAllProductTemplatesPaginated(@PageableDefault(
-            size = 5) Pageable pageable) {
-        return mapProductTemplateDtoListToResponseList(productTemplateService.findAll(pageable));
-
-    }
-
     private List<ProductTemplateResponseModel> mapProductTemplateDtoListToResponseList(List<ProductTemplateDto> productTemplateDtoList) {
         return productTemplateDtoList
                 .stream()
                 .map(productTemplateMapper::productTemplateDtoToProductTemplateResponseModel)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/producttemplatelistpaginated")
+    public List<ProductTemplateResponseModel> getAllProductTemplatesPaginated(@PageableDefault(
+            size = 5) Pageable pageable) {
+        return mapProductTemplateDtoListToResponseList(productTemplateService.findAll(pageable));
+
     }
 }

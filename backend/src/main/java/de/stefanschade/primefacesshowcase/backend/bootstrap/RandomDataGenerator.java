@@ -24,8 +24,8 @@ public class RandomDataGenerator {
 
     FieldType[] fieldTypes = FieldType.values();
 
-    public String getRandomString(int length) {
-        return generateRandomString(length);
+    public FieldType[] getRandomFieldTypeArray(int length) {
+        return getRandomFieldTypeList(length).toArray(new FieldType[length]);
     }
 
     public List<FieldType> getRandomFieldTypeList(int length) {
@@ -35,8 +35,12 @@ public class RandomDataGenerator {
                 .collect(Collectors.toList());
     }
 
-    public FieldType[] getRandomFieldTypeArray(int length) {
-        return getRandomFieldTypeList(length).toArray(new FieldType[length]);
+    private FieldType getRandomFieldType() {
+        return fieldTypes[RANDOM.nextInt(fieldTypes.length)];
+    }
+
+    public String[] getRandomStringArray(int lengthOfArray, int lengthOfEachString) {
+        return getRandomStringList(lengthOfArray, lengthOfEachString).toArray(new String[0]);
     }
 
     public List<String> getRandomStringList(int lengthOfList, int lengthOfEachString) {
@@ -46,12 +50,8 @@ public class RandomDataGenerator {
                 .collect(Collectors.toList());
     }
 
-    public String[] getRandomStringArray(int lengthOfArray, int lengthOfEachString) {
-        return getRandomStringList(lengthOfArray, lengthOfEachString).toArray(new String[0]);
-    }
-
-    private FieldType getRandomFieldType() {
-        return fieldTypes[RANDOM.nextInt(fieldTypes.length)];
+    public String getRandomString(int length) {
+        return generateRandomString(length);
     }
 
     private String generateRandomString(int length) {

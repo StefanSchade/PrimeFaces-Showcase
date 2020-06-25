@@ -7,7 +7,8 @@ import java.net.URISyntaxException;
 
 class ProductTemplateServiceTest {
 
-    @Test void retrieveTemplates() throws URISyntaxException {
+    @Test
+    void retrieveTemplates() throws URISyntaxException {
         new URI("http://localhost:8082");
     }
 }

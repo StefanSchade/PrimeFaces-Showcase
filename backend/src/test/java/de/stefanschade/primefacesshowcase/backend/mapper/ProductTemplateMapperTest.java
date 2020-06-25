@@ -25,20 +25,8 @@ class ProductTemplateMapperTest {
 
     ProductTemplateMapper productTemplateMapper = ProductTemplateMapper.INSTANCE;
 
-    public ProductTemplateEntity prepareProductTemplateEntity() {
-        ProductTemplateEntity productTemplateEntity = new ProductTemplateEntity(NAME_TEMPLATE);
-        ConfigurableFieldEntity configurableFieldEntity1 = new ConfigurableFieldEntity(productTemplateEntity,
-                NAME_FIELD_1, FieldType.DOUBLE);
-        ConfigurableFieldEntity configurableFieldEntity2 = new ConfigurableFieldEntity(productTemplateEntity,
-                NAME_FIELD_2, FieldType.STRING);
-        List<ConfigurableFieldEntity> configurableFieldEntityList = new ArrayList<>(NR_OF_FIELDS);
-        configurableFieldEntityList.add(configurableFieldEntity1);
-        configurableFieldEntityList.add(configurableFieldEntity2);
-        productTemplateEntity.setFields(configurableFieldEntityList);
-        return productTemplateEntity;
-    }
-
-    @Test public void productTemplateEntityToProductTemplateDto() throws Exception {
+    @Test
+    public void productTemplateEntityToProductTemplateDto() throws Exception {
         //given
         ProductTemplateEntity productTemplateEntity = prepareProductTemplateEntity();
 
@@ -57,8 +45,21 @@ class ProductTemplateMapperTest {
                 .getFieldname());
     }
 
+    public ProductTemplateEntity prepareProductTemplateEntity() {
+        ProductTemplateEntity productTemplateEntity = new ProductTemplateEntity(NAME_TEMPLATE);
+        ConfigurableFieldEntity configurableFieldEntity1 = new ConfigurableFieldEntity(productTemplateEntity,
+                NAME_FIELD_1, FieldType.DOUBLE);
+        ConfigurableFieldEntity configurableFieldEntity2 = new ConfigurableFieldEntity(productTemplateEntity,
+                NAME_FIELD_2, FieldType.STRING);
+        List<ConfigurableFieldEntity> configurableFieldEntityList = new ArrayList<>(NR_OF_FIELDS);
+        configurableFieldEntityList.add(configurableFieldEntity1);
+        configurableFieldEntityList.add(configurableFieldEntity2);
+        productTemplateEntity.setFields(configurableFieldEntityList);
+        return productTemplateEntity;
+    }
 
-    @Test public void productTemplateDtoToProductTemplateResponseModel() throws Exception {
+    @Test
+    public void productTemplateDtoToProductTemplateResponseModel() throws Exception {
         //given
         ProductTemplateEntity productTemplateEntity = prepareProductTemplateEntity();
         ProductTemplateDto productTemplateDto =

@@ -26,7 +26,8 @@ public class ProductTemplateView implements Serializable {
 
     @Inject private TemplateTable templateTable;
 
-    @PreDestroy public void writeResults() {
+    @PreDestroy
+    public void writeResults() {
         ProductTemplate productTemplate = templateTable.getTemplateSelected();
         if (productTemplate == null) {
             sessionInformation.setResultTemplateBrowser("No Selection");

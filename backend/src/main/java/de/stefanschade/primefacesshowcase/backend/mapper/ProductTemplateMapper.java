@@ -7,15 +7,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper (componentModel = "spring")
+@Mapper(componentModel = "spring")
 public interface ProductTemplateMapper {
 
     ProductTemplateMapper INSTANCE = Mappers.getMapper(ProductTemplateMapper.class);
 
-    @Mapping(target = "fieldsdto",
-             source = "fields") ProductTemplateDto productTemplateEntityToProductTemplateDto(ProductTemplateEntity productTemplateEntity);
+    @Mapping(target = "fieldsdto", source = "fields")
+    ProductTemplateDto productTemplateEntityToProductTemplateDto(ProductTemplateEntity productTemplateEntity);
 
-    @Mapping(target = "fields",
-             source = "fieldsdto") ProductTemplateResponseModel productTemplateDtoToProductTemplateResponseModel(ProductTemplateDto productTemplateDto);
+    @Mapping(target = "fields", source = "fieldsdto")
+    ProductTemplateResponseModel productTemplateDtoToProductTemplateResponseModel(ProductTemplateDto productTemplateDto);
 
 }

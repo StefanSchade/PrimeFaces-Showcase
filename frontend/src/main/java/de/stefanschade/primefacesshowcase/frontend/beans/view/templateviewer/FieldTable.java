@@ -38,14 +38,9 @@ public class FieldTable implements Serializable {
         this.updatePaginatedFieldList();
     }
 
-    public void retrieveNext() {
-        this.currentPage++;
-        this.updatePaginatedFieldList();
-    }
-
-    public void retrievePrevious() {
-        this.currentPage--;
-        this.updatePaginatedFieldList();
+    public void unSelectFieldDetails() {
+        this.fieldSelected = null;
+        this.fieldIsSelected = false;
     }
 
     private void updatePaginatedFieldList() {
@@ -65,9 +60,14 @@ public class FieldTable implements Serializable {
         this.fieldIsSelected = true;
     }
 
-    public void unSelectFieldDetails() {
-        this.fieldSelected = null;
-        this.fieldIsSelected = false;
+    public void retrieveNext() {
+        this.currentPage++;
+        this.updatePaginatedFieldList();
+    }
+
+    public void retrievePrevious() {
+        this.currentPage--;
+        this.updatePaginatedFieldList();
     }
 
     public String rowClasses() {

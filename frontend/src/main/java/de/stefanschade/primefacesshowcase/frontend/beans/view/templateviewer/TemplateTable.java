@@ -36,10 +36,16 @@ public class TemplateTable implements Serializable {
 
     private List<ProductTemplate> productTemplateListNextPage;
 
-    @PostConstruct public void init() {
+    @PostConstruct
+    public void init() {
         this.productTemplateListCurrentPage = this.productTemplateService.retrieveTemplates(PAGESIZE, currentPage);
         this.productTemplateListNextPage = this.productTemplateService.retrieveTemplates(PAGESIZE, currentPage + 1);
         this.updateVisibilityOfPaginationButtons();
+    }
+
+    private void updateVisibilityOfPaginationButtons() {
+        this.backButtonVisible = this.currentPage > 0;
+        this.nextButtonVisible = this.productTemplateListNextPage.size() > 0;
     }
 
     protected void retrieveNext() {
@@ -56,11 +62,6 @@ public class TemplateTable implements Serializable {
         this.updateVisibilityOfPaginationButtons();
     }
 
-    private void updateVisibilityOfPaginationButtons() {
-        this.backButtonVisible = this.currentPage > 0;
-        this.nextButtonVisible = this.productTemplateListNextPage.size() > 0;
-    }
-
     protected void selectTemplate(ProductTemplate productTemplate) {
         this.templateIsSelected = true;
         this.templateSelected = productTemplate;
@@ -69,13 +70,6 @@ public class TemplateTable implements Serializable {
     protected void unSelectTemplate() {
         this.templateIsSelected = false;
         this.templateSelected = null;
-    }
-
-    public boolean isThisTheSelectedTemplate(ProductTemplate productTemplate) {
-        if (!this.templateIsSelected) {
-            return false;
-        }
-        return productTemplate.equals(this.templateSelected);
     }
 
     public String rowClasses() {
@@ -97,5 +91,12 @@ public class TemplateTable implements Serializable {
             oddEvenFlip = !oddEvenFlip;
         }
         return returnValue.toString();
+    }
+
+    public boolean isThisTheSelectedTemplate(ProductTemplate productTemplate) {
+        if (!this.templateIsSelected) {
+            return false;
+        }
+        return productTemplate.equals(this.templateSelected);
     }
 }

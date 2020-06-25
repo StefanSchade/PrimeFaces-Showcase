@@ -18,7 +18,8 @@ public class SessionInformation implements Serializable {
 
     private String resultTemplateBrowser;
 
-    @PostConstruct public void init() {
+    @PostConstruct
+    public void init() {
         resultTemplateBrowser = "Template Browser not called yet";
     }
 

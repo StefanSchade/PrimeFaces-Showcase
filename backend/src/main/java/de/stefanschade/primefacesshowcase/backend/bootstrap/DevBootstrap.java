@@ -33,7 +33,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Autowired RandomDataGenerator randomDataGenerator;
 
-    @Override public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
         log.info("generating testdata");
 

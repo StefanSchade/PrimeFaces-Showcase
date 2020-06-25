@@ -5,7 +5,7 @@ import de.stefanschade.primefacesshowcase.backend.entities.ConfigurableFieldEnti
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ConfigurableFieldMapper {
 
     de.stefanschade.primefacesshowcase.backend.mapper.ProductTemplateMapper INSTANCE =
@@ -14,5 +14,3 @@ public interface ConfigurableFieldMapper {
     ConfigurableFieldDto configurableFieldDtoToConfigurableFieldEntity(ConfigurableFieldEntity configurableFieldEntity);
 
 }
-
-
